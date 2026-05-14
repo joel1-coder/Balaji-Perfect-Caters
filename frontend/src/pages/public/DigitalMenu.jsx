@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
@@ -27,7 +27,7 @@ const DigitalMenu = () => {
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/menus`, { timeout: 3000 });
+        const res = await axios.get(`https://balaji-perfect-caters.onrender.com/api/menus`, { timeout: 3000 });
         if (res.data.data && res.data.data.length > 0 && res.data.data[0].items.length > 0) {
           setMenu(res.data.data[0]);
         } else {
@@ -50,7 +50,7 @@ const DigitalMenu = () => {
 
   return (
     <div style={s.layout}>
-      {/* ── Main Content ── */}
+      {/* â”€â”€ Main Content â”€â”€ */}
       <main style={s.main}>
         <header style={s.header}>
           <div>
@@ -58,7 +58,7 @@ const DigitalMenu = () => {
             <p style={s.pageSubtitle}>View our fresh offerings for today's service.</p>
           </div>
           <div style={s.searchBox}>
-            <span style={{ color: '#94a3b8' }}>🔍</span>
+            <span style={{ color: '#94a3b8' }}>ðŸ”</span>
             <input 
               style={s.searchInput} 
               placeholder="Search menu items..." 
@@ -75,7 +75,7 @@ const DigitalMenu = () => {
 
             return (
               <section key={cat} style={s.section}>
-                <h2 style={s.sectionTitle}>🍽 {cat.toUpperCase()}</h2>
+                <h2 style={s.sectionTitle}>ðŸ½ {cat.toUpperCase()}</h2>
                 
                 <div style={s.grid}>
                   {catItems.map(item => (
@@ -85,7 +85,7 @@ const DigitalMenu = () => {
                         {item.image ? (
                           <img src={item.image} alt={item.name} style={s.cardImage} />
                         ) : (
-                          <div style={s.cardImagePlaceholder}>🍽 No Image</div>
+                          <div style={s.cardImagePlaceholder}>ðŸ½ No Image</div>
                         )}
                       </div>
                       
@@ -94,7 +94,7 @@ const DigitalMenu = () => {
                         <div style={s.cardRow}>
                           <h3 style={s.itemName}>{item.name}</h3>
                           <div style={s.itemPrice}>
-                            <span style={s.priceBox}>₹{item.price}</span>
+                            <span style={s.priceBox}>â‚¹{item.price}</span>
                           </div>
                         </div>
                         

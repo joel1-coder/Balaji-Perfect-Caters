@@ -1,9 +1,9 @@
-import React from 'react';
+﻿import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const navItems = [
-  { icon: '🧾', label: 'Billing',       path: '/user/billing' },
-  { icon: '🍽', label: 'Menu Items',    path: '/user/menu' },
+  { icon: 'ðŸ§¾', label: 'Billing',       path: '/user/billing' },
+  { icon: 'ðŸ½', label: 'Menu Items',    path: '/user/menu' },
 ];
 
 const UserLayout = ({ children }) => {
@@ -21,7 +21,7 @@ const UserLayout = ({ children }) => {
 
   return (
     <div style={styles.page}>
-      {/* ── Sidebar ── */}
+      {/* â”€â”€ Sidebar â”€â”€ */}
       <aside style={styles.sidebar}>
         {/* Brand */}
         <div style={styles.brand}>
@@ -65,19 +65,19 @@ const UserLayout = ({ children }) => {
         {/* Bottom */}
         <div style={styles.sidebarBottom}>
           <button style={styles.switchBtn} onClick={() => navigate('/admin/overview')}>
-            ⊕ Switch to Admin
+            âŠ• Switch to Admin
           </button>
           <button style={{ ...styles.navItem, color: 'rgba(255,255,255,0.5)' }}
             onClick={() => navigate('/user/settings')}>
-            <span>⚙</span> Settings
+            <span>âš™</span> Settings
           </button>
           <button style={{ ...styles.navItem, color: '#f87171' }} onClick={handleLogout}>
-            <span>↪</span> Logout
+            <span>â†ª</span> Logout
           </button>
         </div>
       </aside>
 
-      {/* ── Page Content ── */}
+      {/* â”€â”€ Page Content â”€â”€ */}
       <div style={styles.content}>{children}</div>
     </div>
   );

@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import AdminLayout from '../../components/AdminLayout';
 
-const API = 'http://localhost:5000/api/menus';
+const API = 'https://balaji-perfect-caters.onrender.com/api/menus';
 const TYPES = ['Snacks', 'Tea', 'Juice', 'Breakfast', 'Lunch'];
 const TABS  = ['All', ...TYPES];
 
 const BLANK_FORM = { name: '', category: 'Snacks', price: '', description: '', image: '' };
 
-// ── Helpers ────────────────────────────────────────────────────
+// â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const toast = (msg, type = 'success') => {
   const el = document.createElement('div');
   el.innerText = msg;
@@ -23,7 +23,7 @@ const toast = (msg, type = 'success') => {
   setTimeout(() => el.remove(), 2800);
 };
 
-// ── Component ──────────────────────────────────────────────────
+// â”€â”€ Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const MenuItems = () => {
   const [menuId,     setMenuId]     = useState(null);
   const [items,      setItems]      = useState([]);
@@ -36,7 +36,7 @@ const MenuItems = () => {
   const [preview,    setPreview]    = useState('');
   const fileRef = useRef();
 
-  // ── Load menus on mount ──────────────────────────────────────
+  // â”€â”€ Load menus on mount â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   useEffect(() => { fetchItems(); }, []);
 
   const fetchItems = async () => {
@@ -56,7 +56,7 @@ const MenuItems = () => {
     setLoading(false);
   };
 
-  // ── Seed data if no menu exists ──────────────────────────────
+  // â”€â”€ Seed data if no menu exists â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const handleSeed = async () => {
     try {
       await axios.post(`${API}/seed`);
@@ -65,7 +65,7 @@ const MenuItems = () => {
     } catch { toast('Seed failed', 'error'); }
   };
 
-  // ── Open modal ───────────────────────────────────────────────
+  // â”€â”€ Open modal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const openAdd = () => {
     setEditItem(null);
     setForm(BLANK_FORM);
@@ -82,7 +82,7 @@ const MenuItems = () => {
 
   const closeModal = () => { setShowModal(false); setEditItem(null); };
 
-  // ── Image pick (converts to base64 preview, stores URL) ─────
+  // â”€â”€ Image pick (converts to base64 preview, stores URL) â”€â”€â”€â”€â”€
   const handleImageFile = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -94,7 +94,7 @@ const MenuItems = () => {
     reader.readAsDataURL(file);
   };
 
-  // ── Save (create or update) ──────────────────────────────────
+  // â”€â”€ Save (create or update) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const handleSave = async () => {
     if (!form.name.trim())    { toast('Name is required', 'error'); return; }
     if (!form.price || isNaN(form.price) || +form.price <= 0) { toast('Enter a valid price', 'error'); return; }
@@ -121,7 +121,7 @@ const MenuItems = () => {
     setSaving(false);
   };
 
-  // ── Delete ───────────────────────────────────────────────────
+  // â”€â”€ Delete â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const handleDelete = async (item) => {
     if (!window.confirm(`Delete "${item.name}"?`)) return;
     try {
@@ -131,10 +131,10 @@ const MenuItems = () => {
     } catch { toast('Delete failed', 'error'); }
   };
 
-  // ── Filtered items ───────────────────────────────────────────
+  // â”€â”€ Filtered items â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const filtered = activeTab === 'All' ? items : items.filter(i => i.category === activeTab);
 
-  // ── Category badge colours ───────────────────────────────────
+  // â”€â”€ Category badge colours â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const catColor = {
     Snacks:    { bg: '#fef9c3', color: '#854d0e' },
     Tea:       { bg: '#ede9fe', color: '#6d28d9' },
@@ -143,7 +143,7 @@ const MenuItems = () => {
     Lunch:     { bg: '#dbeafe', color: '#1e40af' },
   };
 
-  // ── Render ───────────────────────────────────────────────────
+  // â”€â”€ Render â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   return (
     <AdminLayout>
       {/* Top Bar */}
@@ -151,10 +151,10 @@ const MenuItems = () => {
         <h1 style={s.pageTitle}>Menu Management</h1>
         <div style={s.topRight}>
           <button style={s.qrBtn} onClick={() => window.open('/public/menu/main', '_blank')}>
-            📱 View Digital Menu
+            ðŸ“± View Digital Menu
           </button>
-          <button style={s.seedBtn} onClick={handleSeed}>⚡ Seed Demo</button>
-          <button style={s.addBtn}  onClick={openAdd}>⊕ Add New Item</button>
+          <button style={s.seedBtn} onClick={handleSeed}>âš¡ Seed Demo</button>
+          <button style={s.addBtn}  onClick={openAdd}>âŠ• Add New Item</button>
         </div>
       </header>
 
@@ -178,7 +178,7 @@ const MenuItems = () => {
         ) : items.length === 0 ? (
           <div style={s.emptyState}>
             <p style={{ marginBottom: '16px', color: '#64748b' }}>No items yet. Seed demo data or add your first item.</p>
-            <button style={s.addBtn} onClick={handleSeed}>⚡ Seed Demo Data</button>
+            <button style={s.addBtn} onClick={handleSeed}>âš¡ Seed Demo Data</button>
           </div>
         ) : (
           <div style={s.tableCard}>
@@ -203,7 +203,7 @@ const MenuItems = () => {
                   {item.image ? (
                     <img src={item.image} alt={item.name} style={s.thumb} onError={e => { e.target.style.display = 'none'; }}/>
                   ) : (
-                    <div style={s.thumbPlaceholder}>🍽</div>
+                    <div style={s.thumbPlaceholder}>ðŸ½</div>
                   )}
                 </div>
                 <span style={{ flex: 2, fontWeight: '700', color: '#0f172a' }}>{item.name}</span>
@@ -212,11 +212,11 @@ const MenuItems = () => {
                     {item.category}
                   </span>
                 </span>
-                <span style={{ flex: 1, fontWeight: '700', color: '#0f2444' }}>₹{parseFloat(item.price).toFixed(2)}</span>
-                <span style={{ flex: 2, color: '#64748b', fontSize: '0.85rem' }}>{item.description || '—'}</span>
+                <span style={{ flex: 1, fontWeight: '700', color: '#0f2444' }}>â‚¹{parseFloat(item.price).toFixed(2)}</span>
+                <span style={{ flex: 2, color: '#64748b', fontSize: '0.85rem' }}>{item.description || 'â€”'}</span>
                 <div style={{ flex: '0 0 100px', display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
-                  <button style={s.editBtn}   onClick={() => openEdit(item)}>✎ Edit</button>
-                  <button style={s.deleteBtn} onClick={() => handleDelete(item)}>🗑</button>
+                  <button style={s.editBtn}   onClick={() => openEdit(item)}>âœŽ Edit</button>
+                  <button style={s.deleteBtn} onClick={() => handleDelete(item)}>ðŸ—‘</button>
                 </div>
               </div>
             ))}
@@ -224,19 +224,19 @@ const MenuItems = () => {
             {/* Footer */}
             <div style={s.tableFooter}>
               Showing {filtered.length} of {items.length} items
-              <span style={{ color: '#16a34a', marginLeft: '12px' }}>● Menu Live</span>
+              <span style={{ color: '#16a34a', marginLeft: '12px' }}>â— Menu Live</span>
             </div>
           </div>
         )}
       </div>
 
-      {/* ── Modal ── */}
+      {/* â”€â”€ Modal â”€â”€ */}
       {showModal && (
         <div style={s.overlay} onClick={e => e.target === e.currentTarget && closeModal()}>
           <div style={s.modal}>
             <div style={s.modalHeader}>
               <h2 style={s.modalTitle}>{editItem ? 'Edit Item' : 'Add New Item'}</h2>
-              <button style={s.closeBtn} onClick={closeModal}>✕</button>
+              <button style={s.closeBtn} onClick={closeModal}>âœ•</button>
             </div>
 
             {/* Image Upload */}
@@ -246,7 +246,7 @@ const MenuItems = () => {
                   <img src={preview} alt="preview" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '12px' }}/>
                 ) : (
                   <div style={s.imagePlaceholder}>
-                    <span style={{ fontSize: '2rem' }}>📷</span>
+                    <span style={{ fontSize: '2rem' }}>ðŸ“·</span>
                     <span style={{ fontSize: '0.85rem', color: '#94a3b8', marginTop: '8px' }}>Click to upload image</span>
                   </div>
                 )}
@@ -280,9 +280,9 @@ const MenuItems = () => {
 
               {/* Price */}
               <div style={s.fieldGroup}>
-                <label style={s.label}>Price (₹) <span style={{ color: '#ef4444' }}>*</span></label>
+                <label style={s.label}>Price (â‚¹) <span style={{ color: '#ef4444' }}>*</span></label>
                 <div style={s.priceWrapper}>
-                  <span style={s.rupeeSign}>₹</span>
+                  <span style={s.rupeeSign}>â‚¹</span>
                   <input style={{ ...s.input, paddingLeft: '32px' }} type="number" min="0" step="any" placeholder="0.00"
                     value={form.price} onChange={e => setForm(f => ({...f, price: e.target.value}))}/>
                 </div>
@@ -312,7 +312,7 @@ const MenuItems = () => {
   );
 };
 
-// ── Styles ─────────────────────────────────────────────────────
+// â”€â”€ Styles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const s = {
   topBar:    { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 28px', backgroundColor: 'white', borderBottom: '1px solid #e2e8f0' },
   pageTitle: { fontSize: '1.4rem', fontWeight: '800', color: '#0f172a' },

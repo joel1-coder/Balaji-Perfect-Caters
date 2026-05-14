@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import axios from 'axios';
 import UserLayout from '../../components/UserLayout';
 
@@ -74,7 +74,7 @@ const QuickBill = () => {
     };
 
     try {
-      await axios.post('http://localhost:5000/api/transactions', payload);
+      await axios.post('https://balaji-perfect-caters.onrender.com/api/transactions', payload);
       alert(`Order ${orderId} saved successfully!`);
       setOrderItems([]);
     } catch (err) {
@@ -94,15 +94,15 @@ const QuickBill = () => {
       <header style={s.topBar}>
         <div style={s.topBarLeft}>
           <h1 style={s.pageTitle}>QuickBill Terminal</h1>
-          <span style={s.liveBadge}>● Live</span>
+          <span style={s.liveBadge}>â— Live</span>
         </div>
         <div style={s.topBarRight}>
           <div style={s.searchBox}>
-            <span>🔍</span>
+            <span>ðŸ”</span>
             <input style={s.searchInput} placeholder="Search orders..." />
           </div>
-          <button style={s.iconBtn}>🔔</button>
-          <button style={s.iconBtn}>❓</button>
+          <button style={s.iconBtn}>ðŸ””</button>
+          <button style={s.iconBtn}>â“</button>
           <div style={s.userBadge}>
             <div style={s.userAvatar}>{localStorage.getItem('canteen_user')?.charAt(0).toUpperCase() || 'A'}</div>
             <div>
@@ -119,7 +119,7 @@ const QuickBill = () => {
         <div style={s.orderPanel}>
           {/* Item Selection */}
           <div style={s.card}>
-            <div style={s.cardTitle}><span>🛒</span> ITEM SELECTION</div>
+            <div style={s.cardTitle}><span>ðŸ›’</span> ITEM SELECTION</div>
             <div style={s.selectionRow}>
               <div style={s.selectWrapper}>
                 <label style={s.fieldLabel}>Search Item (e.g., Tea, Coffee, Sandwich)</label>
@@ -131,14 +131,14 @@ const QuickBill = () => {
               <div>
                 <label style={s.fieldLabel}>Quantity</label>
                 <div style={s.qtyControl}>
-                  <button style={s.qtyBtn} onClick={() => setQty(Math.max(1, qty - 1))}>−</button>
+                  <button style={s.qtyBtn} onClick={() => setQty(Math.max(1, qty - 1))}>âˆ’</button>
                   <span style={s.qtyValue}>{qty}</span>
                   <button style={s.qtyBtn} onClick={() => setQty(qty + 1)}>+</button>
                 </div>
               </div>
               <div>
                 <label style={s.fieldLabel}>Unit Rate</label>
-                <div style={s.rateBox}>₹{selectedItem?.price.toFixed(2)}</div>
+                <div style={s.rateBox}>â‚¹{selectedItem?.price.toFixed(2)}</div>
               </div>
               <button style={s.addBtn} onClick={addToBill}>+ ADD TO BILL</button>
             </div>
@@ -148,7 +148,7 @@ const QuickBill = () => {
           <div style={{ ...s.card, flex: 1, display: 'flex', flexDirection: 'column' }}>
             <div style={s.orderHeader}>
               <span style={s.cardTitle}>CURRENT ORDER ITEMS</span>
-              <button style={s.clearBtn} onClick={() => setOrderItems([])}>🗑 Clear List</button>
+              <button style={s.clearBtn} onClick={() => setOrderItems([])}>ðŸ—‘ Clear List</button>
             </div>
             <div style={{ flex: 1, overflowY: 'auto' }}>
               <table style={s.table}>
@@ -161,10 +161,10 @@ const QuickBill = () => {
                       <td style={s.td}>{String(i + 1).padStart(2, '0')}</td>
                       <td style={{ ...s.td, fontWeight: '700', color: '#1a3a6b' }}>{item.name}</td>
                       <td style={s.td}>{item.qty}</td>
-                      <td style={s.td}>₹{item.rate.toFixed(2)}</td>
-                      <td style={s.td}>₹{item.total.toFixed(2)}</td>
+                      <td style={s.td}>â‚¹{item.rate.toFixed(2)}</td>
+                      <td style={s.td}>â‚¹{item.total.toFixed(2)}</td>
                       <td style={s.td}>
-                        <button style={s.removeBtn} onClick={() => removeItem(item.id)}>✕</button>
+                        <button style={s.removeBtn} onClick={() => removeItem(item.id)}>âœ•</button>
                       </td>
                     </tr>
                   ))}
@@ -181,13 +181,13 @@ const QuickBill = () => {
               
               <div style={s.grandTotalBox}>
                 <div style={s.unitsLabel}>GRAND TOTAL</div>
-                <div style={s.grandTotalValue}>₹{grandTotal.toFixed(2)}</div>
+                <div style={s.grandTotalValue}>â‚¹{grandTotal.toFixed(2)}</div>
               </div>
 
               <div style={s.actionGroup}>
                 <button style={s.clearActionBtn} onClick={() => setOrderItems([])}>CLEAR</button>
                 <button style={s.saveOrderBtn} onClick={saveOrder}>
-                  <span style={{marginRight: '8px'}}>💾</span> SAVE ORDER
+                  <span style={{marginRight: '8px'}}>ðŸ’¾</span> SAVE ORDER
                 </button>
               </div>
             </div>
@@ -199,7 +199,7 @@ const QuickBill = () => {
           <div style={s.card}>
             <div style={s.memberHeader}>
               <span style={s.sectionLabel}>MEMBER DETAILS</span>
-              <button style={s.editBtn} onClick={() => { setTempMember(member); setShowMemberModal(true); }}>✎</button>
+              <button style={s.editBtn} onClick={() => { setTempMember(member); setShowMemberModal(true); }}>âœŽ</button>
             </div>
             <div style={s.memberCard}>
               <div style={s.memberAvatar}>{member.name.split(' ').map(n => n[0]).join('')}</div>
@@ -215,7 +215,7 @@ const QuickBill = () => {
               </div>
               <div>
                 <div style={s.metaLabel}>Credit Limit</div>
-                <div style={{ ...s.metaValue, color: '#0f2444', fontWeight: '800' }}>₹{member.limit.toFixed(2)}</div>
+                <div style={{ ...s.metaValue, color: '#0f2444', fontWeight: '800' }}>â‚¹{member.limit.toFixed(2)}</div>
               </div>
             </div>
             <div style={s.paymentRow}>
@@ -231,7 +231,7 @@ const QuickBill = () => {
 
           {/* Recent Transactions */}
           <div style={s.card}>
-            <span style={s.sectionLabel}>⏱ RECENT TRANSACTIONS</span>
+            <span style={s.sectionLabel}>â± RECENT TRANSACTIONS</span>
             <div style={{ marginTop: '15px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {RECENT_TRANSACTIONS.map(tx => (
                 <div key={tx.id} style={s.txCard}>
@@ -240,7 +240,7 @@ const QuickBill = () => {
                     <div style={s.txTime}>{tx.time}</div>
                   </div>
                   <div style={{ textAlign: 'right' }}>
-                    <div style={s.txAmount}>₹{tx.amount}.00</div>
+                    <div style={s.txAmount}>â‚¹{tx.amount}.00</div>
                     <span style={{ ...s.txStatus, ...(tx.paid ? s.txPaid : s.txUnpaid) }}>
                       {tx.paid ? 'PAID' : 'UNPAID'}
                     </span>
@@ -252,13 +252,13 @@ const QuickBill = () => {
         </aside>
       </div>
 
-      {/* ── Member Edit Modal ── */}
+      {/* â”€â”€ Member Edit Modal â”€â”€ */}
       {showMemberModal && (
         <div style={s.modalOverlay}>
           <div style={s.modal}>
             <div style={s.modalHeader}>
               <h3 style={s.modalTitle}>Update Member Info</h3>
-              <button style={s.closeBtn} onClick={() => setShowMemberModal(false)}>✕</button>
+              <button style={s.closeBtn} onClick={() => setShowMemberModal(false)}>âœ•</button>
             </div>
             <div style={s.modalBody}>
               <div style={s.field}>

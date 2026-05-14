@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+﻿import React, { useState, useMemo, useEffect } from 'react';
 import axios from 'axios';
 import AdminLayout from '../../components/AdminLayout';
 
@@ -35,7 +35,7 @@ const TransactionAudit = () => {
 
   const fetchTransactions = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/transactions');
+      const res = await axios.get('https://balaji-perfect-caters.onrender.com/api/transactions');
       setTransactions(res.data.data);
     } catch (err) {
       console.error('Failed to fetch transactions');
@@ -105,7 +105,7 @@ const TransactionAudit = () => {
         <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
           <p><strong>Order ID:</strong> ${t.orderId}</p>
           <p><strong>Customer:</strong> ${t.customerName} (${t.department || 'N/A'})</p>
-          <p><strong>Total:</strong> ₹${t.totalAmount.toFixed(2)}</p>
+          <p><strong>Total:</strong> â‚¹${t.totalAmount.toFixed(2)}</p>
           <p><strong>Status:</strong> ${t.paymentStatus.toUpperCase()}</p>
           <p><strong>Date:</strong> ${new Date(t.createdAt).toLocaleString()}</p>
         </div>`;
@@ -128,7 +128,7 @@ const TransactionAudit = () => {
         <h1 style={s.pageTitle}>Transaction Audit</h1>
         <div style={s.topRight}>
           <div style={s.searchBox}>
-            <span>🔍</span>
+            <span>ðŸ”</span>
             <input 
               style={s.searchInput} 
               placeholder="Search transactions..."
@@ -170,8 +170,8 @@ const TransactionAudit = () => {
           <div style={s.exportBox}>
             <div style={s.exportLabel}>EXPORT FILTERED LOGS</div>
             <div style={{ display: 'flex', gap: '10px' }}>
-              <button style={s.exportBtn} onClick={exportToExcel}>📊 Excel (CSV)</button>
-              <button style={s.exportBtn} onClick={exportToWord}>📝 Word (TXT)</button>
+              <button style={s.exportBtn} onClick={exportToExcel}>ðŸ“Š Excel (CSV)</button>
+              <button style={s.exportBtn} onClick={exportToWord}>ðŸ“ Word (TXT)</button>
             </div>
           </div>
         </div>
@@ -182,8 +182,8 @@ const TransactionAudit = () => {
             <span style={{ color: '#64748b', fontSize: '0.85rem' }}>{selected.length} items selected</span>
             {selected.length > 0 && (
               <>
-                <button style={s.bulkBtn}>✓ Mark as Paid</button>
-                <button style={{ ...s.bulkBtn, color: '#ef4444' }}>🚩 Flag for Review</button>
+                <button style={s.bulkBtn}>âœ“ Mark as Paid</button>
+                <button style={{ ...s.bulkBtn, color: '#ef4444' }}>ðŸš© Flag for Review</button>
               </>
             )}
             <span style={{ marginLeft: 'auto', color: '#94a3b8', fontSize: '0.8rem' }}>
@@ -222,7 +222,7 @@ const TransactionAudit = () => {
                     <div style={{ fontSize: '0.78rem', color: '#94a3b8' }}>{t.customerId || t.department || 'N/A'}</div>
                   </td>
                   <td style={{ ...s.td, color: '#475569' }}>{(t.items || []).map(i => i.name).join(', ')}</td>
-                  <td style={{ ...s.td, fontWeight: '700' }}>₹{(t.totalAmount || 0).toFixed(2)}</td>
+                  <td style={{ ...s.td, fontWeight: '700' }}>â‚¹{(t.totalAmount || 0).toFixed(2)}</td>
                   <td style={s.td}>
                     <span style={{ ...s.badge, backgroundColor: (statusStyle[t.paymentStatus] || statusStyle.pending).bg, color: (statusStyle[t.paymentStatus] || statusStyle.pending).color }}>{t.paymentStatus || 'pending'}</span>
                   </td>
@@ -241,7 +241,7 @@ const TransactionAudit = () => {
           </div>
           <div style={s.summaryCard}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-              <span style={{ color: '#ef4444', fontSize: '1.2rem' }}>⚠️</span>
+              <span style={{ color: '#ef4444', fontSize: '1.2rem' }}>âš ï¸</span>
               <span style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px' }}>DISPUTED</span>
             </div>
             <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#0f172a' }}>
@@ -251,7 +251,7 @@ const TransactionAudit = () => {
           </div>
           <div style={s.summaryCard}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-              <span style={{ color: '#16a34a', fontSize: '1.2rem' }}>✅</span>
+              <span style={{ color: '#16a34a', fontSize: '1.2rem' }}>âœ…</span>
               <span style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px' }}>PAID TRANSACTIONS</span>
             </div>
             <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#0f172a' }}>

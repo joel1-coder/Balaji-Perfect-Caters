@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const API = 'http://localhost:5000/api/menus';
+const API = 'https://balaji-perfect-caters.onrender.com/api/menus';
 
 const OperatorMenu = () => {
   const navigate = useNavigate();
@@ -65,7 +65,7 @@ const OperatorMenu = () => {
 
   return (
     <div style={s.layout}>
-      {/* ── Sidebar ── */}
+      {/* â”€â”€ Sidebar â”€â”€ */}
       <aside style={s.sidebar}>
         <div style={s.sidebarHeader}>
           <div style={s.brandTitle}>Balaji Perfect Caters</div>
@@ -93,7 +93,7 @@ const OperatorMenu = () => {
         </nav>
       </aside>
 
-      {/* ── Main Content ── */}
+      {/* â”€â”€ Main Content â”€â”€ */}
       <main style={s.main}>
         <header style={s.header}>
           <div>
@@ -101,7 +101,7 @@ const OperatorMenu = () => {
             <p style={s.pageSubtitle}>Update availability and pricing for today's service.</p>
           </div>
           <div style={s.searchBox}>
-            <span style={{ color: '#94a3b8' }}>🔍</span>
+            <span style={{ color: '#94a3b8' }}>ðŸ”</span>
             <input 
               style={s.searchInput} 
               placeholder="Search menu items..." 
@@ -121,7 +121,7 @@ const OperatorMenu = () => {
 
               return (
                 <section key={cat} id={`section-${cat}`} style={s.section}>
-                  <h2 style={s.sectionTitle}>☕ {cat.toUpperCase()}</h2>
+                  <h2 style={s.sectionTitle}>â˜• {cat.toUpperCase()}</h2>
                   
                   <div style={s.grid}>
                     {catItems.map(item => (
@@ -130,7 +130,7 @@ const OperatorMenu = () => {
                           {item.image ? (
                             <img src={item.image} alt={item.name} style={s.cardImage} />
                           ) : (
-                            <div style={s.cardImagePlaceholder}>🍽 No Image</div>
+                            <div style={s.cardImagePlaceholder}>ðŸ½ No Image</div>
                           )}
                         </div>
                         
@@ -138,7 +138,7 @@ const OperatorMenu = () => {
                           <div style={s.cardRow}>
                             <h3 style={s.itemName}>{item.name}</h3>
                             <div style={s.itemPrice}>
-                              <span style={s.priceSymbol}>₹</span>{item.price}
+                              <span style={s.priceSymbol}>â‚¹</span>{item.price}
                             </div>
                           </div>
                           

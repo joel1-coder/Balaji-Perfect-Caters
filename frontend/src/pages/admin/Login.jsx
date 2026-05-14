@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// ── Hardcoded Credentials ─────────────────────────────────────
+// â”€â”€ Hardcoded Credentials â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const CREDENTIALS = {
   admin:    { password: 'admin@123',    role: 'admin',    redirect: '/admin/overview' },
   operator: { password: 'operator@123', role: 'operator', redirect: '/user/billing'   },
@@ -51,7 +51,7 @@ const Login = () => {
           <div style={styles.featureList}>
             {['Real-time Order Tracking', 'Transaction Audit Logs', 'Executive Performance Reports', 'Multi-terminal Support'].map(f => (
               <div key={f} style={styles.featureItem}>
-                <span style={styles.featureCheck}>✓</span>
+                <span style={styles.featureCheck}>âœ“</span>
                 <span>{f}</span>
               </div>
             ))}
@@ -59,7 +59,7 @@ const Login = () => {
 
           <div style={styles.statusRow}>
             <span style={styles.statusDot}></span>
-            <span style={styles.statusText}>All Systems Operational — v4.2.1-stable</span>
+            <span style={styles.statusText}>All Systems Operational â€” v4.2.1-stable</span>
           </div>
         </div>
       </div>

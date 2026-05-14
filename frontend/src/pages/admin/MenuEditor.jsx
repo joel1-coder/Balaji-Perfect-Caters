@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -16,7 +16,7 @@ const MenuEditor = () => {
 
   useEffect(() => {
     if (!isNew) {
-      axios.get(`http://localhost:5000/api/menus/${id}`).then(res => {
+      axios.get(`https://balaji-perfect-caters.onrender.com/api/menus/${id}`).then(res => {
         setMenu(res.data.data);
         setLoading(false);
       }).catch(err => {
@@ -32,8 +32,8 @@ const MenuEditor = () => {
       return;
     }
     try {
-      if (isNew) await axios.post('http://localhost:5000/api/menus', menu);
-      else await axios.put(`http://localhost:5000/api/menus/${id}`, menu);
+      if (isNew) await axios.post('https://balaji-perfect-caters.onrender.com/api/menus', menu);
+      else await axios.put(`https://balaji-perfect-caters.onrender.com/api/menus/${id}`, menu);
       navigate('/admin/menus');
     } catch (err) { 
       alert('Failed to save menu changes.');
@@ -64,7 +64,7 @@ const MenuEditor = () => {
     <div style={styles.container}>
       <header style={styles.header}>
         <div>
-          <button style={styles.backBtn} onClick={() => navigate('/admin/menus')}>← Back to Menus</button>
+          <button style={styles.backBtn} onClick={() => navigate('/admin/menus')}>â† Back to Menus</button>
           <h1 style={styles.title}>{isNew ? 'Create New Menu' : 'Configure Menu'}</h1>
         </div>
         <div style={styles.headerActions}>
@@ -119,7 +119,7 @@ const MenuEditor = () => {
                 <div key={i} style={styles.itemCard}>
                   <div style={styles.itemCardHeader}>
                     <span style={styles.itemNumber}>#{i + 1}</span>
-                    <button style={styles.deleteBtn} onClick={() => removeItem(i)}>✕</button>
+                    <button style={styles.deleteBtn} onClick={() => removeItem(i)}>âœ•</button>
                   </div>
                   
                   <div style={styles.itemGrid}>

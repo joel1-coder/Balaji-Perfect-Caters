@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AdminLayout from '../../components/AdminLayout';
 
-const API = 'http://localhost:5000/api/staff';
+const API = 'https://balaji-perfect-caters.onrender.com/api/staff';
 
 const ROLES = ['Chef', 'Cashier', 'Server', 'Manager'];
 const STATUSES = ['ON-DUTY', 'OFF-DUTY', 'ABSENT'];
 
-const BLANK_FORM = { name: '', empId: '', role: 'Cashier', shiftTiming: '09:00 AM — 05:00 PM', shiftLabel: 'General Shift', status: 'ON-DUTY', rating: 5 };
+const BLANK_FORM = { name: '', empId: '', role: 'Cashier', shiftTiming: '09:00 AM â€” 05:00 PM', shiftLabel: 'General Shift', status: 'ON-DUTY', rating: 5 };
 
 const toast = (msg, type = 'success') => {
   const el = document.createElement('div');
@@ -67,7 +67,7 @@ const StaffManagement = () => {
     } catch { toast('Seed failed', 'error'); }
   };
 
-  // ── Modal Actions ──
+  // â”€â”€ Modal Actions â”€â”€
   const openAdd = () => {
     setEditItem(null);
     setForm(BLANK_FORM);
@@ -86,7 +86,7 @@ const StaffManagement = () => {
 
   const closeModal = () => { setShowModal(false); setEditItem(null); };
 
-  // ── Save (Create / Update) ──
+  // â”€â”€ Save (Create / Update) â”€â”€
   const handleSave = async () => {
     if (!form.name.trim() || !form.empId.trim()) { toast('Name and Employee ID are required', 'error'); return; }
     
@@ -107,7 +107,7 @@ const StaffManagement = () => {
     setSaving(false);
   };
 
-  // ── Delete ──
+  // â”€â”€ Delete â”€â”€
   const handleDelete = async (staff) => {
     if (!window.confirm(`Remove ${staff.name} (${staff.empId}) from the roster?`)) return;
     try {
@@ -128,8 +128,8 @@ const StaffManagement = () => {
       <header style={s.topBar}>
         <h1 style={s.pageTitle}>Staff Roster</h1>
         <div style={s.topRight}>
-          <button style={s.seedBtn} onClick={handleSeed}>⚡ Seed Demo</button>
-          <button style={s.addBtn} onClick={openAdd}>👤+ Add Employee</button>
+          <button style={s.seedBtn} onClick={handleSeed}>âš¡ Seed Demo</button>
+          <button style={s.addBtn} onClick={openAdd}>ðŸ‘¤+ Add Employee</button>
         </div>
       </header>
 
@@ -139,13 +139,13 @@ const StaffManagement = () => {
         {/* Stats Row */}
         <div style={s.statsRow}>
           <div style={s.statCard}>
-            <div style={s.statIcon}>👥</div>
+            <div style={s.statIcon}>ðŸ‘¥</div>
             <div style={s.statLabel}>Overall</div>
             <div style={s.statSub}>Total Staff</div>
             <div style={s.statVal}>{totalStaff}</div>
           </div>
           <div style={{ ...s.statCard, backgroundColor: '#0f2444', color: 'white' }}>
-            <div style={s.statIcon}>⏱</div>
+            <div style={s.statIcon}>â±</div>
             <div style={{ ...s.statLabel, color: 'rgba(255,255,255,0.7)' }}><span style={s.liveDot}></span> Live</div>
             <div style={{ ...s.statSub, color: 'rgba(255,255,255,0.7)' }}>Currently On-Duty</div>
             <div style={{ ...s.statVal, color: 'white' }}>{onDutyCount}</div>
@@ -220,12 +220,12 @@ const StaffManagement = () => {
                       </span>
                     </td>
                     <td style={s.td}>
-                      <span style={s.rating}>★ {emp.rating}</span>
+                      <span style={s.rating}>â˜… {emp.rating}</span>
                     </td>
                     <td style={s.td}>
                       <div style={{ display: 'flex', gap: '8px' }}>
-                        <button style={s.actionBtnEdit} onClick={() => openEdit(emp)}>✎ Edit</button>
-                        <button style={s.actionBtnDel} onClick={() => handleDelete(emp)}>✕</button>
+                        <button style={s.actionBtnEdit} onClick={() => openEdit(emp)}>âœŽ Edit</button>
+                        <button style={s.actionBtnDel} onClick={() => handleDelete(emp)}>âœ•</button>
                       </div>
                     </td>
                   </tr>
@@ -236,13 +236,13 @@ const StaffManagement = () => {
         </div>
       </div>
 
-      {/* ── Modal Form ── */}
+      {/* â”€â”€ Modal Form â”€â”€ */}
       {showModal && (
         <div style={s.overlay} onClick={e => e.target === e.currentTarget && closeModal()}>
           <div style={s.modal}>
             <div style={s.modalHeader}>
               <h2 style={s.modalTitle}>{editItem ? 'Edit Employee' : 'Add New Employee'}</h2>
-              <button style={s.closeBtn} onClick={closeModal}>✕</button>
+              <button style={s.closeBtn} onClick={closeModal}>âœ•</button>
             </div>
 
             <div style={s.formGrid}>
@@ -270,7 +270,7 @@ const StaffManagement = () => {
 
               <div style={s.fieldGroup}>
                 <label style={s.label}>Shift Timing</label>
-                <input style={s.input} placeholder="09:00 AM — 05:00 PM" value={form.shiftTiming} onChange={e => setForm({...form, shiftTiming: e.target.value})} />
+                <input style={s.input} placeholder="09:00 AM â€” 05:00 PM" value={form.shiftTiming} onChange={e => setForm({...form, shiftTiming: e.target.value})} />
               </div>
               <div style={s.fieldGroup}>
                 <label style={s.label}>Shift Label</label>

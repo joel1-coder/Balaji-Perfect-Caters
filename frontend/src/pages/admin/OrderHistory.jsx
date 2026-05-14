@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+﻿import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AdminLayout from '../../components/AdminLayout';
 
@@ -6,7 +6,7 @@ import AdminLayout from '../../components/AdminLayout';
 const ORDERS = [
   { id: '#ORD-94021', date: '2024-05-24', time: '10:45 AM', customer: 'John Doe', initials: 'JD', color: '#dbeafe', items: 'Grilled Chicken Salad, Fresh Orange Juice...', total: 24.50, status: 'Paid' },
   { id: '#ORD-94020', date: '2024-05-24', time: '10:42 AM', customer: 'Alice Smith', initials: 'AS', color: '#f3e8ff', items: 'Espresso, Avocado Toast', total: 18.20, status: 'Unpaid' },
-  { id: '#ORD-94019', date: '2024-05-23', time: '10:30 AM', customer: 'Guest #102', initials: '👤', color: '#f1f5f9', items: 'Double Cheeseburger Combo, Large Soda', total: 15.75, status: 'Paid' },
+  { id: '#ORD-94019', date: '2024-05-23', time: '10:30 AM', customer: 'Guest #102', initials: 'ðŸ‘¤', color: '#f1f5f9', items: 'Double Cheeseburger Combo, Large Soda', total: 15.75, status: 'Paid' },
   { id: '#ORD-94018', date: '2024-04-15', time: '10:15 AM', customer: 'Robert King', initials: 'RK', color: '#dcfce7', items: 'Margherita Pizza, Sparkling Water x2', total: 32.00, status: 'Paid' },
   { id: '#ORD-94017', date: '2024-04-02', time: '09:00 AM', customer: 'Emma Watson', initials: 'EW', color: '#fef3c7', items: 'Pancakes, Maple Syrup, Black Coffee', total: 21.00, status: 'Paid' },
   { id: '#ORD-94016', date: '2024-03-28', time: '01:20 PM', customer: 'Marketing Dept', initials: 'MD', color: '#e0e7ff', items: 'Team Lunch Buffet (x8)', total: 125.00, status: 'Pending' },
@@ -101,7 +101,7 @@ const OrderHistory = () => {
         <h1 style={s.pageTitle}>Order History</h1>
         <div style={s.topRight}>
           <div style={s.searchBox}>
-            <span>🔍</span>
+            <span>ðŸ”</span>
             <input 
               style={s.searchInput} 
               placeholder="Search Transaction ID, User..."
@@ -109,7 +109,7 @@ const OrderHistory = () => {
               onChange={e => setSearchQuery(e.target.value)}
             />
           </div>
-          <button style={s.iconBtn}>🔔</button>
+          <button style={s.iconBtn}>ðŸ””</button>
           <button style={s.newOrderBtn} onClick={() => navigate('/admin/billing')}>+ New Order</button>
         </div>
       </header>
@@ -139,9 +139,9 @@ const OrderHistory = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
               <div style={s.exportContainer}>
                 <span style={s.exportLabel}>Export:</span>
-                <button style={s.exportBtn} onClick={exportToCSV}>📊 Excel (CSV)</button>
+                <button style={s.exportBtn} onClick={exportToCSV}>ðŸ“Š Excel (CSV)</button>
                 <span style={{ color: '#e2e8f0' }}>|</span>
-                <button style={s.exportBtn} onClick={exportToDOC}>📝 Word (DOC)</button>
+                <button style={s.exportBtn} onClick={exportToDOC}>ðŸ“ Word (DOC)</button>
               </div>
 
               <div style={s.totalSalesCard}>
@@ -195,9 +195,9 @@ const OrderHistory = () => {
           <div style={s.paginationRow}>
             <span style={s.showingText}>Showing {filteredOrders.length} transactions</span>
             <div style={s.pagination}>
-              <button style={s.pageBtn}>‹</button>
+              <button style={s.pageBtn}>â€¹</button>
               <button style={s.pageActive}>1</button>
-              <button style={s.pageBtn}>›</button>
+              <button style={s.pageBtn}>â€º</button>
             </div>
           </div>
         </div>
@@ -205,20 +205,20 @@ const OrderHistory = () => {
         {/* Bottom Summary Cards */}
         <div style={s.summaryRow}>
           <div style={s.summaryCard}>
-            <div style={s.summaryIcon}>📈</div>
+            <div style={s.summaryIcon}>ðŸ“ˆ</div>
             <div style={s.summaryTitle}>Peak Hour Volume</div>
             <div style={s.summaryText}>Most orders processed between</div>
             <div style={{ color: '#0f2444', fontWeight: '700', marginBottom: '12px' }}>12:00 PM - 1:30 PM.</div>
             <div style={s.progressBar}><div style={{ ...s.progressFill, width: '75%' }}></div></div>
           </div>
           <div style={s.summaryCard}>
-            <div style={s.summaryIcon}>⭐</div>
+            <div style={s.summaryIcon}>â­</div>
             <div style={s.summaryTitle}>Top Selling Item</div>
             <div style={{ color: '#0f2444', fontWeight: '700', fontSize: '1.1rem', margin: '8px 0' }}>Grilled Chicken Salad</div>
             <div style={{ color: '#64748b', fontSize: '0.85rem' }}>142 units sold</div>
           </div>
           <div style={s.summaryCard}>
-            <div style={s.summaryIcon}>💳</div>
+            <div style={s.summaryIcon}>ðŸ’³</div>
             <div style={s.summaryTitle}>Payment Mix</div>
             <div style={s.paymentMixRow}>
               {[{ label: 'Card', val: '72%' }, { label: 'Cash', val: '18%' }, { label: 'Mobile', val: '10%' }].map(p => (

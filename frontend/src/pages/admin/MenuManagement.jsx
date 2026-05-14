@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ const MenuManagement = () => {
 
   const fetchMenus = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/menus');
+      const res = await axios.get('https://balaji-perfect-caters.onrender.com/api/menus');
       setMenus(res.data.data);
     } catch (err) {
       console.error('Error fetching menus:', err);
@@ -24,7 +24,7 @@ const MenuManagement = () => {
 
   const handleSeed = async () => {
     try {
-      await axios.post('http://localhost:5000/api/menus/seed');
+      await axios.post('https://balaji-perfect-caters.onrender.com/api/menus/seed');
       fetchMenus();
     } catch (err) {
       alert('Error seeding data');
@@ -34,7 +34,7 @@ const MenuManagement = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this menu? This action cannot be undone.')) {
       try {
-        await axios.delete(`http://localhost:5000/api/menus/${id}`);
+        await axios.delete(`https://balaji-perfect-caters.onrender.com/api/menus/${id}`);
         fetchMenus();
       } catch (err) {
         alert('Error deleting menu');
@@ -108,18 +108,18 @@ const MenuManagement = () => {
               <p style={styles.cardSub}>{m.title}</p>
               <div style={styles.cardMeta}>
                 <span>{m.items.length} Items</span>
-                <span>•</span>
+                <span>â€¢</span>
                 <span>Updated recently</span>
               </div>
               <div style={styles.actions}>
                 <button style={styles.actionBtn} onClick={() => navigate(`/admin/menu/${m._id}`)}>
-                  ✎ Edit
+                  âœŽ Edit
                 </button>
                 <button style={styles.actionBtn} onClick={() => showQR(m._id)}>
-                  📱 QR
+                  ðŸ“± QR
                 </button>
                 <button style={{...styles.actionBtn, color: '#f43f5e'}} onClick={() => handleDelete(m._id)}>
-                  🗑 Delete
+                  ðŸ—‘ Delete
                 </button>
               </div>
             </div>
