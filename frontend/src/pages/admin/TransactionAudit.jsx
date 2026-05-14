@@ -105,7 +105,7 @@ const TransactionAudit = () => {
         <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
           <p><strong>Order ID:</strong> ${t.orderId}</p>
           <p><strong>Customer:</strong> ${t.customerName} (${t.department || 'N/A'})</p>
-          <p><strong>Total:</strong> â‚¹${t.totalAmount.toFixed(2)}</p>
+          <p><strong>Total:</strong> Rs. ${t.totalAmount.toFixed(2)}</p>
           <p><strong>Status:</strong> ${t.paymentStatus.toUpperCase()}</p>
           <p><strong>Date:</strong> ${new Date(t.createdAt).toLocaleString()}</p>
         </div>`;
@@ -128,7 +128,7 @@ const TransactionAudit = () => {
         <h1 style={s.pageTitle}>Transaction Audit</h1>
         <div style={s.topRight}>
           <div style={s.searchBox}>
-            <span>ðŸ”</span>
+            <span>[SEARCH]</span>
             <input 
               style={s.searchInput} 
               placeholder="Search transactions..."

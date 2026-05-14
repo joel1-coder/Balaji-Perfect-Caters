@@ -94,15 +94,15 @@ const QuickBill = () => {
       <header style={s.topBar}>
         <div style={s.topBarLeft}>
           <h1 style={s.pageTitle}>QuickBill Terminal</h1>
-          <span style={s.liveBadge}>â— Live</span>
+          <span style={s.liveBadge}>● Live</span>
         </div>
         <div style={s.topBarRight}>
           <div style={s.searchBox}>
-            <span>ðŸ”</span>
+            <span>[SEARCH]</span>
             <input style={s.searchInput} placeholder="Search orders..." />
           </div>
-          <button style={s.iconBtn}>ðŸ””</button>
-          <button style={s.iconBtn}>â“</button>
+          <button style={s.iconBtn}>[NOTIFY]</button>
+          <button style={s.iconBtn}>[MENU]</button>
           <div style={s.userBadge}>
             <div style={s.userAvatar}>{localStorage.getItem('canteen_user')?.charAt(0).toUpperCase() || 'A'}</div>
             <div>
@@ -119,7 +119,7 @@ const QuickBill = () => {
         <div style={s.orderPanel}>
           {/* Item Selection */}
           <div style={s.card}>
-            <div style={s.cardTitle}><span>ðŸ›’</span> ITEM SELECTION</div>
+            <div style={s.cardTitle}>[CART] ITEM SELECTION</div>
             <div style={s.selectionRow}>
               <div style={s.selectWrapper}>
                 <label style={s.fieldLabel}>Search Item (e.g., Tea, Coffee, Sandwich)</label>
@@ -131,14 +131,14 @@ const QuickBill = () => {
               <div>
                 <label style={s.fieldLabel}>Quantity</label>
                 <div style={s.qtyControl}>
-                  <button style={s.qtyBtn} onClick={() => setQty(Math.max(1, qty - 1))}>âˆ’</button>
+                  <button style={s.qtyBtn} onClick={() => setQty(Math.max(1, qty - 1))}>-</button>
                   <span style={s.qtyValue}>{qty}</span>
                   <button style={s.qtyBtn} onClick={() => setQty(qty + 1)}>+</button>
                 </div>
               </div>
               <div>
                 <label style={s.fieldLabel}>Unit Rate</label>
-                <div style={s.rateBox}>â‚¹{selectedItem?.price.toFixed(2)}</div>
+                <div style={s.rateBox}>Rs. {selectedItem?.price.toFixed(2)}</div>
               </div>
               <button style={s.addBtn} onClick={addToBill}>+ ADD TO BILL</button>
             </div>

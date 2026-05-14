@@ -12,7 +12,7 @@ const ExecutiveOverview = () => {
           <p style={s.pageSubtitle}>{currentDate}</p>
         </div>
         <div style={s.topRight}>
-          <button style={s.iconBtn}>ðŸ””<span style={s.badge}>3</span></button>
+          <button style={s.iconBtn}>[NOTIFY]<span style={s.badge}>3</span></button>
           <div style={s.adminProfile}>
             <div style={s.adminAvatar}>A</div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -28,7 +28,7 @@ const ExecutiveOverview = () => {
         {/* Welcome Hero */}
         <div style={s.heroCard}>
           <div style={s.heroLeft}>
-            <h2 style={s.heroTitle}>Good morning, Admin! ðŸ‘‹</h2>
+            <h2 style={s.heroTitle}>Good morning, Admin!</h2>
             <p style={s.heroText}>Here is what's happening with your canteen today. Revenue is up <strong style={{ color: '#10b981' }}>12%</strong> compared to yesterday.</p>
             <div style={{ display: 'flex', gap: '12px', marginTop: '16px' }}>
               <button style={s.primaryBtn} onClick={() => window.open('/public/menu/main', '_blank')}>View Live Menu</button>
@@ -51,31 +51,31 @@ const ExecutiveOverview = () => {
           <div style={{ ...s.kpiCard, borderTop: '4px solid #38bdf8' }}>
             <div style={s.kpiHeader}>
               <span style={s.kpiLabel}>TODAY'S REVENUE</span>
-              <span style={s.kpiIconBox}>ðŸ’°</span>
+              <span style={s.kpiIconBox}>$</span>
             </div>
             <div style={s.kpiValue}>$3,248.50</div>
-            <div style={s.kpiTrend}><span style={{ color: '#10b981' }}>â†‘ +8.4%</span> vs last week</div>
+            <div style={s.kpiTrend}><span style={{ color: '#10b981' }}>↑ +8.4%</span> vs last week</div>
           </div>
           <div style={{ ...s.kpiCard, borderTop: '4px solid #818cf8' }}>
             <div style={s.kpiHeader}>
               <span style={s.kpiLabel}>TOTAL ORDERS</span>
-              <span style={s.kpiIconBox}>ðŸ›’</span>
+              <span style={s.kpiIconBox}>[CART]</span>
             </div>
             <div style={s.kpiValue}>412</div>
-            <div style={s.kpiTrend}><span style={{ color: '#10b981' }}>â†‘ +12.1%</span> vs last week</div>
+            <div style={s.kpiTrend}><span style={{ color: '#10b981' }}>↑ +12.1%</span> vs last week</div>
           </div>
           <div style={{ ...s.kpiCard, borderTop: '4px solid #f472b6' }}>
             <div style={s.kpiHeader}>
               <span style={s.kpiLabel}>AVERAGE ORDER VALUE</span>
-              <span style={s.kpiIconBox}>ðŸ“ˆ</span>
+              <span style={s.kpiIconBox}>[CHART]</span>
             </div>
             <div style={s.kpiValue}>$7.88</div>
-            <div style={s.kpiTrend}><span style={{ color: '#ef4444' }}>â†“ -1.2%</span> vs last week</div>
+            <div style={s.kpiTrend}><span style={{ color: '#ef4444' }}>↓ -1.2%</span> vs last week</div>
           </div>
           <div style={{ ...s.kpiCard, borderTop: '4px solid #34d399' }}>
             <div style={s.kpiHeader}>
               <span style={s.kpiLabel}>ACTIVE STAFF</span>
-              <span style={s.kpiIconBox}>ðŸ‘¥</span>
+              <span style={s.kpiIconBox}>[PEOPLE]</span>
             </div>
             <div style={s.kpiValue}>14 <span style={{ fontSize: '1rem', color: '#94a3b8' }}>/ 20</span></div>
             <div style={s.kpiTrend}>Current Shift</div>

@@ -65,7 +65,7 @@ const OperatorMenu = () => {
 
   return (
     <div style={s.layout}>
-      {/* â”€â”€ Sidebar â”€â”€ */}
+      {/* ---- Sidebar ---- */}
       <aside style={s.sidebar}>
         <div style={s.sidebarHeader}>
           <div style={s.brandTitle}>Balaji Perfect Caters</div>
@@ -101,7 +101,7 @@ const OperatorMenu = () => {
             <p style={s.pageSubtitle}>Update availability and pricing for today's service.</p>
           </div>
           <div style={s.searchBox}>
-            <span style={{ color: '#94a3b8' }}>ðŸ”</span>
+            <span style={{ color: '#94a3b8' }}>[SEARCH]</span>
             <input 
               style={s.searchInput} 
               placeholder="Search menu items..." 

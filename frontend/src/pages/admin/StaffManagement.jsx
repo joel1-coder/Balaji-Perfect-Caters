@@ -7,7 +7,7 @@ const API = 'https://balaji-perfect-caters.onrender.com/api/staff';
 const ROLES = ['Chef', 'Cashier', 'Server', 'Manager'];
 const STATUSES = ['ON-DUTY', 'OFF-DUTY', 'ABSENT'];
 
-const BLANK_FORM = { name: '', empId: '', role: 'Cashier', shiftTiming: '09:00 AM â€” 05:00 PM', shiftLabel: 'General Shift', status: 'ON-DUTY', rating: 5 };
+const BLANK_FORM = { name: '', empId: '', role: 'Cashier', shiftTiming: '09:00 AM - 05:00 PM', shiftLabel: 'General Shift', status: 'ON-DUTY', rating: 5 };
 
 const toast = (msg, type = 'success') => {
   const el = document.createElement('div');
