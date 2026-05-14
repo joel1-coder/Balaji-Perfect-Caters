@@ -1,1 +1,10 @@
-﻿{ "rewrites": [ { "source": "/(.*)", "destination": "/" } ] }
+﻿{
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/public/:path*", "destination": "/index.html" },
+    { "source": "/admin/:path*", "destination": "/index.html" },
+    { "source": "/user/:path*", "destination": "/index.html" },
+    { "source": "/login", "destination": "/index.html" },
+    { "source": "/:path*", "destination": "/index.html" }
+  ]
+}
