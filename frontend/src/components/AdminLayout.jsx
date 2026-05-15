@@ -103,7 +103,11 @@ const AdminLayout = ({ children }) => {
         </nav>
 
         <div style={s.sidebarBottom}>
-          <button style={s.switchBtn} onClick={() => navigate('/user/billing')}>
+          <button style={s.switchBtn} onClick={() => {
+            localStorage.setItem('canteen_role', 'operator');
+            localStorage.setItem('canteen_user', 'operator');
+            navigate('/user/billing');
+          }}>
             ⚡ Switch to Operator
           </button>
           <button style={{ ...s.navItem, color: '#64748b' }} onClick={() => navigate('/admin/settings')}>

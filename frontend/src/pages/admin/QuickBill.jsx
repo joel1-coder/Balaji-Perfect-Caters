@@ -165,7 +165,7 @@ const QuickBill = () => {
           <div style={{ ...s.card, flex: 1, display: 'flex', flexDirection: 'column' }}>
             <div style={s.orderHeader}>
               <span style={s.cardTitle}>CURRENT ORDER ITEMS</span>
-              <button style={s.clearBtn} onClick={() => setOrderItems([])}>ðŸ—‘ Clear List</button>
+              <button style={s.clearBtn} onClick={() => setOrderItems([])}>🗑️ Clear List</button>
             </div>
             <div style={{ flex: 1, overflowY: 'auto' }}>
               <table style={s.table}>

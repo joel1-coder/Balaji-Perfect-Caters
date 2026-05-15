@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import AdminLayout from '../../components/AdminLayout';
 
 const ExecutiveOverview = () => {
   const currentDate = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  const [staffData, setStaffData] = useState({ onDuty: 14, total: 20 }); // Fallback values while loading
+
+  useEffect(() => {
+    const fetchStaff = async () => {
+      try {
+        const res = await axios.get('https://balaji-perfect-caters.onrender.com/api/staff');
+        const staffList = res.data.data || [];
+        const onDuty = staffList.filter(s => s.status === 'ON-DUTY').length;
+        setStaffData({ onDuty, total: staffList.length });
+      } catch (err) {
+        console.error('Failed to fetch staff data', err);
+      }
+    };
+    fetchStaff();
+  }, []);
 
   return (
     <AdminLayout>
@@ -35,9 +51,9 @@ const ExecutiveOverview = () => {
           <div style={{ ...s.kpiCard, borderTop: '4px solid #38bdf8' }}>
             <div style={s.kpiHeader}>
               <span style={s.kpiLabel}>TODAY'S REVENUE</span>
-              <span style={s.kpiIconBox}>$</span>
+              <span style={s.kpiIconBox}>₹</span>
             </div>
-            <div style={s.kpiValue}>$3,248.50</div>
+            <div style={s.kpiValue}>₹3,248.50</div>
             <div style={s.kpiTrend}><span style={{ color: '#10b981' }}>↑ +8.4%</span> vs last week</div>
           </div>
           <div style={{ ...s.kpiCard, borderTop: '4px solid #818cf8' }}>
@@ -53,7 +69,7 @@ const ExecutiveOverview = () => {
               <span style={s.kpiLabel}>AVERAGE ORDER VALUE</span>
               <span style={s.kpiIconBox}>[CHART]</span>
             </div>
-            <div style={s.kpiValue}>$7.88</div>
+            <div style={s.kpiValue}>₹7.88</div>
             <div style={s.kpiTrend}><span style={{ color: '#ef4444' }}>↓ -1.2%</span> vs last week</div>
           </div>
           <div style={{ ...s.kpiCard, borderTop: '4px solid #34d399' }}>
@@ -61,7 +77,7 @@ const ExecutiveOverview = () => {
               <span style={s.kpiLabel}>ACTIVE STAFF</span>
               <span style={s.kpiIconBox}>[PEOPLE]</span>
             </div>
-            <div style={s.kpiValue}>14 <span style={{ fontSize: '1rem', color: '#94a3b8' }}>/ 20</span></div>
+            <div style={s.kpiValue}>{staffData.onDuty} <span style={{ fontSize: '1rem', color: '#94a3b8' }}>/ {staffData.total}</span></div>
             <div style={s.kpiTrend}>Current Shift</div>
           </div>
         </div>
@@ -101,10 +117,10 @@ const ExecutiveOverview = () => {
             </div>
             <div style={s.listCont}>
               {[
-                { name: 'Grilled Chicken Salad', units: 142, revenue: '$1,136.00', trend: '+12%', color: '#fef3c7' },
-                { name: 'Fresh Orange Juice', units: 98, revenue: '$490.00', trend: '+5%', color: '#dbeafe' },
-                { name: 'Espresso Double', units: 85, revenue: '$340.00', trend: '+2%', color: '#f3e8ff' },
-                { name: 'Avocado Toast', units: 76, revenue: '$646.00', trend: '-3%', color: '#dcfce7' },
+                { name: 'Grilled Chicken Salad', units: 142, revenue: '₹1,136.00', trend: '+12%', color: '#fef3c7' },
+                { name: 'Fresh Orange Juice', units: 98, revenue: '₹490.00', trend: '+5%', color: '#dbeafe' },
+                { name: 'Espresso Double', units: 85, revenue: '₹340.00', trend: '+2%', color: '#f3e8ff' },
+                { name: 'Avocado Toast', units: 76, revenue: '₹646.00', trend: '-3%', color: '#dcfce7' },
               ].map((item, i) => (
                 <div key={i} style={s.listItem}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>

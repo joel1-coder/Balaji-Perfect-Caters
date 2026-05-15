@@ -145,8 +145,10 @@ const TransactionAudit = () => {
       <html>
         <head>
           <title>Generated Bill</title>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
           <style>
             body { font-family: 'Outfit', sans-serif; padding: 40px; color: #333; }
+            #content-to-pdf { padding: 20px; }
             .header { text-align: center; margin-bottom: 40px; }
             .header h1 { margin: 0; color: #0f2444; }
             .header p { margin: 5px 0; color: #666; }
@@ -156,52 +158,70 @@ const TransactionAudit = () => {
             th, td { border-bottom: 1px solid #ddd; padding: 12px; text-align: left; }
             th { background-color: #f8fafc; color: #0f2444; }
             .total { text-align: right; font-size: 1.5em; font-weight: bold; color: #0f2444; margin-top: 20px; }
-            @media print { button { display: none; } }
+            .no-print { text-align: center; margin-top: 50px; }
+            @media print { .no-print { display: none; } }
           </style>
         </head>
         <body>
-          <div class="header">
-            <h1>Balaji Perfect Caters</h1>
-            <p>Department Billing Statement</p>
-          </div>
-          
-          <div class="info">
-            <p><strong>Department:</strong> ${departmentFilter === 'All Departments' ? 'All Departments' : departmentFilter}</p>
-            <p><strong>Period:</strong> ${startDate || 'Start'} to ${endDate || 'End'}</p>
-            <p><strong>Generated on:</strong> ${new Date().toLocaleDateString()}</p>
-            <p><strong>Total Transactions:</strong> ${filteredData.length}</p>
-          </div>
+          <div id="content-to-pdf">
+            <div class="header">
+              <h1>Balaji Perfect Caters</h1>
+              <p>Department Billing Statement</p>
+            </div>
+            
+            <div class="info">
+              <p><strong>Department:</strong> ${departmentFilter === 'All Departments' ? 'All Departments' : departmentFilter}</p>
+              <p><strong>Period:</strong> ${startDate || 'Start'} to ${endDate || 'End'}</p>
+              <p><strong>Generated on:</strong> ${new Date().toLocaleDateString()}</p>
+              <p><strong>Total Transactions:</strong> ${filteredData.length}</p>
+            </div>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Transaction ID</th>
-                <th>Customer</th>
-                <th>Items</th>
-                <th style="text-align: right;">Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${filteredData.map(t => `
+            <table>
+              <thead>
                 <tr>
-                  <td>${new Date(t.createdAt).toLocaleDateString()}</td>
-                  <td>${t.orderId}</td>
-                  <td>${t.customerName}</td>
-                  <td>${(t.items || []).map(i => `${i.name} (x${i.qty})`).join(', ')}</td>
-                  <td style="text-align: right;">Rs. ${(t.totalAmount || 0).toFixed(2)}</td>
+                  <th>Date</th>
+                  <th>Transaction ID</th>
+                  <th>Customer</th>
+                  <th>Items</th>
+                  <th style="text-align: right;">Amount</th>
                 </tr>
-              `).join('')}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                ${filteredData.map(t => `
+                  <tr>
+                    <td>${new Date(t.createdAt).toLocaleDateString()}</td>
+                    <td>${t.orderId}</td>
+                    <td>${t.customerName}</td>
+                    <td>${(t.items || []).map(i => `${i.name} (x${i.qty})`).join(', ')}</td>
+                    <td style="text-align: right;">Rs. ${(t.totalAmount || 0).toFixed(2)}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
 
-          <div class="total">
-            Grand Total: Rs. ${totalFilteredValue.toFixed(2)}
+            <div class="total">
+              Grand Total: Rs. ${totalFilteredValue.toFixed(2)}
+            </div>
           </div>
 
-          <div style="text-align: center; margin-top: 50px;">
-            <button onclick="window.print()" style="padding: 10px 20px; font-size: 16px; cursor: pointer; background: #0f2444; color: white; border: none; border-radius: 5px;">Print Bill</button>
+          <div class="no-print" style="display: flex; gap: 15px; justify-content: center;">
+            <button onclick="window.print()" style="padding: 10px 20px; font-size: 16px; cursor: pointer; background: #0f2444; color: white; border: none; border-radius: 5px;">🖨️ Print Bill</button>
+            <button onclick="downloadPDF()" style="padding: 10px 20px; font-size: 16px; cursor: pointer; background: #dc2626; color: white; border: none; border-radius: 5px;">📥 Download PDF</button>
           </div>
+
+          <script>
+            function downloadPDF() {
+              var element = document.getElementById('content-to-pdf');
+              var opt = {
+                margin:       0.5,
+                filename:     'Balaji_Billing_Statement.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+              };
+              html2pdf().set(opt).from(element).save();
+            }
+          </script>
         </body>
       </html>
     `;

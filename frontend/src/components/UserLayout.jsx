@@ -64,7 +64,11 @@ const UserLayout = ({ children }) => {
 
         {/* Bottom */}
         <div style={styles.sidebarBottom}>
-          <button style={styles.switchBtn} onClick={() => navigate('/admin/overview')}>
+          <button style={styles.switchBtn} onClick={() => {
+            localStorage.setItem('canteen_role', 'admin');
+            localStorage.setItem('canteen_user', 'admin');
+            navigate('/admin/overview');
+          }}>
             ⚡ Switch to Admin
           </button>
           <button style={{ ...styles.navItem, color: 'rgba(255,255,255,0.5)' }}
