@@ -42,14 +42,14 @@ function App() {
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
 
-        {/* â”€â”€ Admin Routes â”€â”€ */}
+        {/* ──── Admin Routes ──── */}
         <Route path="/admin/overview"   element={<AdminRoute><ExecutiveOverview /></AdminRoute>} />
         <Route path="/admin/menu-items" element={<AdminRoute><MenuItems /></AdminRoute>} />
         <Route path="/admin/menu-items/edit/:id" element={<AdminRoute><MenuEditor /></AdminRoute>} />
         <Route path="/admin/audit"      element={<AdminRoute><TransactionAudit /></AdminRoute>} />
         <Route path="/admin/staff"      element={<AdminRoute><StaffManagement /></AdminRoute>} />
 
-        {/* â”€â”€ User / Operator Routes â”€â”€ */}
+        {/* ──── User / Operator Routes ──── */}
         <Route path="/user/billing"     element={<UserRoute><QuickBill /></UserRoute>} />
         <Route path="/user/menu"        element={<UserRoute><OperatorMenu /></UserRoute>} />
 
@@ -58,7 +58,7 @@ function App() {
         <Route path="/admin/menus"      element={<Navigate to="/admin/menu-items" replace />} />
         <Route path="/quickbill"        element={<Navigate to="/user/billing" replace />} />
 
-        {/* â”€â”€ Public QR Menu (no auth required) â”€â”€ */}
+        {/* ──── Public QR Menu (no auth required) ──── */}
         <Route path="/public/menu/:id" element={<DigitalMenu />} />
 
         {/* Fallback */}

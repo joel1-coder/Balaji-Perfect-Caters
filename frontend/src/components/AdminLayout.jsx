@@ -2,10 +2,10 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const navItems = [
-  { icon: 'âŠž', label: 'Executive Overview', path: '/admin/overview' },
-  { icon: 'ðŸ½', label: 'Menu Management',    path: '/admin/menu-items' },
-  { icon: 'ðŸ”', label: 'Transaction Audit',  path: '/admin/audit' },
-  { icon: 'ðŸ‘¥', label: 'Staff Management',   path: '/admin/staff' },
+  { icon: '📊', label: 'Executive Overview', path: '/admin/overview' },
+  { icon: '🍽️', label: 'Menu Management',    path: '/admin/menu-items' },
+  { icon: '📈', label: 'Transaction Audit',  path: '/admin/audit' },
+  { icon: '👥', label: 'Staff Management',   path: '/admin/staff' },
 ];
 
 const AdminLayout = ({ children }) => {
@@ -19,7 +19,7 @@ const AdminLayout = ({ children }) => {
 
   return (
     <div style={styles.page}>
-      {/* â”€â”€ Sidebar â”€â”€ */}
+      {/* ──── Sidebar ──── */}
       <aside style={styles.sidebar}>
         <div style={styles.brand}>
           <div style={styles.brandIcon}>
@@ -53,18 +53,18 @@ const AdminLayout = ({ children }) => {
 
         <div style={styles.sidebarBottom}>
           <button style={styles.switchBtn} onClick={() => navigate('/quickbill')}>
-            âŠ• Switch to Admin
+            ⚡ Switch to Admin
           </button>
           <button style={{ ...styles.navItem, color: '#64748b' }} onClick={() => navigate('/admin/settings')}>
-            <span>âš™</span> Settings
+            <span>⚙️</span> Settings
           </button>
           <button style={{ ...styles.navItem, color: '#ef4444' }} onClick={handleLogout}>
-            <span>â†ª</span> Logout
+            <span>↪️</span> Logout
           </button>
         </div>
       </aside>
 
-      {/* â”€â”€ Page Content â”€â”€ */}
+      {/* ──── Page Content ──── */}
       <div style={styles.content}>{children}</div>
     </div>
   );
