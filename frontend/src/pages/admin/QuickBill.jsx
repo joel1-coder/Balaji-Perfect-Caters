@@ -187,7 +187,7 @@ const QuickBill = () => {
               <div style={s.actionGroup}>
                 <button style={s.clearActionBtn} onClick={() => setOrderItems([])}>CLEAR</button>
                 <button style={s.saveOrderBtn} onClick={saveOrder}>
-                  <span style={{marginRight: '8px'}}>ðŸ’¾</span> SAVE ORDER
+                  <span style={{marginRight: '8px'}}>💾</span> SAVE ORDER
                 </button>
               </div>
             </div>

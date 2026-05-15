@@ -42,6 +42,15 @@ const TransactionAudit = () => {
     }
     setLoading(false);
   };
+
+  const updateStatus = async (id, newStatus) => {
+    try {
+      await axios.patch(`https://balaji-perfect-caters.onrender.com/api/transactions/${id}/status`, { paymentStatus: newStatus });
+      setTransactions(prev => prev.map(t => t._id === id ? { ...t, paymentStatus: newStatus } : t));
+    } catch (err) {
+      alert('Failed to update status: ' + (err.response?.data?.error || err.message));
+    }
+  };
   
   // Memoized Filtered List
   const filteredData = useMemo(() => {
@@ -224,7 +233,27 @@ const TransactionAudit = () => {
                   <td style={{ ...s.td, color: '#475569' }}>{(t.items || []).map(i => i.name).join(', ')}</td>
                   <td style={{ ...s.td, fontWeight: '700' }}>₹{(t.totalAmount || 0).toFixed(2)}</td>
                   <td style={s.td}>
-                    <span style={{ ...s.badge, backgroundColor: (statusStyle[t.paymentStatus] || statusStyle.pending).bg, color: (statusStyle[t.paymentStatus] || statusStyle.pending).color }}>{t.paymentStatus || 'pending'}</span>
+                    <select
+                      value={t.paymentStatus || 'pending'}
+                      onChange={e => updateStatus(t._id, e.target.value)}
+                      style={{
+                        padding: '5px 10px',
+                        borderRadius: '20px',
+                        border: '1.5px solid',
+                        fontSize: '0.78rem',
+                        fontWeight: '700',
+                        cursor: 'pointer',
+                        outline: 'none',
+                        fontFamily: "'Outfit', sans-serif",
+                        backgroundColor: (statusStyle[t.paymentStatus] || statusStyle.pending).bg,
+                        color: (statusStyle[t.paymentStatus] || statusStyle.pending).color,
+                        borderColor: (statusStyle[t.paymentStatus] || statusStyle.pending).color,
+                      }}
+                    >
+                      <option value="paid">paid</option>
+                      <option value="unpaid">unpaid</option>
+                      <option value="pending">pending</option>
+                    </select>
                   </td>
                 </tr>
               ))}

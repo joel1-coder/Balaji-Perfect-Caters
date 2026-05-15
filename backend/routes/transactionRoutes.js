@@ -34,4 +34,24 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// PATCH update payment status
+router.patch('/:id/status', async (req, res) => {
+  try {
+    const { paymentStatus } = req.body;
+    const allowed = ['paid', 'unpaid', 'pending', 'disputed'];
+    if (!allowed.includes(paymentStatus)) {
+      return res.status(400).json({ success: false, error: 'Invalid status' });
+    }
+    const txn = await Transaction.findByIdAndUpdate(
+      req.params.id,
+      { paymentStatus },
+      { new: true }
+    );
+    if (!txn) return res.status(404).json({ success: false, error: 'Transaction not found' });
+    res.json({ success: true, data: txn });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 export default router;
