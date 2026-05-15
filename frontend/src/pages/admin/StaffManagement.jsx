@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AdminLayout from '../../components/AdminLayout';
 
@@ -67,7 +67,7 @@ const StaffManagement = () => {
     } catch { toast('Seed failed', 'error'); }
   };
 
-  // ”€”€ Modal Actions ”€”€
+  // —— Modal Actions ——
   const openAdd = () => {
     setEditItem(null);
     setForm(BLANK_FORM);
@@ -86,7 +86,7 @@ const StaffManagement = () => {
 
   const closeModal = () => { setShowModal(false); setEditItem(null); };
 
-  // ”€”€ Save (Create / Update) ”€”€
+  // —— Save (Create / Update) ——
   const handleSave = async () => {
     if (!form.name.trim() || !form.empId.trim()) { toast('Name and Employee ID are required', 'error'); return; }
     
@@ -107,7 +107,7 @@ const StaffManagement = () => {
     setSaving(false);
   };
 
-  // ”€”€ Delete ”€”€
+  // —— Delete ——
   const handleDelete = async (staff) => {
     if (!window.confirm(`Remove ${staff.name} (${staff.empId}) from the roster?`)) return;
     try {
@@ -236,13 +236,13 @@ const StaffManagement = () => {
         </div>
       </div>
 
-      {/* ”€”€ Modal Form ”€”€ */}
+      {/* —— Modal Form —— */}
       {showModal && (
         <div style={s.overlay} onClick={e => e.target === e.currentTarget && closeModal()}>
           <div style={s.modal}>
             <div style={s.modalHeader}>
               <h2 style={s.modalTitle}>{editItem ? 'Edit Employee' : 'Add New Employee'}</h2>
-              <button style={s.closeBtn} onClick={closeModal}>œ•</button>
+              <button style={s.closeBtn} onClick={closeModal}>×</button>
             </div>
 
             <div style={s.formGrid}>
@@ -270,7 +270,7 @@ const StaffManagement = () => {
 
               <div style={s.fieldGroup}>
                 <label style={s.label}>Shift Timing</label>
-                <input style={s.input} placeholder="09:00 AM "” 05:00 PM" value={form.shiftTiming} onChange={e => setForm({...form, shiftTiming: e.target.value})} />
+                <input style={s.input} placeholder="09:00 AM - 05:00 PM" value={form.shiftTiming} onChange={e => setForm({...form, shiftTiming: e.target.value})} />
               </div>
               <div style={s.fieldGroup}>
                 <label style={s.label}>Shift Label</label>
