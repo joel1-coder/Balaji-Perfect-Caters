@@ -47,11 +47,7 @@ const UserLayout = ({ children }) => {
         {/* Brand */}
         <div style={styles.brand}>
           <div style={styles.brandIcon}>
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-              <rect width="28" height="28" rx="6" fill="rgba(255,255,255,0.15)"/>
-              <path d="M7 20L14 8L21 20H7Z" fill="white" opacity="0.9"/>
-              <circle cx="14" cy="14" r="3" fill="#38bdf8"/>
-            </svg>
+            <img src="/bpc-logo.jpeg" alt="BPC Logo" style={{ width: '32px', height: '32px', borderRadius: '6px', objectFit: 'cover' }} />
           </div>
           <div>
             <div style={styles.brandName}>Balaji Perfect Caters</div>

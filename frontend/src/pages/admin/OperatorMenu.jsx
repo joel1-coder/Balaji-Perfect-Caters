@@ -89,8 +89,11 @@ const OperatorMenu = () => {
       {/* ---- Sidebar ---- */}
       <aside className={`user-sidebar ${sidebarOpen ? 'open' : ''}`} style={s.sidebar}>
         <div style={s.sidebarHeader}>
-          <div style={s.brandTitle}>Balaji Perfect Caters</div>
-          <div style={s.brandSubtitle}>Operator Terminal</div>
+          <img src="/bpc-logo.jpeg" alt="BPC Logo" style={{ width: '32px', height: '32px', borderRadius: '6px', objectFit: 'cover' }} />
+          <div>
+            <div style={s.brandTitle}>Balaji Perfect Caters</div>
+            <div style={s.brandSubtitle}>Operator Terminal</div>
+          </div>
         </div>
         
         <button style={s.newTxnBtn} onClick={() => navigate('/user/billing')}>
@@ -210,7 +213,7 @@ const s = {
   layout: { display: 'flex', height: '100vh', backgroundColor: '#f8fafc', fontFamily: "'Outfit', sans-serif" },
   
   sidebar: { width: '260px', backgroundColor: '#f8fafc', borderRight: '1px solid #e2e8f0', display: 'flex', flexDirection: 'column' },
-  sidebarHeader: { padding: '24px', borderBottom: '1px solid #e2e8f0', backgroundColor: 'white' },
+  sidebarHeader: { padding: '24px 20px', borderBottom: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', gap: '12px', backgroundColor: 'white' },
   brandTitle: { fontSize: '1.2rem', fontWeight: '800', color: '#0f172a' },
   brandSubtitle: { fontSize: '0.75rem', color: '#64748b' },
   newTxnBtn: { margin: '20px', backgroundColor: '#0f2444', color: 'white', border: 'none', borderRadius: '4px', padding: '12px', fontWeight: '700', cursor: 'pointer', fontSize: '0.85rem' },
