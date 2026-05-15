@@ -157,6 +157,7 @@ const TransactionAudit = () => {
             table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
             th, td { border-bottom: 1px solid #ddd; padding: 12px; text-align: left; }
             th { background-color: #f8fafc; color: #0f2444; }
+            tr { page-break-inside: avoid; }
             .total { text-align: right; font-size: 1.5em; font-weight: bold; color: #0f2444; margin-top: 20px; }
             .no-print { text-align: center; margin-top: 50px; }
             @media print { .no-print { display: none; } }
@@ -217,7 +218,8 @@ const TransactionAudit = () => {
                 filename:     'Balaji_Billing_Statement.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2 },
-                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
+                pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
               };
               html2pdf().set(opt).from(element).save();
             }
