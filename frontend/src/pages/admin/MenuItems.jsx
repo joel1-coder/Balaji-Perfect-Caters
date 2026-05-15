@@ -153,7 +153,7 @@ const MenuItems = () => {
           <button style={s.qrBtn} onClick={() => window.open('/public/menu/main', '_blank')}>
             ðŸ“± View Digital Menu
           </button>
-          <button style={s.seedBtn} onClick={handleSeed}>âš¡ Seed Demo</button>
+          <button style={s.seedBtn} onClick={handleSeed}>⚡ Seed Demo</button>
           <button style={s.addBtn}  onClick={openAdd}>âŠ• Add New Item</button>
         </div>
       </header>
@@ -178,7 +178,7 @@ const MenuItems = () => {
         ) : items.length === 0 ? (
           <div style={s.emptyState}>
             <p style={{ marginBottom: '16px', color: '#64748b' }}>No items yet. Seed demo data or add your first item.</p>
-            <button style={s.addBtn} onClick={handleSeed}>âš¡ Seed Demo Data</button>
+            <button style={s.addBtn} onClick={handleSeed}>⚡ Seed Demo Data</button>
           </div>
         ) : (
           <div style={s.tableCard}>
@@ -203,7 +203,7 @@ const MenuItems = () => {
                   {item.image ? (
                     <img src={item.image} alt={item.name} style={s.thumb} onError={e => { e.target.style.display = 'none'; }}/>
                   ) : (
-                    <div style={s.thumbPlaceholder}>ðŸ½</div>
+                    <div style={s.thumbPlaceholder}>🍽️</div>
                   )}
                 </div>
                 <span style={{ flex: 2, fontWeight: '700', color: '#0f172a' }}>{item.name}</span>
@@ -216,7 +216,7 @@ const MenuItems = () => {
                 <span style={{ flex: 2, color: '#64748b', fontSize: '0.85rem' }}>{item.description || 'â€”'}</span>
                 <div style={{ flex: '0 0 100px', display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
                   <button style={s.editBtn}   onClick={() => openEdit(item)}>âœŽ Edit</button>
-                  <button style={s.deleteBtn} onClick={() => handleDelete(item)}>ðŸ—‘</button>
+                  <button style={s.deleteBtn} onClick={() => handleDelete(item)}>🗑️</button>
                 </div>
               </div>
             ))}
@@ -246,7 +246,7 @@ const MenuItems = () => {
                   <img src={preview} alt="preview" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '12px' }}/>
                 ) : (
                   <div style={s.imagePlaceholder}>
-                    <span style={{ fontSize: '2rem' }}>ðŸ“·</span>
+                    <span style={{ fontSize: '2rem' }}>📷</span>
                     <span style={{ fontSize: '0.85rem', color: '#94a3b8', marginTop: '8px' }}>Click to upload image</span>
                   </div>
                 )}

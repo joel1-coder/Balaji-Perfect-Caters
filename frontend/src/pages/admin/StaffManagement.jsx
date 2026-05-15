@@ -128,8 +128,8 @@ const StaffManagement = () => {
       <header style={s.topBar}>
         <h1 style={s.pageTitle}>Staff Roster</h1>
         <div style={s.topRight}>
-          <button style={s.seedBtn} onClick={handleSeed}>âš¡ Seed Demo</button>
-          <button style={s.addBtn} onClick={openAdd}>ðŸ‘¤+ Add Employee</button>
+          <button style={s.seedBtn} onClick={handleSeed}>⚡ Seed Demo</button>
+          <button style={s.addBtn} onClick={openAdd}>👤+ Add Employee</button>
         </div>
       </header>
 
@@ -139,7 +139,7 @@ const StaffManagement = () => {
         {/* Stats Row */}
         <div style={s.statsRow}>
           <div style={s.statCard}>
-            <div style={s.statIcon}>ðŸ‘¥</div>
+            <div style={s.statIcon}>👥</div>
             <div style={s.statLabel}>Overall</div>
             <div style={s.statSub}>Total Staff</div>
             <div style={s.statVal}>{totalStaff}</div>

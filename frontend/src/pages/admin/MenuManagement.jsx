@@ -119,7 +119,7 @@ const MenuManagement = () => {
                   ðŸ“± QR
                 </button>
                 <button style={{...styles.actionBtn, color: '#f43f5e'}} onClick={() => handleDelete(m._id)}>
-                  ðŸ—‘ Delete
+                  🗑️ Delete
                 </button>
               </div>
             </div>

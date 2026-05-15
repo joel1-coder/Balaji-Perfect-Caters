@@ -2,8 +2,8 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const navItems = [
-  { icon: 'ðŸ§¾', label: 'Billing',       path: '/user/billing' },
-  { icon: 'ðŸ½', label: 'Menu Items',    path: '/user/menu' },
+  { icon: '💼', label: 'Billing',       path: '/user/billing' },
+  { icon: '🍽️', label: 'Menu Items',    path: '/user/menu' },
 ];
 
 const UserLayout = ({ children }) => {

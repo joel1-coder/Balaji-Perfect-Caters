@@ -130,7 +130,7 @@ const OperatorMenu = () => {
                           {item.image ? (
                             <img src={item.image} alt={item.name} style={s.cardImage} />
                           ) : (
-                            <div style={s.cardImagePlaceholder}>ðŸ½ No Image</div>
+                            <div style={s.cardImagePlaceholder}>🍽️ No Image</div>
                           )}
                         </div>
                         
