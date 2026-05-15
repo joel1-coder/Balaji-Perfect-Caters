@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import '../styles/userResponsive.css';
 
 const navItems = [
   { icon: '💼', label: 'Billing',       path: '/user/billing' },
@@ -9,6 +10,7 @@ const navItems = [
 const UserLayout = ({ children }) => {
   const navigate  = useNavigate();
   const location  = useLocation();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem('canteen_auth');
@@ -21,8 +23,27 @@ const UserLayout = ({ children }) => {
 
   return (
     <div style={styles.page}>
-      {/* ”€”€ Sidebar ”€”€ */}
-      <aside style={styles.sidebar}>
+      {/* Mobile Floating Hamburger */}
+      <button 
+        className="user-hamburger" 
+        style={{ position: 'fixed', top: '20px', left: '20px', zIndex: 300, background: 'white', padding: '10px', borderRadius: '8px', boxShadow: '0 2px 5px rgba(0,0,0,0.2)' }}
+        onClick={() => setSidebarOpen(true)}
+      >
+        <div />
+        <div />
+        <div />
+      </button>
+
+      {/* Mobile Overlay */}
+      {sidebarOpen && (
+        <div 
+          style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 199 }}
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside className={`user-sidebar ${sidebarOpen ? 'open' : ''}`} style={styles.sidebar}>
         {/* Brand */}
         <div style={styles.brand}>
           <div style={styles.brandIcon}>

@@ -119,7 +119,6 @@ const QuickBill = () => {
             <input style={s.searchInput} placeholder="Search orders..." />
           </div>
           <button style={s.iconBtn}>🔔</button>
-          <button style={s.iconBtn} className="show-mobile">☰</button>
           <div style={s.userBadge}>
             <div style={s.userAvatar}>{localStorage.getItem('canteen_user')?.charAt(0).toUpperCase() || 'A'}</div>
             <div>
@@ -131,9 +130,9 @@ const QuickBill = () => {
       </header>
 
       {/* Content Area */}
-      <div style={s.contentArea}>
+      <div style={s.contentArea} className="quickbill-content">
         {/* Left: Order Panel */}
-        <div style={s.orderPanel}>
+        <div style={s.orderPanel} className="quickbill-left">
           {/* Item Selection */}
           <div style={s.card}>
             <div style={s.cardTitle}>🛒 ITEM SELECTION</div>
@@ -212,7 +211,7 @@ const QuickBill = () => {
         </div>
 
         {/* Right: Member Details */}
-        <aside style={s.rightPanel}>
+        <aside style={s.rightPanel} className="quickbill-right">
           <div style={s.card}>
             <div style={s.memberHeader}>
               <span style={s.sectionLabel}>MEMBER DETAILS</span>
@@ -235,15 +234,7 @@ const QuickBill = () => {
                 <div style={{ ...s.metaValue, color: '#0f2444', fontWeight: '800' }}>₹{member.limit.toFixed(2)}</div>
               </div>
             </div>
-            <div style={s.paymentRow}>
-              <span style={s.metaLabel}>Payment Status</span>
-              <div style={s.paymentToggle}>
-                <button onClick={() => setPaymentStatus('paid')}
-                  style={{ ...s.payBtn, ...(paymentStatus === 'paid' ? s.payBtnPaid : {}) }}>PAID</button>
-                <button onClick={() => setPaymentStatus('unpaid')}
-                  style={{ ...s.payBtn, ...(paymentStatus === 'unpaid' ? s.payBtnUnpaid : {}) }}>UNPAID</button>
-              </div>
-            </div>
+
           </div>
 
           {/* Recent Transactions */}

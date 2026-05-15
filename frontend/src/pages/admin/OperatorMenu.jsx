@@ -1,6 +1,7 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import '../styles/userResponsive.css';
 
 const API = 'https://balaji-perfect-caters.onrender.com/api/menus';
 
@@ -11,6 +12,7 @@ const OperatorMenu = () => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState('All');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const MOCK_DATA = [
     { _id: '1', name: 'Samosa (2 pcs)', price: 25, category: 'Snacks', isAvailable: true, image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&q=80&w=400' },
@@ -65,8 +67,27 @@ const OperatorMenu = () => {
 
   return (
     <div style={s.layout}>
+      {/* Mobile Floating Hamburger */}
+      <button 
+        className="user-hamburger" 
+        style={{ position: 'fixed', top: '20px', left: '20px', zIndex: 300, background: 'white', padding: '10px', borderRadius: '8px', boxShadow: '0 2px 5px rgba(0,0,0,0.2)' }}
+        onClick={() => setSidebarOpen(true)}
+      >
+        <div />
+        <div />
+        <div />
+      </button>
+
+      {/* Mobile Overlay */}
+      {sidebarOpen && (
+        <div 
+          style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 199 }}
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* ---- Sidebar ---- */}
-      <aside style={s.sidebar}>
+      <aside className={`user-sidebar ${sidebarOpen ? 'open' : ''}`} style={s.sidebar}>
         <div style={s.sidebarHeader}>
           <div style={s.brandTitle}>Balaji Perfect Caters</div>
           <div style={s.brandSubtitle}>Operator Terminal</div>
@@ -94,7 +115,7 @@ const OperatorMenu = () => {
       </aside>
 
       {/* ”€”€ Main Content ”€”€ */}
-      <main style={s.main}>
+      <main className="operator-menu-main" style={s.main}>
         <header style={s.header}>
           <div>
             <h1 style={s.pageTitle}>Menu Items</h1>
@@ -123,7 +144,7 @@ const OperatorMenu = () => {
                 <section key={cat} id={`section-${cat}`} style={s.section}>
                   <h2 style={s.sectionTitle}>˜• {cat.toUpperCase()}</h2>
                   
-                  <div style={s.grid}>
+                  <div className="operator-menu-grid" style={s.grid}>
                     {catItems.map(item => (
                       <div key={item._id} style={s.card}>
                         <div style={s.cardImageWrap}>

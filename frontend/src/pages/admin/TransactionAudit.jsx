@@ -213,13 +213,17 @@ const TransactionAudit = () => {
           <script>
             function downloadPDF() {
               var element = document.getElementById('content-to-pdf');
+              
+              var pxHeight = element.scrollHeight;
+              var inHeight = (pxHeight / 96) + 1.5; 
+              var pdfFormat = inHeight > 11 ? [8.5, inHeight] : 'letter';
+
               var opt = {
                 margin:       0.5,
                 filename:     'Balaji_Billing_Statement.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2 },
-                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
-                pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
+                jsPDF:        { unit: 'in', format: pdfFormat, orientation: 'portrait' }
               };
               html2pdf().set(opt).from(element).save();
             }
@@ -371,22 +375,21 @@ const TransactionAudit = () => {
           </table>
         </div>
 
-        {/* Bottom Stats */}
-        <div style={s.bottomRow}>
+             <div style={s.bottomRow}>
           <div style={{ ...s.summaryCard, backgroundColor: '#0f2444', color: 'white' }}>
             <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', letterSpacing: '1px' }}>FILTERED TOTAL</div>
-            <div style={{ fontSize: '2.2rem', fontWeight: '800', color: 'white', margin: '8px 0' }}>${totalFilteredValue.toFixed(2)}</div>
+            <div style={{ fontSize: '2.2rem', fontWeight: '800', color: 'white', margin: '8px 0' }}>₹{totalFilteredValue.toFixed(2)}</div>
             <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Total sum of currently visible items</div>
           </div>
           <div style={s.summaryCard}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-              <span style={{ color: '#ef4444', fontSize: '1.2rem' }}>⚠️</span>
-              <span style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px' }}>DISPUTED</span>
+              <span style={{ color: '#ef4444', fontSize: '1.2rem' }}>⚠️ </span>
+              <span style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px' }}>UNPAID TRANSACTIONS</span>
             </div>
             <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#0f172a' }}>
-              {filteredData.filter(x => x.paymentStatus === 'disputed').length}
+              {filteredData.filter(x => x.paymentStatus === 'unpaid').length}
             </div>
-            <div style={{ fontSize: '0.8rem', color: '#ef4444' }}>Requires immediate reconciliation</div>
+            <div style={{ fontSize: '0.8rem', color: '#ef4444' }}>Requires immediate payment</div>
           </div>
           <div style={s.summaryCard}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
