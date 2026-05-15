@@ -145,7 +145,7 @@ const StaffManagement = () => {
             <div style={s.statVal}>{totalStaff}</div>
           </div>
           <div style={{ ...s.statCard, backgroundColor: '#0f2444', color: 'white' }}>
-            <div style={s.statIcon}>â±</div>
+            <div style={s.statIcon}>⏱️</div>
             <div style={{ ...s.statLabel, color: 'rgba(255,255,255,0.7)' }}><span style={s.liveDot}></span> Live</div>
             <div style={{ ...s.statSub, color: 'rgba(255,255,255,0.7)' }}>Currently On-Duty</div>
             <div style={{ ...s.statVal, color: 'white' }}>{onDutyCount}</div>
@@ -220,12 +220,12 @@ const StaffManagement = () => {
                       </span>
                     </td>
                     <td style={s.td}>
-                      <span style={s.rating}>â˜… {emp.rating}</span>
+                      <span style={s.rating}>⭐ {emp.rating}</span>
                     </td>
                     <td style={s.td}>
                       <div style={{ display: 'flex', gap: '8px' }}>
-                        <button style={s.actionBtnEdit} onClick={() => openEdit(emp)}>âœŽ Edit</button>
-                        <button style={s.actionBtnDel} onClick={() => handleDelete(emp)}>âœ•</button>
+                        <button style={s.actionBtnEdit} onClick={() => openEdit(emp)}>✏️ Edit</button>
+                        <button style={s.actionBtnDel} onClick={() => handleDelete(emp)}>✕</button>
                       </div>
                     </td>
                   </tr>

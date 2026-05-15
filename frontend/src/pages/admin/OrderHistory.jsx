@@ -195,9 +195,9 @@ const OrderHistory = () => {
           <div style={s.paginationRow}>
             <span style={s.showingText}>Showing {filteredOrders.length} transactions</span>
             <div style={s.pagination}>
-              <button style={s.pageBtn}>â€¹</button>
+              <button style={s.pageBtn}>‹</button>
               <button style={s.pageActive}>1</button>
-              <button style={s.pageBtn}>â€º</button>
+              <button style={s.pageBtn}>›</button>
             </div>
           </div>
         </div>
