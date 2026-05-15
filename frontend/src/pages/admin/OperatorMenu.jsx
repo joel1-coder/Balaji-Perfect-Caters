@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../styles/userResponsive.css';
+import '../../styles/userResponsive.css';
 
 const API = 'https://balaji-perfect-caters.onrender.com/api/menus';
 
