@@ -26,7 +26,7 @@ const UserLayout = ({ children }) => {
       {/* Mobile Floating Hamburger */}
       <button 
         className="user-hamburger" 
-        style={{ position: 'fixed', top: '20px', left: '20px', zIndex: 300, background: 'white', padding: '10px', borderRadius: '8px', boxShadow: '0 2px 5px rgba(0,0,0,0.2)' }}
+        style={{ position: 'fixed', top: '15px', left: '15px', zIndex: 200, background: 'white', padding: '8px 8px', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.15)', height: '36px', width: '38px', alignItems: 'center' }}
         onClick={() => setSidebarOpen(true)}
       >
         <div />
@@ -37,7 +37,7 @@ const UserLayout = ({ children }) => {
       {/* Mobile Overlay */}
       {sidebarOpen && (
         <div 
-          style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 199 }}
+          style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(15,36,68,0.5)', zIndex: 350, backdropFilter: 'blur(2px)' }}
           onClick={() => setSidebarOpen(false)}
         />
       )}
