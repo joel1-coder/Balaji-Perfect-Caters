@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import AdminLayout from '../../components/AdminLayout';
 
 const ExecutiveOverview = () => {
@@ -6,22 +6,6 @@ const ExecutiveOverview = () => {
 
   return (
     <AdminLayout>
-      <header style={s.topBar}>
-        <div>
-          <h1 style={s.pageTitle}>Dashboard Overview</h1>
-          <p style={s.pageSubtitle}>{currentDate}</p>
-        </div>
-        <div style={s.topRight}>
-          <button style={s.iconBtn}>[NOTIFY]<span style={s.badge}>3</span></button>
-          <div style={s.adminProfile}>
-            <div style={s.adminAvatar}>A</div>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <span style={{ fontSize: '0.85rem', fontWeight: '700', color: '#0f172a' }}>Admin User</span>
-              <span style={{ fontSize: '0.7rem', color: '#64748b' }}>Superadmin</span>
-            </div>
-          </div>
-        </div>
-      </header>
 
       <div style={s.page}>
         
