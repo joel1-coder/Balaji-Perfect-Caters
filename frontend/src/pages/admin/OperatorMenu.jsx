@@ -138,7 +138,7 @@ const OperatorMenu = () => {
                           <div style={s.cardRow}>
                             <h3 style={s.itemName}>{item.name}</h3>
                             <div style={s.itemPrice}>
-                              <span style={s.priceSymbol}>‚¹</span>{item.price}
+                              <span style={s.priceSymbol}>₹</span>{item.price}
                             </div>
                           </div>
                           

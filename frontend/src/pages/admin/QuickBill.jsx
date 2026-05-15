@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import UserLayout from '../../components/UserLayout';
 
@@ -161,10 +161,10 @@ const QuickBill = () => {
                       <td style={s.td}>{String(i + 1).padStart(2, '0')}</td>
                       <td style={{ ...s.td, fontWeight: '700', color: '#1a3a6b' }}>{item.name}</td>
                       <td style={s.td}>{item.qty}</td>
-                      <td style={s.td}>‚¹{item.rate.toFixed(2)}</td>
-                      <td style={s.td}>‚¹{item.total.toFixed(2)}</td>
+                      <td style={s.td}>₹{item.rate.toFixed(2)}</td>
+                      <td style={s.td}>₹{item.total.toFixed(2)}</td>
                       <td style={s.td}>
-                        <button style={s.removeBtn} onClick={() => removeItem(item.id)}>œ•</button>
+                        <button style={s.removeBtn} onClick={() => removeItem(item.id)}>✕</button>
                       </td>
                     </tr>
                   ))}
@@ -181,7 +181,7 @@ const QuickBill = () => {
               
               <div style={s.grandTotalBox}>
                 <div style={s.unitsLabel}>GRAND TOTAL</div>
-                <div style={s.grandTotalValue}>‚¹{grandTotal.toFixed(2)}</div>
+                <div style={s.grandTotalValue}>₹{grandTotal.toFixed(2)}</div>
               </div>
 
               <div style={s.actionGroup}>
@@ -215,7 +215,7 @@ const QuickBill = () => {
               </div>
               <div>
                 <div style={s.metaLabel}>Credit Limit</div>
-                <div style={{ ...s.metaValue, color: '#0f2444', fontWeight: '800' }}>‚¹{member.limit.toFixed(2)}</div>
+                <div style={{ ...s.metaValue, color: '#0f2444', fontWeight: '800' }}>₹{member.limit.toFixed(2)}</div>
               </div>
             </div>
             <div style={s.paymentRow}>
@@ -240,7 +240,7 @@ const QuickBill = () => {
                     <div style={s.txTime}>{tx.time}</div>
                   </div>
                   <div style={{ textAlign: 'right' }}>
-                    <div style={s.txAmount}>‚¹{tx.amount}.00</div>
+                    <div style={s.txAmount}>₹{tx.amount}.00</div>
                     <span style={{ ...s.txStatus, ...(tx.paid ? s.txPaid : s.txUnpaid) }}>
                       {tx.paid ? 'PAID' : 'UNPAID'}
                     </span>
@@ -258,7 +258,7 @@ const QuickBill = () => {
           <div style={s.modal}>
             <div style={s.modalHeader}>
               <h3 style={s.modalTitle}>Update Member Info</h3>
-              <button style={s.closeBtn} onClick={() => setShowMemberModal(false)}>œ•</button>
+              <button style={s.closeBtn} onClick={() => setShowMemberModal(false)}>✕</button>
             </div>
             <div style={s.modalBody}>
               <div style={s.field}>

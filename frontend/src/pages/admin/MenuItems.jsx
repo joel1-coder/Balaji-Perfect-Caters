@@ -212,7 +212,7 @@ const MenuItems = () => {
                     {item.category}
                   </span>
                 </span>
-                <span style={{ flex: 1, fontWeight: '700', color: '#0f2444' }}>‚¹{parseFloat(item.price).toFixed(2)}</span>
+                <span style={{ flex: 1, fontWeight: '700', color: '#0f2444' }}>₹{parseFloat(item.price).toFixed(2)}</span>
                 <span style={{ flex: 2, color: '#64748b', fontSize: '0.85rem' }}>{item.description || '"”'}</span>
                 <div style={{ flex: '0 0 100px', display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
                   <button style={s.editBtn}   onClick={() => openEdit(item)}>œŽ Edit</button>
@@ -280,9 +280,9 @@ const MenuItems = () => {
 
               {/* Price */}
               <div style={s.fieldGroup}>
-                <label style={s.label}>Price (‚¹) <span style={{ color: '#ef4444' }}>*</span></label>
+                <label style={s.label}>Price (₹) <span style={{ color: '#ef4444' }}>*</span></label>
                 <div style={s.priceWrapper}>
-                  <span style={s.rupeeSign}>‚¹</span>
+                  <span style={s.rupeeSign}>₹</span>
                   <input style={{ ...s.input, paddingLeft: '32px' }} type="number" min="0" step="any" placeholder="0.00"
                     value={form.price} onChange={e => setForm(f => ({...f, price: e.target.value}))}/>
                 </div>
