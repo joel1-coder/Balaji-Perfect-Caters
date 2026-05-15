@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import AdminLayout from '../../components/AdminLayout';
 
@@ -215,7 +215,7 @@ const MenuItems = () => {
                 <span style={{ flex: 1, fontWeight: '700', color: '#0f2444' }}>₹{parseFloat(item.price).toFixed(2)}</span>
                 <span style={{ flex: 2, color: '#64748b', fontSize: '0.85rem' }}>{item.description || '"”'}</span>
                 <div style={{ flex: '0 0 100px', display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
-                  <button style={s.editBtn}   onClick={() => openEdit(item)}>œŽ Edit</button>
+                  <button style={s.editBtn}   onClick={() => openEdit(item)}>✏️ Edit</button>
                   <button style={s.deleteBtn} onClick={() => handleDelete(item)}>🗑️</button>
                 </div>
               </div>
@@ -236,7 +236,7 @@ const MenuItems = () => {
           <div style={s.modal}>
             <div style={s.modalHeader}>
               <h2 style={s.modalTitle}>{editItem ? 'Edit Item' : 'Add New Item'}</h2>
-              <button style={s.closeBtn} onClick={closeModal}>œ•</button>
+              <button style={s.closeBtn} onClick={closeModal}>×</button>
             </div>
 
             {/* Image Upload */}
