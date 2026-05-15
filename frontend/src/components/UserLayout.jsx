@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const navItems = [
@@ -65,14 +65,14 @@ const UserLayout = ({ children }) => {
         {/* Bottom */}
         <div style={styles.sidebarBottom}>
           <button style={styles.switchBtn} onClick={() => navigate('/admin/overview')}>
-            Š• Switch to Admin
+            ⚡ Switch to Admin
           </button>
           <button style={{ ...styles.navItem, color: 'rgba(255,255,255,0.5)' }}
             onClick={() => navigate('/user/settings')}>
-            <span>š™</span> Settings
+            <span>⚙️</span> Settings
           </button>
           <button style={{ ...styles.navItem, color: '#f87171' }} onClick={handleLogout}>
-            <span>†ª</span> Logout
+            <span>🚪</span> Logout
           </button>
         </div>
       </aside>
