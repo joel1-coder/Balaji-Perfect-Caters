@@ -170,8 +170,8 @@ const TransactionAudit = () => {
           <div style={s.exportBox}>
             <div style={s.exportLabel}>EXPORT FILTERED LOGS</div>
             <div style={{ display: 'flex', gap: '10px' }}>
-              <button style={s.exportBtn} onClick={exportToExcel}>ðŸ“Š Excel (CSV)</button>
-              <button style={s.exportBtn} onClick={exportToWord}>ðŸ“ Word (TXT)</button>
+              <button style={s.exportBtn} onClick={exportToExcel}>📊 Excel (CSV)</button>
+              <button style={s.exportBtn} onClick={exportToWord}>📝 Word (TXT)</button>
             </div>
           </div>
         </div>
