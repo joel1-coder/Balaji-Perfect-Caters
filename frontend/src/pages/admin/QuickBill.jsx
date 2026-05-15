@@ -98,11 +98,11 @@ const QuickBill = () => {
         </div>
         <div style={s.topBarRight}>
           <div style={s.searchBox}>
-            <span>[SEARCH]</span>
+            <span>🔍</span>
             <input style={s.searchInput} placeholder="Search orders..." />
           </div>
-          <button style={s.iconBtn}>[NOTIFY]</button>
-          <button style={s.iconBtn}>[MENU]</button>
+          <button style={s.iconBtn}>🔔</button>
+          <button style={s.iconBtn}>☰</button>
           <div style={s.userBadge}>
             <div style={s.userAvatar}>{localStorage.getItem('canteen_user')?.charAt(0).toUpperCase() || 'A'}</div>
             <div>
@@ -119,7 +119,7 @@ const QuickBill = () => {
         <div style={s.orderPanel}>
           {/* Item Selection */}
           <div style={s.card}>
-            <div style={s.cardTitle}>[CART] ITEM SELECTION</div>
+            <div style={s.cardTitle}>🛒 ITEM SELECTION</div>
             <div style={s.selectionRow}>
               <div style={s.selectWrapper}>
                 <label style={s.fieldLabel}>Search Item (e.g., Tea, Coffee, Sandwich)</label>
@@ -199,7 +199,7 @@ const QuickBill = () => {
           <div style={s.card}>
             <div style={s.memberHeader}>
               <span style={s.sectionLabel}>MEMBER DETAILS</span>
-              <button style={s.editBtn} onClick={() => { setTempMember(member); setShowMemberModal(true); }}>œŽ</button>
+              <button style={s.editBtn} onClick={() => { setTempMember(member); setShowMemberModal(true); }}>✏️</button>
             </div>
             <div style={s.memberCard}>
               <div style={s.memberAvatar}>{member.name.split(' ').map(n => n[0]).join('')}</div>
@@ -231,7 +231,7 @@ const QuickBill = () => {
 
           {/* Recent Transactions */}
           <div style={s.card}>
-            <span style={s.sectionLabel}>± RECENT TRANSACTIONS</span>
+            <span style={s.sectionLabel}>🕐 RECENT TRANSACTIONS</span>
             <div style={{ marginTop: '15px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {RECENT_TRANSACTIONS.map(tx => (
                 <div key={tx.id} style={s.txCard}>
