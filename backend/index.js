@@ -19,8 +19,8 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 // MongoDB Connection with Auto-Fallback
 const connectDB = async () => {
   try {
-    // Try to connect to Atlas with a short 2-second timeout
-    await mongoose.connect(process.env.MONGO_URI, { serverSelectionTimeoutMS: 2000 });
+    // Try to connect to Atlas with a 10-second timeout
+    await mongoose.connect(process.env.MONGO_URI, { serverSelectionTimeoutMS: 10000 });
     console.log('✅ MongoDB Connected (Atlas)');
   } catch (err) {
     console.log('⚠️ Atlas Connection Failed. Starting local temporary memory database...');

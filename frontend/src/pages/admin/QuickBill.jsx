@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import UserLayout from '../../components/UserLayout';
 
@@ -39,6 +39,22 @@ const QuickBill = () => {
   });
   const [showMemberModal, setShowMemberModal] = useState(false);
   const [tempMember, setTempMember] = useState(member);
+  const [recentTransactions, setRecentTransactions] = useState([]);
+
+  const fetchRecentTransactions = async () => {
+    try {
+      const res = await axios.get('https://balaji-perfect-caters.onrender.com/api/transactions');
+      if (res.data.success) {
+        setRecentTransactions(res.data.data.slice(0, 5));
+      }
+    } catch (err) {
+      console.error('Failed to fetch transactions:', err);
+    }
+  };
+
+  useEffect(() => {
+    fetchRecentTransactions();
+  }, []);
 
   const addToBill = () => {
     const newItem = {
@@ -77,6 +93,7 @@ const QuickBill = () => {
       await axios.post('https://balaji-perfect-caters.onrender.com/api/transactions', payload);
       alert(`Order ${orderId} saved successfully!`);
       setOrderItems([]);
+      fetchRecentTransactions();
     } catch (err) {
       console.error('Save Error:', err.response?.data || err.message);
       alert('Save Failed: ' + (err.response?.data?.error || err.message));
@@ -102,7 +119,7 @@ const QuickBill = () => {
             <input style={s.searchInput} placeholder="Search orders..." />
           </div>
           <button style={s.iconBtn}>🔔</button>
-          <button style={s.iconBtn}>☰</button>
+          <button style={s.iconBtn} className="show-mobile">☰</button>
           <div style={s.userBadge}>
             <div style={s.userAvatar}>{localStorage.getItem('canteen_user')?.charAt(0).toUpperCase() || 'A'}</div>
             <div>
@@ -233,20 +250,22 @@ const QuickBill = () => {
           <div style={s.card}>
             <span style={s.sectionLabel}>🕐 RECENT TRANSACTIONS</span>
             <div style={{ marginTop: '15px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {RECENT_TRANSACTIONS.map(tx => (
-                <div key={tx.id} style={s.txCard}>
+              {recentTransactions.length > 0 ? recentTransactions.map(tx => (
+                <div key={tx._id} style={s.txCard}>
                   <div>
-                    <div style={s.txId}>Order #{tx.id}</div>
-                    <div style={s.txTime}>{tx.time}</div>
+                    <div style={s.txId}>Order #{tx.orderId}</div>
+                    <div style={s.txTime}>{new Date(tx.createdAt).toLocaleString([], { hour: '2-digit', minute: '2-digit', month: 'short', day: 'numeric' })}</div>
                   </div>
                   <div style={{ textAlign: 'right' }}>
-                    <div style={s.txAmount}>₹{tx.amount}.00</div>
-                    <span style={{ ...s.txStatus, ...(tx.paid ? s.txPaid : s.txUnpaid) }}>
-                      {tx.paid ? 'PAID' : 'UNPAID'}
+                    <div style={s.txAmount}>₹{tx.totalAmount}.00</div>
+                    <span style={{ ...s.txStatus, ...(tx.paymentStatus === 'paid' ? s.txPaid : s.txUnpaid) }}>
+                      {tx.paymentStatus === 'paid' ? 'PAID' : 'UNPAID'}
                     </span>
                   </div>
                 </div>
-              ))}
+              )) : (
+                <div style={{fontSize: '0.8rem', color: '#64748b', textAlign: 'center', padding: '10px'}}>No recent transactions</div>
+              )}
             </div>
           </div>
         </aside>

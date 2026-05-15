@@ -26,8 +26,13 @@ const TransactionAudit = () => {
   // Filters
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('All Transactions');
+  const [departmentFilter, setDepartmentFilter] = useState('All Departments');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+
+  const uniqueDepartments = useMemo(() => {
+    return [...new Set(transactions.map(t => t.department).filter(d => d && d.trim() !== ''))];
+  }, [transactions]);
 
   useEffect(() => {
     fetchTransactions();
@@ -73,9 +78,11 @@ const TransactionAudit = () => {
         }
       }
 
-      return matchSearch && matchStatus && matchDate;
+      const matchDept = departmentFilter === 'All Departments' || (t.department || 'N/A') === departmentFilter;
+
+      return matchSearch && matchStatus && matchDate && matchDept;
     });
-  }, [transactions, searchQuery, statusFilter, startDate, endDate]);
+  }, [transactions, searchQuery, statusFilter, startDate, endDate, departmentFilter]);
 
   const toggle = (id) => setSelected(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
 
@@ -131,6 +138,79 @@ const TransactionAudit = () => {
 
   const totalFilteredValue = filteredData.reduce((sum, t) => sum + (t.totalAmount || 0), 0);
 
+  const generateBill = () => {
+    if (filteredData.length === 0) return alert('No data to generate bill!');
+    
+    let billContent = `
+      <html>
+        <head>
+          <title>Generated Bill</title>
+          <style>
+            body { font-family: 'Outfit', sans-serif; padding: 40px; color: #333; }
+            .header { text-align: center; margin-bottom: 40px; }
+            .header h1 { margin: 0; color: #0f2444; }
+            .header p { margin: 5px 0; color: #666; }
+            .info { margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 20px; }
+            .info p { margin: 5px 0; }
+            table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+            th, td { border-bottom: 1px solid #ddd; padding: 12px; text-align: left; }
+            th { background-color: #f8fafc; color: #0f2444; }
+            .total { text-align: right; font-size: 1.5em; font-weight: bold; color: #0f2444; margin-top: 20px; }
+            @media print { button { display: none; } }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <h1>Balaji Perfect Caters</h1>
+            <p>Department Billing Statement</p>
+          </div>
+          
+          <div class="info">
+            <p><strong>Department:</strong> ${departmentFilter === 'All Departments' ? 'All Departments' : departmentFilter}</p>
+            <p><strong>Period:</strong> ${startDate || 'Start'} to ${endDate || 'End'}</p>
+            <p><strong>Generated on:</strong> ${new Date().toLocaleDateString()}</p>
+            <p><strong>Total Transactions:</strong> ${filteredData.length}</p>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Transaction ID</th>
+                <th>Customer</th>
+                <th>Items</th>
+                <th style="text-align: right;">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${filteredData.map(t => `
+                <tr>
+                  <td>${new Date(t.createdAt).toLocaleDateString()}</td>
+                  <td>${t.orderId}</td>
+                  <td>${t.customerName}</td>
+                  <td>${(t.items || []).map(i => `${i.name} (x${i.qty})`).join(', ')}</td>
+                  <td style="text-align: right;">Rs. ${(t.totalAmount || 0).toFixed(2)}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+
+          <div class="total">
+            Grand Total: Rs. ${totalFilteredValue.toFixed(2)}
+          </div>
+
+          <div style="text-align: center; margin-top: 50px;">
+            <button onclick="window.print()" style="padding: 10px 20px; font-size: 16px; cursor: pointer; background: #0f2444; color: white; border: none; border-radius: 5px;">Print Bill</button>
+          </div>
+        </body>
+      </html>
+    `;
+
+    const printWindow = window.open('', '', 'width=800,height=600');
+    printWindow.document.write(billContent);
+    printWindow.document.close();
+  };
+
   return (
     <AdminLayout>
       <header style={s.topBar}>
@@ -161,6 +241,13 @@ const TransactionAudit = () => {
               <input type="date" style={s.filterInput} value={endDate} onChange={e => setEndDate(e.target.value)} />
             </div>
             <div style={s.filterGroup}>
+              <label style={s.filterLabel}>Department</label>
+              <select style={s.filterInput} value={departmentFilter} onChange={e => setDepartmentFilter(e.target.value)}>
+                <option>All Departments</option>
+                {uniqueDepartments.map(d => <option key={d} value={d}>{d}</option>)}
+              </select>
+            </div>
+            <div style={s.filterGroup}>
               <label style={s.filterLabel}>Audit Category</label>
               <select style={s.filterInput} value={statusFilter} onChange={e => setStatusFilter(e.target.value)}>
                 <option>All Transactions</option>
@@ -171,7 +258,7 @@ const TransactionAudit = () => {
             </div>
             <button 
                 style={s.clearBtn} 
-                onClick={() => { setStartDate(''); setEndDate(''); setStatusFilter('All Transactions'); }}
+                onClick={() => { setStartDate(''); setEndDate(''); setStatusFilter('All Transactions'); setDepartmentFilter('All Departments'); }}
               >
                 Clear Filters
             </button>
@@ -181,6 +268,7 @@ const TransactionAudit = () => {
             <div style={{ display: 'flex', gap: '10px' }}>
               <button style={s.exportBtn} onClick={exportToExcel}>📊 Excel (CSV)</button>
               <button style={s.exportBtn} onClick={exportToWord}>📝 Word (TXT)</button>
+              <button style={{ ...s.exportBtn, backgroundColor: '#0f2444', color: 'white' }} onClick={generateBill}>🧾 Generate Bill</button>
             </div>
           </div>
         </div>
