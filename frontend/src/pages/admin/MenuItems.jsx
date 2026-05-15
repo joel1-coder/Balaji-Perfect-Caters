@@ -151,10 +151,10 @@ const MenuItems = () => {
         <h1 style={s.pageTitle}>Menu Management</h1>
         <div style={s.topRight}>
           <button style={s.qrBtn} onClick={() => window.open('/public/menu/main', '_blank')}>
-            ðŸ“± View Digital Menu
+            📱 View Digital Menu
           </button>
           <button style={s.seedBtn} onClick={handleSeed}>⚡ Seed Demo</button>
-          <button style={s.addBtn}  onClick={openAdd}>âŠ• Add New Item</button>
+          <button style={s.addBtn}  onClick={openAdd}>➕ Add New Item</button>
         </div>
       </header>
 
