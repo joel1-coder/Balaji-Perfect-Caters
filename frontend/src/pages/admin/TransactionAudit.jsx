@@ -182,7 +182,7 @@ const TransactionAudit = () => {
             <span style={{ color: '#64748b', fontSize: '0.85rem' }}>{selected.length} items selected</span>
             {selected.length > 0 && (
               <>
-                <button style={s.bulkBtn}>âœ“ Mark as Paid</button>
+                <button style={s.bulkBtn}>œ“ Mark as Paid</button>
                 <button style={{ ...s.bulkBtn, color: '#ef4444' }}>ðŸš© Flag for Review</button>
               </>
             )}
@@ -222,7 +222,7 @@ const TransactionAudit = () => {
                     <div style={{ fontSize: '0.78rem', color: '#94a3b8' }}>{t.customerId || t.department || 'N/A'}</div>
                   </td>
                   <td style={{ ...s.td, color: '#475569' }}>{(t.items || []).map(i => i.name).join(', ')}</td>
-                  <td style={{ ...s.td, fontWeight: '700' }}>â‚¹{(t.totalAmount || 0).toFixed(2)}</td>
+                  <td style={{ ...s.td, fontWeight: '700' }}>‚¹{(t.totalAmount || 0).toFixed(2)}</td>
                   <td style={s.td}>
                     <span style={{ ...s.badge, backgroundColor: (statusStyle[t.paymentStatus] || statusStyle.pending).bg, color: (statusStyle[t.paymentStatus] || statusStyle.pending).color }}>{t.paymentStatus || 'pending'}</span>
                   </td>
@@ -241,7 +241,7 @@ const TransactionAudit = () => {
           </div>
           <div style={s.summaryCard}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-              <span style={{ color: '#ef4444', fontSize: '1.2rem' }}>âš ï¸</span>
+              <span style={{ color: '#ef4444', fontSize: '1.2rem' }}>š ï¸</span>
               <span style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px' }}>DISPUTED</span>
             </div>
             <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#0f172a' }}>
@@ -251,7 +251,7 @@ const TransactionAudit = () => {
           </div>
           <div style={s.summaryCard}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-              <span style={{ color: '#16a34a', fontSize: '1.2rem' }}>âœ…</span>
+              <span style={{ color: '#16a34a', fontSize: '1.2rem' }}>œ…</span>
               <span style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px' }}>PAID TRANSACTIONS</span>
             </div>
             <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#0f172a' }}>

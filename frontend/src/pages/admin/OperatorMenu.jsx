@@ -93,7 +93,7 @@ const OperatorMenu = () => {
         </nav>
       </aside>
 
-      {/* â”€â”€ Main Content â”€â”€ */}
+      {/* ”€”€ Main Content ”€”€ */}
       <main style={s.main}>
         <header style={s.header}>
           <div>
@@ -121,7 +121,7 @@ const OperatorMenu = () => {
 
               return (
                 <section key={cat} id={`section-${cat}`} style={s.section}>
-                  <h2 style={s.sectionTitle}>â˜• {cat.toUpperCase()}</h2>
+                  <h2 style={s.sectionTitle}>˜• {cat.toUpperCase()}</h2>
                   
                   <div style={s.grid}>
                     {catItems.map(item => (
@@ -138,7 +138,7 @@ const OperatorMenu = () => {
                           <div style={s.cardRow}>
                             <h3 style={s.itemName}>{item.name}</h3>
                             <div style={s.itemPrice}>
-                              <span style={s.priceSymbol}>â‚¹</span>{item.price}
+                              <span style={s.priceSymbol}>‚¹</span>{item.price}
                             </div>
                           </div>
                           

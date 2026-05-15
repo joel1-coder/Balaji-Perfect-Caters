@@ -8,7 +8,7 @@ const TABS  = ['All', ...TYPES];
 
 const BLANK_FORM = { name: '', category: 'Snacks', price: '', description: '', image: '' };
 
-// â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ”€”€ Helpers ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 const toast = (msg, type = 'success') => {
   const el = document.createElement('div');
   el.innerText = msg;
@@ -23,7 +23,7 @@ const toast = (msg, type = 'success') => {
   setTimeout(() => el.remove(), 2800);
 };
 
-// â”€â”€ Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ”€”€ Component ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 const MenuItems = () => {
   const [menuId,     setMenuId]     = useState(null);
   const [items,      setItems]      = useState([]);
@@ -36,7 +36,7 @@ const MenuItems = () => {
   const [preview,    setPreview]    = useState('');
   const fileRef = useRef();
 
-  // â”€â”€ Load menus on mount â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ”€”€ Load menus on mount ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
   useEffect(() => { fetchItems(); }, []);
 
   const fetchItems = async () => {
@@ -56,7 +56,7 @@ const MenuItems = () => {
     setLoading(false);
   };
 
-  // â”€â”€ Seed data if no menu exists â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ”€”€ Seed data if no menu exists ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
   const handleSeed = async () => {
     try {
       await axios.post(`${API}/seed`);
@@ -65,7 +65,7 @@ const MenuItems = () => {
     } catch { toast('Seed failed', 'error'); }
   };
 
-  // â”€â”€ Open modal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ”€”€ Open modal ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
   const openAdd = () => {
     setEditItem(null);
     setForm(BLANK_FORM);
@@ -82,7 +82,7 @@ const MenuItems = () => {
 
   const closeModal = () => { setShowModal(false); setEditItem(null); };
 
-  // â”€â”€ Image pick (converts to base64 preview, stores URL) â”€â”€â”€â”€â”€
+  // ”€”€ Image pick (converts to base64 preview, stores URL) ”€”€”€”€”€
   const handleImageFile = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -94,7 +94,7 @@ const MenuItems = () => {
     reader.readAsDataURL(file);
   };
 
-  // â”€â”€ Save (create or update) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ”€”€ Save (create or update) ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
   const handleSave = async () => {
     if (!form.name.trim())    { toast('Name is required', 'error'); return; }
     if (!form.price || isNaN(form.price) || +form.price <= 0) { toast('Enter a valid price', 'error'); return; }
@@ -121,7 +121,7 @@ const MenuItems = () => {
     setSaving(false);
   };
 
-  // â”€â”€ Delete â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ”€”€ Delete ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
   const handleDelete = async (item) => {
     if (!window.confirm(`Delete "${item.name}"?`)) return;
     try {
@@ -131,10 +131,10 @@ const MenuItems = () => {
     } catch { toast('Delete failed', 'error'); }
   };
 
-  // â”€â”€ Filtered items â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ”€”€ Filtered items ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
   const filtered = activeTab === 'All' ? items : items.filter(i => i.category === activeTab);
 
-  // â”€â”€ Category badge colours â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ”€”€ Category badge colours ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
   const catColor = {
     Snacks:    { bg: '#fef9c3', color: '#854d0e' },
     Tea:       { bg: '#ede9fe', color: '#6d28d9' },
@@ -143,7 +143,7 @@ const MenuItems = () => {
     Lunch:     { bg: '#dbeafe', color: '#1e40af' },
   };
 
-  // â”€â”€ Render â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ”€”€ Render ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
   return (
     <AdminLayout>
       {/* Top Bar */}
@@ -212,10 +212,10 @@ const MenuItems = () => {
                     {item.category}
                   </span>
                 </span>
-                <span style={{ flex: 1, fontWeight: '700', color: '#0f2444' }}>â‚¹{parseFloat(item.price).toFixed(2)}</span>
-                <span style={{ flex: 2, color: '#64748b', fontSize: '0.85rem' }}>{item.description || 'â€”'}</span>
+                <span style={{ flex: 1, fontWeight: '700', color: '#0f2444' }}>‚¹{parseFloat(item.price).toFixed(2)}</span>
+                <span style={{ flex: 2, color: '#64748b', fontSize: '0.85rem' }}>{item.description || '"”'}</span>
                 <div style={{ flex: '0 0 100px', display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
-                  <button style={s.editBtn}   onClick={() => openEdit(item)}>âœŽ Edit</button>
+                  <button style={s.editBtn}   onClick={() => openEdit(item)}>œŽ Edit</button>
                   <button style={s.deleteBtn} onClick={() => handleDelete(item)}>🗑️</button>
                 </div>
               </div>
@@ -224,19 +224,19 @@ const MenuItems = () => {
             {/* Footer */}
             <div style={s.tableFooter}>
               Showing {filtered.length} of {items.length} items
-              <span style={{ color: '#16a34a', marginLeft: '12px' }}>â— Menu Live</span>
+              <span style={{ color: '#16a34a', marginLeft: '12px' }}>— Menu Live</span>
             </div>
           </div>
         )}
       </div>
 
-      {/* â”€â”€ Modal â”€â”€ */}
+      {/* ”€”€ Modal ”€”€ */}
       {showModal && (
         <div style={s.overlay} onClick={e => e.target === e.currentTarget && closeModal()}>
           <div style={s.modal}>
             <div style={s.modalHeader}>
               <h2 style={s.modalTitle}>{editItem ? 'Edit Item' : 'Add New Item'}</h2>
-              <button style={s.closeBtn} onClick={closeModal}>âœ•</button>
+              <button style={s.closeBtn} onClick={closeModal}>œ•</button>
             </div>
 
             {/* Image Upload */}
@@ -280,9 +280,9 @@ const MenuItems = () => {
 
               {/* Price */}
               <div style={s.fieldGroup}>
-                <label style={s.label}>Price (â‚¹) <span style={{ color: '#ef4444' }}>*</span></label>
+                <label style={s.label}>Price (‚¹) <span style={{ color: '#ef4444' }}>*</span></label>
                 <div style={s.priceWrapper}>
-                  <span style={s.rupeeSign}>â‚¹</span>
+                  <span style={s.rupeeSign}>‚¹</span>
                   <input style={{ ...s.input, paddingLeft: '32px' }} type="number" min="0" step="any" placeholder="0.00"
                     value={form.price} onChange={e => setForm(f => ({...f, price: e.target.value}))}/>
                 </div>
@@ -312,7 +312,7 @@ const MenuItems = () => {
   );
 };
 
-// â”€â”€ Styles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ”€”€ Styles ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 const s = {
   topBar:    { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 28px', backgroundColor: 'white', borderBottom: '1px solid #e2e8f0' },
   pageTitle: { fontSize: '1.4rem', fontWeight: '800', color: '#0f172a' },

@@ -21,7 +21,7 @@ const UserLayout = ({ children }) => {
 
   return (
     <div style={styles.page}>
-      {/* â”€â”€ Sidebar â”€â”€ */}
+      {/* ”€”€ Sidebar ”€”€ */}
       <aside style={styles.sidebar}>
         {/* Brand */}
         <div style={styles.brand}>
@@ -65,19 +65,19 @@ const UserLayout = ({ children }) => {
         {/* Bottom */}
         <div style={styles.sidebarBottom}>
           <button style={styles.switchBtn} onClick={() => navigate('/admin/overview')}>
-            âŠ• Switch to Admin
+            Š• Switch to Admin
           </button>
           <button style={{ ...styles.navItem, color: 'rgba(255,255,255,0.5)' }}
             onClick={() => navigate('/user/settings')}>
-            <span>âš™</span> Settings
+            <span>š™</span> Settings
           </button>
           <button style={{ ...styles.navItem, color: '#f87171' }} onClick={handleLogout}>
-            <span>â†ª</span> Logout
+            <span>†ª</span> Logout
           </button>
         </div>
       </aside>
 
-      {/* â”€â”€ Page Content â”€â”€ */}
+      {/* ”€”€ Page Content ”€”€ */}
       <div style={styles.content}>{children}</div>
     </div>
   );

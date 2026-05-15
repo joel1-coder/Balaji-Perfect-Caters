@@ -161,10 +161,10 @@ const QuickBill = () => {
                       <td style={s.td}>{String(i + 1).padStart(2, '0')}</td>
                       <td style={{ ...s.td, fontWeight: '700', color: '#1a3a6b' }}>{item.name}</td>
                       <td style={s.td}>{item.qty}</td>
-                      <td style={s.td}>â‚¹{item.rate.toFixed(2)}</td>
-                      <td style={s.td}>â‚¹{item.total.toFixed(2)}</td>
+                      <td style={s.td}>‚¹{item.rate.toFixed(2)}</td>
+                      <td style={s.td}>‚¹{item.total.toFixed(2)}</td>
                       <td style={s.td}>
-                        <button style={s.removeBtn} onClick={() => removeItem(item.id)}>âœ•</button>
+                        <button style={s.removeBtn} onClick={() => removeItem(item.id)}>œ•</button>
                       </td>
                     </tr>
                   ))}
@@ -181,7 +181,7 @@ const QuickBill = () => {
               
               <div style={s.grandTotalBox}>
                 <div style={s.unitsLabel}>GRAND TOTAL</div>
-                <div style={s.grandTotalValue}>â‚¹{grandTotal.toFixed(2)}</div>
+                <div style={s.grandTotalValue}>‚¹{grandTotal.toFixed(2)}</div>
               </div>
 
               <div style={s.actionGroup}>
@@ -199,7 +199,7 @@ const QuickBill = () => {
           <div style={s.card}>
             <div style={s.memberHeader}>
               <span style={s.sectionLabel}>MEMBER DETAILS</span>
-              <button style={s.editBtn} onClick={() => { setTempMember(member); setShowMemberModal(true); }}>âœŽ</button>
+              <button style={s.editBtn} onClick={() => { setTempMember(member); setShowMemberModal(true); }}>œŽ</button>
             </div>
             <div style={s.memberCard}>
               <div style={s.memberAvatar}>{member.name.split(' ').map(n => n[0]).join('')}</div>
@@ -215,7 +215,7 @@ const QuickBill = () => {
               </div>
               <div>
                 <div style={s.metaLabel}>Credit Limit</div>
-                <div style={{ ...s.metaValue, color: '#0f2444', fontWeight: '800' }}>â‚¹{member.limit.toFixed(2)}</div>
+                <div style={{ ...s.metaValue, color: '#0f2444', fontWeight: '800' }}>‚¹{member.limit.toFixed(2)}</div>
               </div>
             </div>
             <div style={s.paymentRow}>
@@ -231,7 +231,7 @@ const QuickBill = () => {
 
           {/* Recent Transactions */}
           <div style={s.card}>
-            <span style={s.sectionLabel}>â± RECENT TRANSACTIONS</span>
+            <span style={s.sectionLabel}>± RECENT TRANSACTIONS</span>
             <div style={{ marginTop: '15px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {RECENT_TRANSACTIONS.map(tx => (
                 <div key={tx.id} style={s.txCard}>
@@ -240,7 +240,7 @@ const QuickBill = () => {
                     <div style={s.txTime}>{tx.time}</div>
                   </div>
                   <div style={{ textAlign: 'right' }}>
-                    <div style={s.txAmount}>â‚¹{tx.amount}.00</div>
+                    <div style={s.txAmount}>‚¹{tx.amount}.00</div>
                     <span style={{ ...s.txStatus, ...(tx.paid ? s.txPaid : s.txUnpaid) }}>
                       {tx.paid ? 'PAID' : 'UNPAID'}
                     </span>
@@ -252,13 +252,13 @@ const QuickBill = () => {
         </aside>
       </div>
 
-      {/* â”€â”€ Member Edit Modal â”€â”€ */}
+      {/* ”€”€ Member Edit Modal ”€”€ */}
       {showMemberModal && (
         <div style={s.modalOverlay}>
           <div style={s.modal}>
             <div style={s.modalHeader}>
               <h3 style={s.modalTitle}>Update Member Info</h3>
-              <button style={s.closeBtn} onClick={() => setShowMemberModal(false)}>âœ•</button>
+              <button style={s.closeBtn} onClick={() => setShowMemberModal(false)}>œ•</button>
             </div>
             <div style={s.modalBody}>
               <div style={s.field}>

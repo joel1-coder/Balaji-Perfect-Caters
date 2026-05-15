@@ -108,12 +108,12 @@ const MenuManagement = () => {
               <p style={styles.cardSub}>{m.title}</p>
               <div style={styles.cardMeta}>
                 <span>{m.items.length} Items</span>
-                <span>â€¢</span>
+                <span>"¢</span>
                 <span>Updated recently</span>
               </div>
               <div style={styles.actions}>
                 <button style={styles.actionBtn} onClick={() => navigate(`/admin/menu/${m._id}`)}>
-                  âœŽ Edit
+                  œŽ Edit
                 </button>
                 <button style={styles.actionBtn} onClick={() => showQR(m._id)}>
                   ðŸ“± QR

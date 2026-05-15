@@ -64,7 +64,7 @@ const MenuEditor = () => {
     <div style={styles.container}>
       <header style={styles.header}>
         <div>
-          <button style={styles.backBtn} onClick={() => navigate('/admin/menus')}>â† Back to Menus</button>
+          <button style={styles.backBtn} onClick={() => navigate('/admin/menus')}>† Back to Menus</button>
           <h1 style={styles.title}>{isNew ? 'Create New Menu' : 'Configure Menu'}</h1>
         </div>
         <div style={styles.headerActions}>
@@ -119,7 +119,7 @@ const MenuEditor = () => {
                 <div key={i} style={styles.itemCard}>
                   <div style={styles.itemCardHeader}>
                     <span style={styles.itemNumber}>#{i + 1}</span>
-                    <button style={styles.deleteBtn} onClick={() => removeItem(i)}>âœ•</button>
+                    <button style={styles.deleteBtn} onClick={() => removeItem(i)}>œ•</button>
                   </div>
                   
                   <div style={styles.itemGrid}>

@@ -67,7 +67,7 @@ const StaffManagement = () => {
     } catch { toast('Seed failed', 'error'); }
   };
 
-  // â”€â”€ Modal Actions â”€â”€
+  // ”€”€ Modal Actions ”€”€
   const openAdd = () => {
     setEditItem(null);
     setForm(BLANK_FORM);
@@ -86,7 +86,7 @@ const StaffManagement = () => {
 
   const closeModal = () => { setShowModal(false); setEditItem(null); };
 
-  // â”€â”€ Save (Create / Update) â”€â”€
+  // ”€”€ Save (Create / Update) ”€”€
   const handleSave = async () => {
     if (!form.name.trim() || !form.empId.trim()) { toast('Name and Employee ID are required', 'error'); return; }
     
@@ -107,7 +107,7 @@ const StaffManagement = () => {
     setSaving(false);
   };
 
-  // â”€â”€ Delete â”€â”€
+  // ”€”€ Delete ”€”€
   const handleDelete = async (staff) => {
     if (!window.confirm(`Remove ${staff.name} (${staff.empId}) from the roster?`)) return;
     try {
@@ -236,13 +236,13 @@ const StaffManagement = () => {
         </div>
       </div>
 
-      {/* â”€â”€ Modal Form â”€â”€ */}
+      {/* ”€”€ Modal Form ”€”€ */}
       {showModal && (
         <div style={s.overlay} onClick={e => e.target === e.currentTarget && closeModal()}>
           <div style={s.modal}>
             <div style={s.modalHeader}>
               <h2 style={s.modalTitle}>{editItem ? 'Edit Employee' : 'Add New Employee'}</h2>
-              <button style={s.closeBtn} onClick={closeModal}>âœ•</button>
+              <button style={s.closeBtn} onClick={closeModal}>œ•</button>
             </div>
 
             <div style={s.formGrid}>
@@ -270,7 +270,7 @@ const StaffManagement = () => {
 
               <div style={s.fieldGroup}>
                 <label style={s.label}>Shift Timing</label>
-                <input style={s.input} placeholder="09:00 AM â€” 05:00 PM" value={form.shiftTiming} onChange={e => setForm({...form, shiftTiming: e.target.value})} />
+                <input style={s.input} placeholder="09:00 AM "” 05:00 PM" value={form.shiftTiming} onChange={e => setForm({...form, shiftTiming: e.target.value})} />
               </div>
               <div style={s.fieldGroup}>
                 <label style={s.label}>Shift Label</label>
