@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import axios from 'axios';
 import AdminLayout from '../../components/AdminLayout';
 
@@ -314,7 +314,7 @@ const TransactionAudit = () => {
  onChange={toggleAll}
  />
  </th>
- {['Transaction ID', 'Date & Time', 'Customer / Account', 'Items', 'Total Amount', 'Status'].map(h => <th key={h} style={s.th}>{h}</th>)}
+ {['Transaction ID', 'Date & Time', 'Customer / Account', 'Items', 'Total Amount'].map(h => <th key={h} style={s.th}>{h}</th>)}
  </tr>
  </thead>
  <tbody>
