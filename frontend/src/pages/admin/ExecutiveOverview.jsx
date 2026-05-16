@@ -1,24 +1,9 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AdminLayout from '../../components/AdminLayout';
 
 const ExecutiveOverview = () => {
  const currentDate = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
- const [staffData, setStaffData] = useState({ onDuty: 14, total: 20 }); // Fallback values while loading
-
- useEffect(() => {
- const fetchStaff = async () => {
- try {
- const res = await axios.get('https://balaji-perfect-caters.onrender.com/api/staff');
- const staffList = res.data.data || [];
- const onDuty = staffList.filter(s => s.status === 'ON-DUTY').length;
- setStaffData({ onDuty, total: staffList.length });
- } catch (err) {
- console.error('Failed to fetch staff data', err);
- }
- };
- fetchStaff();
- }, []);
 
  return (
  <AdminLayout>
@@ -32,7 +17,6 @@ const ExecutiveOverview = () => {
  <p style={s.heroText}>Here is what's happening with your catering operations today. Revenue is up <strong style={{ color: '#F2C36B' }}>12%</strong> compared to yesterday.</p>
  <div className="overview-hero-actions" style={{ display: 'flex', gap: '12px', marginTop: '16px' }}>
  <button style={s.primaryBtn} onClick={() => window.open('/public/menu/main', '_blank')}>View Live Menu</button>
- <button style={s.secondaryBtn}>Generate Daily Report</button>
  </div>
  </div>
  <div style={s.heroRight}>
@@ -69,19 +53,10 @@ const ExecutiveOverview = () => {
  <div style={s.kpiValue}>Rs. 7.88</div>
  <div style={s.kpiTrend}><span style={{ color: '#ef4444' }}> -1.2%</span> vs last week</div>
  </div>
- <div style={{...s.kpiCard, borderTop: '4px solid #F2C36B' }}>
- <div style={s.kpiHeader}>
- <span style={s.kpiLabel}>ACTIVE STAFF</span>
- </div>
- <div style={s.kpiValue}>{staffData.onDuty} <span style={{ fontSize: '1rem', color: '#8D7E73' }}>/ {staffData.total}</span></div>
- <div style={s.kpiTrend}>Current Shift</div>
- </div>
  </div>
 
  {/* Bottom Grid */}
  <div className="overview-bottom-grid" style={s.bottomGrid}>
- 
- {/* Chart Section */}
  <div style={s.chartCard}>
  <div style={s.cardHeader}>
  <h3 style={s.cardTitle}>Revenue Analytics</h3>
@@ -183,7 +158,7 @@ const s = {
  pulseDot: { width: '10px', height: '10px', backgroundColor: '#E3A23B', borderRadius: '50%', animation: 'pulse 2s infinite' },
  healthMetric: { fontSize: '0.8rem', color: '#8D7E73', marginBottom: '4px' },
  
- kpiRow: { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px' },
+ kpiRow: { display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' },
  kpiCard: { backgroundColor: 'white', borderRadius: '12px', padding: '24px', boxShadow: '0 10px 26px rgba(90,0,6,0.07)', border: '1px solid #E8DED1', display: 'flex', flexDirection: 'column' },
  kpiHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' },
  kpiLabel: { fontSize: '0.75rem', fontWeight: '800', color: '#6F6259', textTransform: 'uppercase', letterSpacing: '0.5px' },
