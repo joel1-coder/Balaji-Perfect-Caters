@@ -52,7 +52,7 @@ const MenuManagement = () => {
     <div style={styles.container}>
       {/* Top Navigation / Breadcrumbs */}
       <nav style={styles.topNav}>
-        <span style={styles.breadcrumb}>Dashboard / <span style={{color: '#38bdf8'}}>Menus</span></span>
+        <span style={styles.breadcrumb}>Dashboard / <span style={{color: '#E3A23B'}}>Menus</span></span>
         <div style={styles.userProfile}>
           <div style={styles.avatar}>A</div>
           <span>Admin</span>
@@ -119,7 +119,7 @@ const MenuManagement = () => {
                   ðŸ“± QR
                 </button>
                 <button style={{...styles.actionBtn, color: '#f43f5e'}} onClick={() => handleDelete(m._id)}>
-                  🗑️ Delete
+                  ??? Delete
                 </button>
               </div>
             </div>
@@ -131,32 +131,32 @@ const MenuManagement = () => {
 };
 
 const styles = {
-  container: { padding: '40px', maxWidth: '1200px', margin: '0 auto', fontFamily: "'Outfit', sans-serif", color: 'white', backgroundColor: '#0f172a', minHeight: '100vh' },
-  topNav: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px', paddingBottom: '15px', borderBottom: '1px solid #1e293b' },
-  breadcrumb: { color: '#64748b', fontSize: '0.9rem', fontWeight: '500' },
+  container: { padding: '40px', maxWidth: '1200px', margin: '0 auto', fontFamily: "'Outfit', sans-serif", color: 'white', backgroundColor: '#5A0006', minHeight: '100vh' },
+  topNav: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px', paddingBottom: '15px', borderBottom: '1px solid #7A0008' },
+  breadcrumb: { color: '#6F6259', fontSize: '0.9rem', fontWeight: '500' },
   userProfile: { display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.9rem' },
-  avatar: { width: '32px', height: '32px', borderRadius: '50%', backgroundColor: '#38bdf8', color: '#0f172a', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800' },
+  avatar: { width: '32px', height: '32px', borderRadius: '50%', backgroundColor: '#E3A23B', color: '#5A0006', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800' },
   header: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '40px' },
-  title: { fontSize: '2.5rem', fontWeight: '800', color: '#f8fafc', letterSpacing: '-1px' },
-  sub: { color: '#94a3b8', maxWidth: '600px', marginTop: '5px' },
+  title: { fontSize: '2.5rem', fontWeight: '800', color: '#FAF7F2', letterSpacing: '-1px' },
+  sub: { color: '#8D7E73', maxWidth: '600px', marginTop: '5px' },
   headerActions: { display: 'flex', gap: '12px' },
   statsRow: { display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px', marginBottom: '40px' },
-  statCard: { backgroundColor: '#1e293b', padding: '24px', borderRadius: '16px', border: '1px solid #334155' },
-  statLabel: { display: 'block', color: '#94a3b8', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' },
-  statValue: { fontSize: '2rem', fontWeight: '800', color: '#38bdf8' },
+  statCard: { backgroundColor: '#7A0008', padding: '24px', borderRadius: '16px', border: '1px solid #8F5B5F' },
+  statLabel: { display: 'block', color: '#8D7E73', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' },
+  statValue: { fontSize: '2rem', fontWeight: '800', color: '#E3A23B' },
   grid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '24px' },
-  card: { backgroundColor: '#1e293b', padding: '24px', borderRadius: '20px', border: '1px solid #334155', transition: 'transform 0.2s', cursor: 'pointer' },
+  card: { backgroundColor: '#7A0008', padding: '24px', borderRadius: '20px', border: '1px solid #8F5B5F', transition: 'transform 0.2s', cursor: 'pointer' },
   cardTop: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' },
   cardTitle: { fontSize: '1.25rem', fontWeight: '700' },
-  badge: { fontSize: '0.7rem', padding: '2px 8px', borderRadius: '20px', backgroundColor: 'rgba(16, 185, 129, 0.1)', color: '#10b981', border: '1px solid #10b981' },
-  cardSub: { color: '#94a3b8', fontSize: '0.95rem', marginBottom: '15px' },
-  cardMeta: { display: 'flex', gap: '10px', color: '#475569', fontSize: '0.85rem', marginBottom: '24px' },
-  actions: { display: 'flex', gap: '10px', borderTop: '1px solid #334155', paddingTop: '20px' },
-  actionBtn: { flex: 1, padding: '8px', borderRadius: '10px', backgroundColor: '#0f172a', border: '1px solid #334155', color: '#94a3b8', cursor: 'pointer', fontWeight: '600', transition: '0.2s' },
-  btnBlue: { backgroundColor: '#38bdf8', color: '#0f172a', border: 'none', padding: '12px 24px', borderRadius: '12px', fontWeight: '800', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' },
-  btnOutline: { backgroundColor: 'transparent', color: '#94a3b8', border: '1px solid #334155', padding: '12px 24px', borderRadius: '12px', fontWeight: '600', cursor: 'pointer' },
-  loader: { textAlign: 'center', padding: '40px', color: '#38bdf8' },
-  emptyState: { gridColumn: '1 / -1', textAlign: 'center', padding: '60px', backgroundColor: '#1e293b', borderRadius: '20px', border: '2px dashed #334155', color: '#64748b' }
+  badge: { fontSize: '0.7rem', padding: '2px 8px', borderRadius: '20px', backgroundColor: 'rgba(227, 162, 59, 0.14)', color: '#E3A23B', border: '1px solid #E3A23B' },
+  cardSub: { color: '#8D7E73', fontSize: '0.95rem', marginBottom: '15px' },
+  cardMeta: { display: 'flex', gap: '10px', color: '#5E514A', fontSize: '0.85rem', marginBottom: '24px' },
+  actions: { display: 'flex', gap: '10px', borderTop: '1px solid #8F5B5F', paddingTop: '20px' },
+  actionBtn: { flex: 1, padding: '8px', borderRadius: '10px', backgroundColor: '#5A0006', border: '1px solid #8F5B5F', color: '#8D7E73', cursor: 'pointer', fontWeight: '600', transition: '0.2s' },
+  btnBlue: { backgroundColor: '#E3A23B', color: '#5A0006', border: 'none', padding: '12px 24px', borderRadius: '12px', fontWeight: '800', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' },
+  btnOutline: { backgroundColor: 'transparent', color: '#8D7E73', border: '1px solid #8F5B5F', padding: '12px 24px', borderRadius: '12px', fontWeight: '600', cursor: 'pointer' },
+  loader: { textAlign: 'center', padding: '40px', color: '#E3A23B' },
+  emptyState: { gridColumn: '1 / -1', textAlign: 'center', padding: '60px', backgroundColor: '#7A0008', borderRadius: '20px', border: '2px dashed #8F5B5F', color: '#6F6259' }
 };
 
 export default MenuManagement;

@@ -1,7 +1,7 @@
-import { useState, useCallback } from "react";
+﻿import { useState, useCallback } from "react";
 import AdminLayout from "../../components/AdminLayout";
 
-// ─── PRICING ENGINE ────────────────────────────────────────────────────────────
+// â”€â”€â”€ PRICING ENGINE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const MENU = {
   idli:        { label: "Idli",           basePrice: 5,    unit: "pc",  category: "South Indian" },
@@ -74,7 +74,7 @@ function computeBill(orderLines, locationKey, serviceKey, eventPax) {
     if (serviceKey === "fullService") deliveryCharge += 800;
   }
 
-  // Packaging: ₹2 per 10 units
+  // Packaging: â‚¹2 per 10 units
   const totalUnits = orderLines.reduce((s, l) => s + l.qty, 0);
   const packagingCharge = Math.ceil(totalUnits / 10) * 2;
 
@@ -89,9 +89,9 @@ function computeBill(orderLines, locationKey, serviceKey, eventPax) {
   return { items, itemsTotal, deliveryCharge, packagingCharge, staffingCharge, preTax, cgst, sgst, grandTotal };
 }
 
-// ─── UI ────────────────────────────────────────────────────────────────────────
+// â”€â”€â”€ UI â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-const fmt = (n) => "₹" + Number(n).toLocaleString("en-IN", { minimumFractionDigits: 2 });
+const fmt = (n) => "â‚¹" + Number(n).toLocaleString("en-IN", { minimumFractionDigits: 2 });
 
 const categories = [...new Set(Object.values(MENU).map(m => m.category))];
 
@@ -116,10 +116,10 @@ export default function CateringQuotation() {
 
   return (
     <AdminLayout>
-      <div style={{ fontFamily: "'Georgia', 'Times New Roman', serif", minHeight: "100vh", background: "#fdf6ec", color: "#1a0f00" }}>
+      <div style={{ fontFamily: "'Georgia', 'Times New Roman', serif", minHeight: "100vh", background: "#FAF7F2", color: "#1a0f00" }}>
         {/* Header */}
         <div style={{
-          background: "linear-gradient(135deg, #7c2d12 0%, #c2410c 60%, #ea580c 100%)",
+          background: "linear-gradient(135deg, #7A0008 0%, #E3A23B 60%, #F2C36B 100%)",
           padding: "36px 32px 28px",
           color: "#fff",
           position: "relative",
@@ -134,7 +134,7 @@ export default function CateringQuotation() {
               Catering Management System
             </div>
             <h1 style={{ margin: 0, fontSize: 32, fontWeight: "normal", letterSpacing: 1 }}>
-              🍽 Dynamic Quotation Builder
+              ðŸ½ Dynamic Quotation Builder
             </h1>
             <p style={{ margin: "8px 0 0", opacity: 0.8, fontSize: 14 }}>
               Instant itemized billing with bulk discounts, taxes & service charges
@@ -187,8 +187,8 @@ export default function CateringQuotation() {
 
           {/* Order Lines */}
           <Section title="Order Items">
-            <div style={{ marginBottom: 8, fontSize: 12, color: "#92400e", letterSpacing: 1, textTransform: "uppercase" }}>
-              Leave discount blank for no discount — enter a % only if needed
+            <div style={{ marginBottom: 8, fontSize: 12, color: "#9C6B22", letterSpacing: 1, textTransform: "uppercase" }}>
+              Leave discount blank for no discount â€” enter a % only if needed
             </div>
             {orderLines.map((line, i) => {
               const preview = computeLineItem(line.key, line.qty, location, line.manualDiscount);
@@ -196,15 +196,15 @@ export default function CateringQuotation() {
                 <div key={i} style={{
                   display: "grid", gridTemplateColumns: "2fr 1fr 1fr auto auto",
                   gap: 12, alignItems: "start", marginBottom: 12,
-                  background: "#fff8f0", borderRadius: 10, padding: "12px 14px",
-                  border: "1px solid #fde8cc"
+                  background: "#FFF9EF", borderRadius: 10, padding: "12px 14px",
+                  border: "1px solid #F2C36B"
                 }}>
                   <div>
                     <select value={line.key} onChange={e => updateLine(i, "key", e.target.value)} style={{ ...inputStyle, marginBottom: 0 }}>
                       {categories.map(cat => (
                         <optgroup key={cat} label={cat}>
                           {Object.entries(MENU).filter(([,v]) => v.category === cat).map(([k,v]) => (
-                            <option key={k} value={k}>{v.label} — {fmt(v.basePrice)}/{v.unit}</option>
+                            <option key={k} value={k}>{v.label} â€” {fmt(v.basePrice)}/{v.unit}</option>
                           ))}
                         </optgroup>
                       ))}
@@ -224,15 +224,15 @@ export default function CateringQuotation() {
                         placeholder="Optional %"
                         style={{ ...inputStyle, paddingRight: 28 }}
                       />
-                      <span style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", fontSize: 12, color: "#92400e", pointerEvents: "none" }}>%</span>
+                      <span style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", fontSize: 12, color: "#9C6B22", pointerEvents: "none" }}>%</span>
                     </div>
                   </div>
                   <div style={{ textAlign: "right", minWidth: 90, paddingTop: 8 }}>
                     {preview && (
                       <div>
-                        <div style={{ fontSize: 13, fontWeight: "bold", color: "#7c2d12" }}>{fmt(preview.subtotal)}</div>
+                        <div style={{ fontSize: 13, fontWeight: "bold", color: "#7A0008" }}>{fmt(preview.subtotal)}</div>
                         {preview.discountPct > 0 && (
-                          <div style={{ fontSize: 11, color: "#2563eb" }}>−{preview.discountPct.toFixed(1)}%</div>
+                          <div style={{ fontSize: 11, color: "#A86612" }}>âˆ’{preview.discountPct.toFixed(1)}%</div>
                         )}
                       </div>
                     )}
@@ -240,12 +240,12 @@ export default function CateringQuotation() {
                   <button onClick={() => removeLine(i)} style={{
                     background: "none", border: "1px solid #fca5a5", color: "#dc2626",
                     borderRadius: 6, padding: "4px 10px", cursor: "pointer", fontSize: 16, marginTop: 2
-                  }}>×</button>
+                  }}>Ã—</button>
                 </div>
               );
             })}
             <button onClick={addLine} style={{
-              background: "#fff", border: "2px dashed #c2410c", color: "#c2410c",
+              background: "#fff", border: "2px dashed #E3A23B", color: "#E3A23B",
               padding: "10px 20px", borderRadius: 10, cursor: "pointer", fontSize: 14,
               width: "100%", marginTop: 4, letterSpacing: 0.5
             }}>+ Add Item</button>
@@ -253,11 +253,11 @@ export default function CateringQuotation() {
 
           {/* Live Summary */}
           <Section title="Live Cost Summary">
-            <div style={{ background: "#fff", borderRadius: 12, overflow: "hidden", border: "1px solid #fde8cc" }}>
+            <div style={{ background: "#fff", borderRadius: 12, overflow: "hidden", border: "1px solid #F2C36B" }}>
               {/* Items breakdown */}
               <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
                 <thead>
-                  <tr style={{ background: "#7c2d12", color: "#fff" }}>
+                  <tr style={{ background: "#7A0008", color: "#fff" }}>
                     {["Item","Qty","Rate/Unit","Discount","Subtotal"].map(h => (
                       <th key={h} style={{ padding: "10px 14px", textAlign: h==="Item"?"left":"right", fontWeight: "normal", letterSpacing: 0.5 }}>{h}</th>
                     ))}
@@ -265,15 +265,15 @@ export default function CateringQuotation() {
                 </thead>
                 <tbody>
                   {bill.items.map((item, i) => (
-                    <tr key={i} style={{ borderBottom: "1px solid #fde8cc", background: i%2===0?"#fffbf7":"#fff" }}>
+                    <tr key={i} style={{ borderBottom: "1px solid #F2C36B", background: i%2===0?"#FAF7F2":"#fff" }}>
                       <td style={{ padding: "10px 14px" }}>
                         <div style={{ fontWeight: "bold" }}>{item.label}</div>
-                        <div style={{ fontSize: 11, color: "#78350f" }}>{item.category}</div>
+                        <div style={{ fontSize: 11, color: "#5A0006" }}>{item.category}</div>
                       </td>
                       <td style={{ padding: "10px 14px", textAlign: "right" }}>{item.qty} {item.unit}</td>
                       <td style={{ padding: "10px 14px", textAlign: "right" }}>{fmt(item.pricePerUnit)}</td>
                       <td style={{ padding: "10px 14px", textAlign: "right", color: item.discountPct > 0 ? "#16a34a" : "#999" }}>
-                        {item.discountPct > 0 ? `−${item.discountPct}%` : "—"}
+                        {item.discountPct > 0 ? `âˆ’${item.discountPct}%` : "â€”"}
                       </td>
                       <td style={{ padding: "10px 14px", textAlign: "right", fontWeight: "bold" }}>{fmt(item.subtotal)}</td>
                     </tr>
@@ -282,7 +282,7 @@ export default function CateringQuotation() {
               </table>
 
               {/* Charges */}
-              <div style={{ padding: "16px 20px", background: "#fdf6ec", borderTop: "2px solid #fde8cc" }}>
+              <div style={{ padding: "16px 20px", background: "#FAF7F2", borderTop: "2px solid #F2C36B" }}>
                 <ChargeRow label="Items Subtotal" value={fmt(bill.itemsTotal)} />
                 {bill.deliveryCharge > 0 && <ChargeRow label={`${SERVICES[service].label} Charge`} value={fmt(bill.deliveryCharge)} />}
                 <ChargeRow label="Packaging & Handling" value={fmt(bill.packagingCharge)} />
@@ -290,7 +290,7 @@ export default function CateringQuotation() {
                 <ChargeRow label="Pre-Tax Total" value={fmt(bill.preTax)} bold />
                 <ChargeRow label={`CGST @ ${(CGST_RATE*100).toFixed(1)}%`} value={fmt(bill.cgst)} />
                 <ChargeRow label={`SGST @ ${(SGST_RATE*100).toFixed(1)}%`} value={fmt(bill.sgst)} />
-                <div style={{ marginTop: 12, padding: "14px 16px", background: "#7c2d12", borderRadius: 10, display: "flex", justifyContent: "space-between", color: "#fff" }}>
+                <div style={{ marginTop: 12, padding: "14px 16px", background: "#7A0008", borderRadius: 10, display: "flex", justifyContent: "space-between", color: "#fff" }}>
                   <span style={{ fontSize: 18, letterSpacing: 1 }}>GRAND TOTAL</span>
                   <span style={{ fontSize: 22, fontWeight: "bold" }}>{fmt(bill.grandTotal)}</span>
                 </div>
@@ -301,12 +301,12 @@ export default function CateringQuotation() {
           {/* Generate Formal Quote */}
           <div style={{ textAlign: "center", marginTop: 8 }}>
             <button onClick={() => setShowBill(b => !b)} style={{
-              background: "linear-gradient(135deg, #7c2d12, #ea580c)",
+              background: "linear-gradient(135deg, #7A0008, #F2C36B)",
               color: "#fff", border: "none", padding: "14px 40px",
               borderRadius: 50, fontSize: 15, cursor: "pointer", letterSpacing: 1,
               boxShadow: "0 4px 20px rgba(194,65,12,0.4)"
             }}>
-              {showBill ? "▲ Hide Formal Quotation" : "📄 Generate Formal Quotation"}
+              {showBill ? "â–² Hide Formal Quotation" : "ðŸ“„ Generate Formal Quotation"}
             </button>
           </div>
 
@@ -314,38 +314,38 @@ export default function CateringQuotation() {
           {showBill && (
             <div style={{
               marginTop: 28, background: "#fff", borderRadius: 16, padding: "36px 40px",
-              border: "2px solid #fde8cc", boxShadow: "0 8px 40px rgba(0,0,0,0.08)"
+              border: "2px solid #F2C36B", boxShadow: "0 8px 40px rgba(0,0,0,0.08)"
             }}>
-              <div style={{ borderBottom: "3px double #7c2d12", paddingBottom: 20, marginBottom: 24 }}>
+              <div style={{ borderBottom: "3px double #7A0008", paddingBottom: 20, marginBottom: 24 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                   <div>
-                    <div style={{ fontSize: 22, fontWeight: "bold", color: "#7c2d12" }}>🍽 Shree Caterers</div>
-                    <div style={{ fontSize: 12, color: "#78350f", marginTop: 4 }}>Premium Catering Services</div>
+                    <div style={{ fontSize: 22, fontWeight: "bold", color: "#7A0008" }}>ðŸ½ Shree Caterers</div>
+                    <div style={{ fontSize: 12, color: "#5A0006", marginTop: 4 }}>Premium Catering Services</div>
                   </div>
                   <div style={{ textAlign: "right" }}>
-                    <div style={{ fontSize: 18, fontWeight: "bold", color: "#7c2d12" }}>QUOTATION</div>
-                    <div style={{ fontSize: 12, color: "#78350f" }}>Date: {new Date().toLocaleDateString("en-IN", {day:"2-digit",month:"long",year:"numeric"})}</div>
-                    <div style={{ fontSize: 12, color: "#78350f" }}>Valid for 7 days</div>
+                    <div style={{ fontSize: 18, fontWeight: "bold", color: "#7A0008" }}>QUOTATION</div>
+                    <div style={{ fontSize: 12, color: "#5A0006" }}>Date: {new Date().toLocaleDateString("en-IN", {day:"2-digit",month:"long",year:"numeric"})}</div>
+                    <div style={{ fontSize: 12, color: "#5A0006" }}>Valid for 7 days</div>
                   </div>
                 </div>
               </div>
 
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginBottom: 28, fontSize: 13 }}>
                 <div>
-                  <div style={{ fontWeight: "bold", color: "#7c2d12", marginBottom: 6, textTransform: "uppercase", fontSize: 11, letterSpacing: 1 }}>Bill To</div>
-                  <div style={{ fontWeight: "bold", fontSize: 15 }}>{clientName || "—"}</div>
-                  <div style={{ color: "#78350f", marginTop: 4 }}>
-                    Event Date: {eventDate ? new Date(eventDate).toLocaleDateString("en-IN", {day:"2-digit",month:"long",year:"numeric"}) : "—"}<br/>
+                  <div style={{ fontWeight: "bold", color: "#7A0008", marginBottom: 6, textTransform: "uppercase", fontSize: 11, letterSpacing: 1 }}>Bill To</div>
+                  <div style={{ fontWeight: "bold", fontSize: 15 }}>{clientName || "â€”"}</div>
+                  <div style={{ color: "#5A0006", marginTop: 4 }}>
+                    Event Date: {eventDate ? new Date(eventDate).toLocaleDateString("en-IN", {day:"2-digit",month:"long",year:"numeric"}) : "â€”"}<br/>
                     Guests: {pax} pax<br/>
                     Location: {LOCATION_MULTIPLIERS[location].label}<br/>
                     Service: {SERVICES[service].label}
                   </div>
                 </div>
                 {bill.items.some(i => i.discountPct > 0) && (
-                  <div style={{ background: "#eff6ff", borderRadius: 10, padding: "12px 16px", border: "1px solid #bfdbfe" }}>
-                    <div style={{ fontWeight: "bold", color: "#1d4ed8", marginBottom: 6, fontSize: 11, textTransform: "uppercase", letterSpacing: 1 }}>Discounts Applied</div>
+                  <div style={{ background: "#FFF8E8", borderRadius: 10, padding: "12px 16px", border: "1px solid #F2C36B" }}>
+                    <div style={{ fontWeight: "bold", color: "#7A0008", marginBottom: 6, fontSize: 11, textTransform: "uppercase", letterSpacing: 1 }}>Discounts Applied</div>
                     {bill.items.filter(i => i.discountPct > 0).map(i => (
-                      <div key={i.key} style={{ fontSize: 12, color: "#1d4ed8" }}>• {i.label}: {i.discountPct.toFixed(1)}% off</div>
+                      <div key={i.key} style={{ fontSize: 12, color: "#7A0008" }}>â€¢ {i.label}: {i.discountPct.toFixed(1)}% off</div>
                     ))}
                   </div>
                 )}
@@ -353,22 +353,22 @@ export default function CateringQuotation() {
 
               <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13, marginBottom: 24 }}>
                 <thead>
-                  <tr style={{ borderBottom: "2px solid #7c2d12" }}>
+                  <tr style={{ borderBottom: "2px solid #7A0008" }}>
                     {["#","Item","Category","Qty","Base Rate","Adj. Rate","Disc.","Total"].map(h => (
-                      <th key={h} style={{ padding: "8px 10px", textAlign: h==="Item"||h==="#"||h==="Category"?"left":"right", color: "#7c2d12", fontWeight: "bold", fontSize: 11, textTransform: "uppercase" }}>{h}</th>
+                      <th key={h} style={{ padding: "8px 10px", textAlign: h==="Item"||h==="#"||h==="Category"?"left":"right", color: "#7A0008", fontWeight: "bold", fontSize: 11, textTransform: "uppercase" }}>{h}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
                   {bill.items.map((item, i) => (
-                    <tr key={i} style={{ borderBottom: "1px solid #fde8cc" }}>
-                      <td style={{ padding: "9px 10px", color: "#78350f" }}>{i+1}</td>
+                    <tr key={i} style={{ borderBottom: "1px solid #F2C36B" }}>
+                      <td style={{ padding: "9px 10px", color: "#5A0006" }}>{i+1}</td>
                       <td style={{ padding: "9px 10px", fontWeight: "bold" }}>{item.label}</td>
-                      <td style={{ padding: "9px 10px", color: "#78350f" }}>{item.category}</td>
+                      <td style={{ padding: "9px 10px", color: "#5A0006" }}>{item.category}</td>
                       <td style={{ padding: "9px 10px", textAlign: "right" }}>{item.qty} {item.unit}</td>
-                      <td style={{ padding: "9px 10px", textAlign: "right", color: "#78350f", textDecoration: item.discountPct > 0 ? "line-through" : "none" }}>{fmt(item.adjustedBase)}</td>
+                      <td style={{ padding: "9px 10px", textAlign: "right", color: "#5A0006", textDecoration: item.discountPct > 0 ? "line-through" : "none" }}>{fmt(item.adjustedBase)}</td>
                       <td style={{ padding: "9px 10px", textAlign: "right" }}>{fmt(item.pricePerUnit)}</td>
-                      <td style={{ padding: "9px 10px", textAlign: "right", color: item.discountPct > 0 ? "#2563eb" : "#999" }}>{item.discountPct > 0 ? `${item.discountPct.toFixed(1)}%` : "—"}</td>
+                      <td style={{ padding: "9px 10px", textAlign: "right", color: item.discountPct > 0 ? "#A86612" : "#999" }}>{item.discountPct > 0 ? `${item.discountPct.toFixed(1)}%` : "â€”"}</td>
                       <td style={{ padding: "9px 10px", textAlign: "right", fontWeight: "bold" }}>{fmt(item.subtotal)}</td>
                     </tr>
                   ))}
@@ -386,17 +386,17 @@ export default function CateringQuotation() {
                   <FRow label={`SGST (${(SGST_RATE*100).toFixed(1)}%)`} value={fmt(bill.sgst)} />
                   <div style={{
                     display: "flex", justifyContent: "space-between", padding: "12px 0",
-                    borderTop: "3px double #7c2d12", marginTop: 6, fontWeight: "bold", fontSize: 16, color: "#7c2d12"
+                    borderTop: "3px double #7A0008", marginTop: 6, fontWeight: "bold", fontSize: 16, color: "#7A0008"
                   }}>
                     <span>Grand Total</span><span>{fmt(bill.grandTotal)}</span>
                   </div>
-                  <div style={{ fontSize: 11, color: "#78350f", textAlign: "right", marginTop: 4 }}>
+                  <div style={{ fontSize: 11, color: "#5A0006", textAlign: "right", marginTop: 4 }}>
                     Amount in words: {toWords(bill.grandTotal)} rupees only
                   </div>
                 </div>
               </div>
 
-              <div style={{ marginTop: 28, padding: "16px 20px", background: "#fdf6ec", borderRadius: 10, fontSize: 12, color: "#78350f", borderLeft: "4px solid #c2410c" }}>
+              <div style={{ marginTop: 28, padding: "16px 20px", background: "#FAF7F2", borderRadius: 10, fontSize: 12, color: "#5A0006", borderLeft: "4px solid #E3A23B" }}>
                 <strong>Terms & Conditions:</strong> 50% advance required at booking. Balance due 2 days before event. Prices inclusive of standard serviceware. Additional charges may apply for venue-specific requirements.
               </div>
             </div>
@@ -407,13 +407,13 @@ export default function CateringQuotation() {
   );
 }
 
-// ─── SMALL HELPERS ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ SMALL HELPERS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function Section({ title, children }) {
   return (
     <div style={{ marginBottom: 24 }}>
-      <div style={{ fontSize: 11, letterSpacing: 3, textTransform: "uppercase", color: "#92400e", marginBottom: 12, fontWeight: "bold" }}>
-        ▸ {title}
+      <div style={{ fontSize: 11, letterSpacing: 3, textTransform: "uppercase", color: "#9C6B22", marginBottom: 12, fontWeight: "bold" }}>
+        â–¸ {title}
       </div>
       {children}
     </div>
@@ -423,20 +423,20 @@ function Section({ title, children }) {
 function Field({ label, children }) {
   return (
     <div>
-      <label style={{ fontSize: 11, letterSpacing: 1, textTransform: "uppercase", color: "#78350f", display: "block", marginBottom: 5 }}>{label}</label>
+      <label style={{ fontSize: 11, letterSpacing: 1, textTransform: "uppercase", color: "#5A0006", display: "block", marginBottom: 5 }}>{label}</label>
       {children}
     </div>
   );
 }
 
 function Note({ children }) {
-  return <div style={{ fontSize: 11, color: "#92400e", marginTop: 4 }}>ℹ {children}</div>;
+  return <div style={{ fontSize: 11, color: "#9C6B22", marginTop: 4 }}>â„¹ {children}</div>;
 }
 
 function ChargeRow({ label, value, bold, note }) {
   return (
-    <div style={{ display: "flex", justifyContent: "space-between", padding: "5px 0", borderBottom: "1px dashed #fde8cc", fontSize: bold ? 14 : 13, fontWeight: bold ? "bold" : "normal" }}>
-      <span>{label}{note && <span style={{ fontSize: 11, color: "#92400e", marginLeft: 6 }}>({note})</span>}</span>
+    <div style={{ display: "flex", justifyContent: "space-between", padding: "5px 0", borderBottom: "1px dashed #F2C36B", fontSize: bold ? 14 : 13, fontWeight: bold ? "bold" : "normal" }}>
+      <span>{label}{note && <span style={{ fontSize: 11, color: "#9C6B22", marginLeft: 6 }}>({note})</span>}</span>
       <span>{value}</span>
     </div>
   );
@@ -447,10 +447,10 @@ function FRow({ label, value, divider }) {
     <div style={{
       display: "flex", justifyContent: "space-between",
       padding: "6px 0",
-      borderTop: divider ? "1px solid #c2410c" : "none",
+      borderTop: divider ? "1px solid #E3A23B" : "none",
       marginTop: divider ? 6 : 0
     }}>
-      <span style={{ color: "#78350f" }}>{label}</span>
+      <span style={{ color: "#5A0006" }}>{label}</span>
       <span style={{ fontWeight: divider ? "bold" : "normal" }}>{value}</span>
     </div>
   );
@@ -458,7 +458,7 @@ function FRow({ label, value, divider }) {
 
 const inputStyle = {
   width: "100%", padding: "9px 12px", borderRadius: 8,
-  border: "1px solid #fde8cc", background: "#fffbf7",
+  border: "1px solid #F2C36B", background: "#FAF7F2",
   fontSize: 13, color: "#1a0f00", outline: "none",
   boxSizing: "border-box", fontFamily: "inherit"
 };

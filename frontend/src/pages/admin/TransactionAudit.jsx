@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+﻿import React, { useState, useMemo, useEffect } from 'react';
 import axios from 'axios';
 import AdminLayout from '../../components/AdminLayout';
 
@@ -13,7 +13,7 @@ const TRANSACTIONS = [
 ];
 
 const statusStyle = {
-  pending: { bg: '#fef9c3', color: '#ca8a04' },
+  pending: { bg: '#FFF3D5', color: '#A86612' },
   paid: { bg: '#dcfce7', color: '#16a34a' },
   unpaid: { bg: '#fee2e2', color: '#dc2626' },
 };
@@ -150,15 +150,15 @@ const TransactionAudit = () => {
             body { font-family: 'Outfit', sans-serif; padding: 40px; color: #333; }
             #content-to-pdf { padding: 20px; }
             .header { text-align: center; margin-bottom: 40px; }
-            .header h1 { margin: 0; color: #0f2444; }
+            .header h1 { margin: 0; color: #7A0008; }
             .header p { margin: 5px 0; color: #666; }
             .info { margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 20px; }
             .info p { margin: 5px 0; }
             table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
             th, td { border-bottom: 1px solid #ddd; padding: 12px; text-align: left; }
-            th { background-color: #f8fafc; color: #0f2444; }
+            th { background-color: #FAF7F2; color: #7A0008; }
             tr { page-break-inside: avoid; }
-            .total { text-align: right; font-size: 1.5em; font-weight: bold; color: #0f2444; margin-top: 20px; }
+            .total { text-align: right; font-size: 1.5em; font-weight: bold; color: #7A0008; margin-top: 20px; }
             .no-print { text-align: center; margin-top: 50px; }
             @media print { .no-print { display: none; } }
           </style>
@@ -206,8 +206,8 @@ const TransactionAudit = () => {
           </div>
 
           <div class="no-print" style="display: flex; gap: 15px; justify-content: center;">
-            <button onclick="window.print()" style="padding: 10px 20px; font-size: 16px; cursor: pointer; background: #0f2444; color: white; border: none; border-radius: 5px;">🖨️ Print Bill</button>
-            <button onclick="downloadPDF()" style="padding: 10px 20px; font-size: 16px; cursor: pointer; background: #dc2626; color: white; border: none; border-radius: 5px;">📥 Download PDF</button>
+            <button onclick="window.print()" style="padding: 10px 20px; font-size: 16px; cursor: pointer; background: #7A0008; color: white; border: none; border-radius: 5px;">ðŸ–¨ï¸ Print Bill</button>
+            <button onclick="downloadPDF()" style="padding: 10px 20px; font-size: 16px; cursor: pointer; background: #dc2626; color: white; border: none; border-radius: 5px;">ðŸ“¥ Download PDF</button>
           </div>
 
           <script>
@@ -292,9 +292,9 @@ const TransactionAudit = () => {
           <div style={s.exportBox}>
             <div style={s.exportLabel}>EXPORT FILTERED LOGS</div>
             <div style={{ display: 'flex', gap: '10px' }}>
-              <button style={s.exportBtn} onClick={exportToExcel}>📊 Excel (CSV)</button>
-              <button style={s.exportBtn} onClick={exportToWord}>📝 Word (TXT)</button>
-              <button style={{ ...s.exportBtn, backgroundColor: '#0f2444', color: 'white' }} onClick={generateBill}>🧾 Generate Bill</button>
+              <button style={s.exportBtn} onClick={exportToExcel}>ðŸ“Š Excel (CSV)</button>
+              <button style={s.exportBtn} onClick={exportToWord}>ðŸ“ Word (TXT)</button>
+              <button style={{ ...s.exportBtn, backgroundColor: '#7A0008', color: 'white' }} onClick={generateBill}>ðŸ§¾ Generate Bill</button>
             </div>
           </div>
         </div>
@@ -302,14 +302,14 @@ const TransactionAudit = () => {
         {/* Table */}
         <div style={s.card}>
           <div style={s.bulkBar}>
-            <span style={{ color: '#64748b', fontSize: '0.85rem' }}>{selected.length} items selected</span>
+            <span style={{ color: '#6F6259', fontSize: '0.85rem' }}>{selected.length} items selected</span>
             {selected.length > 0 && (
               <>
-                <button style={s.bulkBtn}>œ“ Mark as Paid</button>
-                <button style={{ ...s.bulkBtn, color: '#ef4444' }}>🚩 Flag for Review</button>
+                <button style={s.bulkBtn}>Å“â€œ Mark as Paid</button>
+                <button style={{ ...s.bulkBtn, color: '#ef4444' }}>ðŸš© Flag for Review</button>
               </>
             )}
-            <span style={{ marginLeft: 'auto', color: '#94a3b8', fontSize: '0.8rem' }}>
+            <span style={{ marginLeft: 'auto', color: '#8D7E73', fontSize: '0.8rem' }}>
               Showing {filteredData.length} Transactions
             </span>
           </div>
@@ -328,24 +328,24 @@ const TransactionAudit = () => {
             <tbody>
               {filteredData.length === 0 ? (
                 <tr>
-                  <td colSpan="7" style={{ textAlign: 'center', padding: '40px', color: '#94a3b8' }}>
+                  <td colSpan="7" style={{ textAlign: 'center', padding: '40px', color: '#8D7E73' }}>
                     {loading ? 'Loading transactions...' : 'No transactions match your filters.'}
                   </td>
                 </tr>
               ) : filteredData.map((t) => (
-                <tr key={t._id} style={{ ...s.tr, backgroundColor: selected.includes(t._id) ? '#f8fafc' : 'white' }}>
+                <tr key={t._id} style={{ ...s.tr, backgroundColor: selected.includes(t._id) ? '#FAF7F2' : 'white' }}>
                   <td style={s.td}><input type="checkbox" checked={selected.includes(t._id)} onChange={() => toggle(t._id)}/></td>
-                  <td style={{ ...s.td, fontWeight: '700', color: '#0f172a' }}>{t.orderId}</td>
+                  <td style={{ ...s.td, fontWeight: '700', color: '#5A0006' }}>{t.orderId}</td>
                   <td style={s.td}>
-                    <div style={{ fontWeight: '600', color: '#374151', fontSize: '0.9rem' }}>{new Date(t.createdAt).toLocaleDateString()}</div>
-                    <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>{new Date(t.createdAt).toLocaleTimeString()}</div>
+                    <div style={{ fontWeight: '600', color: '#4A3D38', fontSize: '0.9rem' }}>{new Date(t.createdAt).toLocaleDateString()}</div>
+                    <div style={{ color: '#8D7E73', fontSize: '0.75rem' }}>{new Date(t.createdAt).toLocaleTimeString()}</div>
                   </td>
                   <td style={s.td}>
-                    <div style={{ fontWeight: '700', color: '#0f172a', fontSize: '0.9rem' }}>{t.customerName}</div>
-                    <div style={{ fontSize: '0.78rem', color: '#94a3b8' }}>{t.customerId || t.department || 'N/A'}</div>
+                    <div style={{ fontWeight: '700', color: '#5A0006', fontSize: '0.9rem' }}>{t.customerName}</div>
+                    <div style={{ fontSize: '0.78rem', color: '#8D7E73' }}>{t.customerId || t.department || 'N/A'}</div>
                   </td>
-                  <td style={{ ...s.td, color: '#475569' }}>{(t.items || []).map(i => i.name).join(', ')}</td>
-                  <td style={{ ...s.td, fontWeight: '700' }}>₹{(t.totalAmount || 0).toFixed(2)}</td>
+                  <td style={{ ...s.td, color: '#5E514A' }}>{(t.items || []).map(i => i.name).join(', ')}</td>
+                  <td style={{ ...s.td, fontWeight: '700' }}>â‚¹{(t.totalAmount || 0).toFixed(2)}</td>
                   <td style={s.td}>
                     <select
                       value={t.paymentStatus || 'pending'}
@@ -376,30 +376,30 @@ const TransactionAudit = () => {
         </div>
 
              <div style={s.bottomRow}>
-          <div style={{ ...s.summaryCard, backgroundColor: '#0f2444', color: 'white' }}>
+          <div style={{ ...s.summaryCard, backgroundColor: '#7A0008', color: 'white' }}>
             <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', letterSpacing: '1px' }}>FILTERED TOTAL</div>
-            <div style={{ fontSize: '2.2rem', fontWeight: '800', color: 'white', margin: '8px 0' }}>₹{totalFilteredValue.toFixed(2)}</div>
+            <div style={{ fontSize: '2.2rem', fontWeight: '800', color: 'white', margin: '8px 0' }}>â‚¹{totalFilteredValue.toFixed(2)}</div>
             <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Total sum of currently visible items</div>
           </div>
           <div style={s.summaryCard}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-              <span style={{ color: '#ef4444', fontSize: '1.2rem' }}>⚠️ </span>
-              <span style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px' }}>UNPAID TRANSACTIONS</span>
+              <span style={{ color: '#ef4444', fontSize: '1.2rem' }}>âš ï¸ </span>
+              <span style={{ fontSize: '0.7rem', color: '#8D7E73', textTransform: 'uppercase', letterSpacing: '1px' }}>UNPAID TRANSACTIONS</span>
             </div>
-            <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#0f172a' }}>
+            <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#5A0006' }}>
               {filteredData.filter(x => x.paymentStatus === 'unpaid').length}
             </div>
             <div style={{ fontSize: '0.8rem', color: '#ef4444' }}>Requires immediate payment</div>
           </div>
           <div style={s.summaryCard}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-              <span style={{ color: '#16a34a', fontSize: '1.2rem' }}>✅</span>
-              <span style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px' }}>PAID TRANSACTIONS</span>
+              <span style={{ color: '#16a34a', fontSize: '1.2rem' }}>âœ…</span>
+              <span style={{ fontSize: '0.7rem', color: '#8D7E73', textTransform: 'uppercase', letterSpacing: '1px' }}>PAID TRANSACTIONS</span>
             </div>
-            <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#0f172a' }}>
+            <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#5A0006' }}>
               {filteredData.filter(x => x.paymentStatus === 'paid').length}
             </div>
-            <div style={{ fontSize: '0.8rem', color: '#64748b' }}>Cleared successfully</div>
+            <div style={{ fontSize: '0.8rem', color: '#6F6259' }}>Cleared successfully</div>
           </div>
         </div>
       </div>
@@ -408,30 +408,30 @@ const TransactionAudit = () => {
 };
 
 const s = {
-  topBar: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 28px', backgroundColor: 'white', borderBottom: '1px solid #e2e8f0' },
-  pageTitle: { fontSize: '1.4rem', fontWeight: '800', color: '#0f172a' },
+  topBar: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 28px', backgroundColor: 'white', borderBottom: '1px solid #E8DED1' },
+  pageTitle: { fontSize: '1.4rem', fontWeight: '800', color: '#5A0006' },
   topRight: { display: 'flex', alignItems: 'center', gap: '12px' },
-  searchBox: { display: 'flex', alignItems: 'center', gap: '8px', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '8px 14px', backgroundColor: '#f8fafc' },
-  searchInput: { border: 'none', backgroundColor: 'transparent', outline: 'none', fontSize: '0.9rem', color: '#64748b', width: '200px', fontFamily: "'Outfit', sans-serif" },
+  searchBox: { display: 'flex', alignItems: 'center', gap: '8px', border: '1px solid #E8DED1', borderRadius: '10px', padding: '8px 14px', backgroundColor: '#FAF7F2' },
+  searchInput: { border: 'none', backgroundColor: 'transparent', outline: 'none', fontSize: '0.9rem', color: '#6F6259', width: '200px', fontFamily: "'Outfit', sans-serif" },
   page: { flex: 1, padding: '24px', overflow: 'auto', fontFamily: "'Outfit', sans-serif", display: 'flex', flexDirection: 'column', gap: '20px' },
-  filterCard: { backgroundColor: 'white', borderRadius: '14px', padding: '24px', border: '1px solid #e2e8f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '20px' },
+  filterCard: { backgroundColor: 'white', borderRadius: '14px', padding: '24px', border: '1px solid #E8DED1', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '20px' },
   filterLeft: { display: 'flex', alignItems: 'flex-end', gap: '16px', flex: 1, flexWrap: 'wrap' },
   filterGroup: { display: 'flex', flexDirection: 'column', gap: '6px' },
-  filterLabel: { fontSize: '0.78rem', color: '#94a3b8', fontWeight: '600' },
-  filterInput: { padding: '9px 14px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '0.9rem', color: '#0f172a', backgroundColor: 'white', fontFamily: "'Outfit', sans-serif", minWidth: '160px', outline: 'none', cursor: 'pointer' },
-  exportBox: { display: 'flex', flexDirection: 'column', gap: '10px', borderLeft: '1px solid #e2e8f0', paddingLeft: '24px' },
-  exportLabel: { fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: '600' },
-  exportBtn: { padding: '8px 16px', border: '1px solid #e2e8f0', borderRadius: '8px', backgroundColor: '#f8fafc', color: '#0f2444', cursor: 'pointer', fontWeight: '700', fontFamily: "'Outfit', sans-serif" },
-  card: { backgroundColor: 'white', borderRadius: '14px', padding: '24px', border: '1px solid #e2e8f0' },
-  bulkBar: { display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', paddingBottom: '16px', borderBottom: '1px solid #f1f5f9' },
-  bulkBtn: { background: 'none', border: 'none', color: '#0f2444', fontWeight: '700', cursor: 'pointer', fontSize: '0.85rem', fontFamily: "'Outfit', sans-serif" },
+  filterLabel: { fontSize: '0.78rem', color: '#8D7E73', fontWeight: '600' },
+  filterInput: { padding: '9px 14px', border: '1px solid #E8DED1', borderRadius: '8px', fontSize: '0.9rem', color: '#5A0006', backgroundColor: 'white', fontFamily: "'Outfit', sans-serif", minWidth: '160px', outline: 'none', cursor: 'pointer' },
+  exportBox: { display: 'flex', flexDirection: 'column', gap: '10px', borderLeft: '1px solid #E8DED1', paddingLeft: '24px' },
+  exportLabel: { fontSize: '0.7rem', color: '#8D7E73', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: '600' },
+  exportBtn: { padding: '8px 16px', border: '1px solid #E8DED1', borderRadius: '8px', backgroundColor: '#FAF7F2', color: '#7A0008', cursor: 'pointer', fontWeight: '700', fontFamily: "'Outfit', sans-serif" },
+  card: { backgroundColor: 'white', borderRadius: '14px', padding: '24px', border: '1px solid #E8DED1' },
+  bulkBar: { display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px', paddingBottom: '16px', borderBottom: '1px solid #F4EFE7' },
+  bulkBtn: { background: 'none', border: 'none', color: '#7A0008', fontWeight: '700', cursor: 'pointer', fontSize: '0.85rem', fontFamily: "'Outfit', sans-serif" },
   table: { width: '100%', borderCollapse: 'collapse' },
-  th: { fontSize: '0.75rem', color: '#94a3b8', textTransform: 'uppercase', fontWeight: '700', padding: '10px 14px', textAlign: 'left', borderBottom: '1px solid #f1f5f9', letterSpacing: '0.5px' },
-  tr: { borderBottom: '1px solid #f8fafc' },
-  td: { padding: '16px 14px', color: '#374151', fontSize: '0.9rem', verticalAlign: 'middle' },
+  th: { fontSize: '0.75rem', color: '#8D7E73', textTransform: 'uppercase', fontWeight: '700', padding: '10px 14px', textAlign: 'left', borderBottom: '1px solid #F4EFE7', letterSpacing: '0.5px' },
+  tr: { borderBottom: '1px solid #FAF7F2' },
+  td: { padding: '16px 14px', color: '#4A3D38', fontSize: '0.9rem', verticalAlign: 'middle' },
   badge: { fontSize: '0.78rem', fontWeight: '700', padding: '4px 12px', borderRadius: '20px' },
   bottomRow: { display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' },
-  summaryCard: { backgroundColor: 'white', borderRadius: '14px', padding: '24px', border: '1px solid #e2e8f0' },
+  summaryCard: { backgroundColor: 'white', borderRadius: '14px', padding: '24px', border: '1px solid #E8DED1' },
 };
 
 export default TransactionAudit;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/userResponsive.css';
@@ -117,7 +117,7 @@ const OperatorMenu = () => {
         </nav>
       </aside>
 
-      {/* ”€”€ Main Content ”€”€ */}
+      {/* â€â‚¬â€â‚¬ Main Content â€â‚¬â€â‚¬ */}
       <main className="operator-menu-main" style={s.main}>
         <header style={s.header}>
           <div>
@@ -125,7 +125,7 @@ const OperatorMenu = () => {
             <p style={s.pageSubtitle}>Update availability and pricing for today's service.</p>
           </div>
           <div style={s.searchBox}>
-            <span style={{ color: '#94a3b8' }}>[SEARCH]</span>
+            <span style={{ color: '#8D7E73' }}>[SEARCH]</span>
             <input 
               style={s.searchInput} 
               placeholder="Search menu items..." 
@@ -137,7 +137,7 @@ const OperatorMenu = () => {
 
         <div style={s.contentScroll}>
           {loading ? (
-            <div style={{ padding: '40px', color: '#64748b' }}>Loading menu...</div>
+            <div style={{ padding: '40px', color: '#6F6259' }}>Loading menu...</div>
           ) : (
             categories.map(cat => {
               const catItems = filteredItems.filter(i => i.category === cat);
@@ -145,7 +145,7 @@ const OperatorMenu = () => {
 
               return (
                 <section key={cat} id={`section-${cat}`} style={s.section}>
-                  <h2 style={s.sectionTitle}>˜• {cat.toUpperCase()}</h2>
+                  <h2 style={s.sectionTitle}>Ëœâ€¢ {cat.toUpperCase()}</h2>
                   
                   <div className="operator-menu-grid" style={s.grid}>
                     {catItems.map(item => (
@@ -154,7 +154,7 @@ const OperatorMenu = () => {
                           {item.image ? (
                             <img src={item.image} alt={item.name} style={s.cardImage} />
                           ) : (
-                            <div style={s.cardImagePlaceholder}>🍽️ No Image</div>
+                            <div style={s.cardImagePlaceholder}>ðŸ½ï¸ No Image</div>
                           )}
                         </div>
                         
@@ -162,7 +162,7 @@ const OperatorMenu = () => {
                           <div style={s.cardRow}>
                             <h3 style={s.itemName}>{item.name}</h3>
                             <div style={s.itemPrice}>
-                              <span style={s.priceSymbol}>₹</span>{item.price}
+                              <span style={s.priceSymbol}>â‚¹</span>{item.price}
                             </div>
                           </div>
                           
@@ -184,7 +184,7 @@ const OperatorMenu = () => {
                             <button 
                               style={{
                                 ...s.toggleBtn,
-                                backgroundColor: item.isAvailable ? '#0f2444' : '#e2e8f0'
+                                backgroundColor: item.isAvailable ? '#7A0008' : '#E8DED1'
                               }}
                               onClick={() => toggleAvailability(item)}
                             >
@@ -210,39 +210,39 @@ const OperatorMenu = () => {
 };
 
 const s = {
-  layout: { display: 'flex', height: '100vh', backgroundColor: '#f8fafc', fontFamily: "'Outfit', sans-serif" },
+  layout: { display: 'flex', height: '100vh', backgroundColor: '#FAF7F2', fontFamily: "'Outfit', sans-serif" },
   
-  sidebar: { width: '260px', backgroundColor: '#f8fafc', borderRight: '1px solid #e2e8f0', display: 'flex', flexDirection: 'column' },
-  sidebarHeader: { padding: '24px 20px', borderBottom: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', gap: '12px', backgroundColor: 'white' },
-  brandTitle: { fontSize: '1.2rem', fontWeight: '800', color: '#0f172a' },
-  brandSubtitle: { fontSize: '0.75rem', color: '#64748b' },
-  newTxnBtn: { margin: '20px', backgroundColor: '#0f2444', color: 'white', border: 'none', borderRadius: '4px', padding: '12px', fontWeight: '700', cursor: 'pointer', fontSize: '0.85rem' },
+  sidebar: { width: '260px', background: 'linear-gradient(180deg, #5A0006 0%, #7A0008 100%)', borderRight: '1px solid rgba(242,195,107,0.28)', display: 'flex', flexDirection: 'column' },
+  sidebarHeader: { padding: '24px 20px', borderBottom: '1px solid rgba(242,195,107,0.22)', display: 'flex', alignItems: 'center', gap: '12px', backgroundColor: 'transparent' },
+  brandTitle: { fontSize: '1.2rem', fontWeight: '800', color: 'white' },
+  brandSubtitle: { fontSize: '0.75rem', color: 'rgba(255,255,255,0.62)' },
+  newTxnBtn: { margin: '20px', background: 'linear-gradient(135deg, #E3A23B, #F2C36B)', color: '#5A0006', border: 'none', borderRadius: '8px', padding: '12px', fontWeight: '800', cursor: 'pointer', fontSize: '0.85rem' },
   nav: { display: 'flex', flexDirection: 'column', padding: '0 20px' },
-  navItem: { padding: '12px 16px', backgroundColor: 'transparent', border: 'none', textAlign: 'left', cursor: 'pointer', fontSize: '0.85rem', fontWeight: '600', color: '#475569', borderRadius: '4px', position: 'relative', transition: '0.2s' },
-  navItemActive: { backgroundColor: '#dbeafe', color: '#0f2444' },
-  navActiveBorder: { position: 'absolute', right: '-20px', top: 0, bottom: 0, width: '3px', backgroundColor: '#0f2444' },
+  navItem: { padding: '12px 16px', backgroundColor: 'transparent', border: 'none', textAlign: 'left', cursor: 'pointer', fontSize: '0.85rem', fontWeight: '600', color: 'rgba(255,255,255,0.68)', borderRadius: '6px', position: 'relative', transition: '0.2s' },
+  navItemActive: { backgroundColor: 'rgba(227,162,59,0.18)', color: '#F2C36B' },
+  navActiveBorder: { position: 'absolute', right: '-20px', top: 0, bottom: 0, width: '3px', backgroundColor: '#E3A23B' },
 
   main: { flex: 1, display: 'flex', flexDirection: 'column', backgroundColor: 'white' },
-  header: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '24px 40px', borderBottom: '1px solid #e2e8f0', backgroundColor: 'white', zIndex: 10 },
-  pageTitle: { fontSize: '1.4rem', fontWeight: '800', color: '#0f2444', marginBottom: '4px' },
-  pageSubtitle: { fontSize: '0.85rem', color: '#64748b' },
-  searchBox: { display: 'flex', alignItems: 'center', gap: '8px', border: '1px solid #e2e8f0', borderRadius: '4px', padding: '8px 12px', width: '260px' },
+  header: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '24px 40px', borderBottom: '1px solid #E8DED1', backgroundColor: 'white', zIndex: 10 },
+  pageTitle: { fontSize: '1.4rem', fontWeight: '800', color: '#7A0008', marginBottom: '4px' },
+  pageSubtitle: { fontSize: '0.85rem', color: '#6F6259' },
+  searchBox: { display: 'flex', alignItems: 'center', gap: '8px', border: '1px solid #E8DED1', borderRadius: '4px', padding: '8px 12px', width: '260px' },
   searchInput: { border: 'none', outline: 'none', fontSize: '0.85rem', width: '100%', fontFamily: "'Outfit', sans-serif" },
   
   contentScroll: { flex: 1, overflowY: 'auto', padding: '0 40px 40px 40px' },
   section: { marginTop: '40px' },
-  sectionTitle: { fontSize: '0.9rem', fontWeight: '800', color: '#475569', letterSpacing: '1px', marginBottom: '20px', borderBottom: '1px solid #e2e8f0', paddingBottom: '8px' },
+  sectionTitle: { fontSize: '0.9rem', fontWeight: '800', color: '#5E514A', letterSpacing: '1px', marginBottom: '20px', borderBottom: '1px solid #E8DED1', paddingBottom: '8px' },
   grid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '20px' },
   
-  card: { backgroundColor: 'white', border: '1px solid #e2e8f0', borderRadius: '8px', overflow: 'hidden', display: 'flex', flexDirection: 'column' },
-  cardImageWrap: { height: '180px', width: '100%', backgroundColor: '#f1f5f9' },
+  card: { backgroundColor: 'white', border: '1px solid #E8DED1', borderRadius: '10px', overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 10px 24px rgba(90,0,6,0.07)' },
+  cardImageWrap: { height: '180px', width: '100%', backgroundColor: '#F4EFE7' },
   cardImage: { width: '100%', height: '100%', objectFit: 'cover' },
-  cardImagePlaceholder: { width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: '0.9rem' },
+  cardImagePlaceholder: { width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#8D7E73', fontSize: '0.9rem' },
   cardBody: { padding: '16px' },
   cardRow: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
-  itemName: { fontSize: '1rem', fontWeight: '700', color: '#0f172a' },
-  itemPrice: { fontSize: '1.1rem', fontWeight: '800', color: '#0f172a', display: 'flex', alignItems: 'flex-start' },
-  priceSymbol: { fontSize: '0.7rem', color: '#94a3b8', marginRight: '2px', marginTop: '2px' },
+  itemName: { fontSize: '1rem', fontWeight: '700', color: '#5A0006' },
+  itemPrice: { fontSize: '1.1rem', fontWeight: '800', color: '#5A0006', display: 'flex', alignItems: 'flex-start' },
+  priceSymbol: { fontSize: '0.7rem', color: '#8D7E73', marginRight: '2px', marginTop: '2px' },
   
   statusWrap: { display: 'flex', alignItems: 'center', gap: '6px' },
   statusDot: { width: '8px', height: '8px', borderRadius: '50%' },

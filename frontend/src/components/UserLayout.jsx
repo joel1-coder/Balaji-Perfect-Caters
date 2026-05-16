@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/userResponsive.css';
 
 const navItems = [
-  { icon: '💼', label: 'Billing',       path: '/user/billing' },
-  { icon: '🍽️', label: 'Menu Items',    path: '/user/menu' },
+  { icon: 'ðŸ’¼', label: 'Billing',       path: '/user/billing' },
+  { icon: 'ðŸ½ï¸', label: 'Menu Items',    path: '/user/menu' },
 ];
 
 const UserLayout = ({ children }) => {
@@ -86,19 +86,19 @@ const UserLayout = ({ children }) => {
             localStorage.setItem('canteen_user', 'admin');
             navigate('/admin/overview');
           }}>
-            ⚡ Switch to Admin
+            âš¡ Switch to Admin
           </button>
           <button style={{ ...styles.navItem, color: 'rgba(255,255,255,0.5)' }}
             onClick={() => navigate('/user/settings')}>
-            <span>⚙️</span> Settings
+            <span>âš™ï¸</span> Settings
           </button>
           <button style={{ ...styles.navItem, color: '#f87171' }} onClick={handleLogout}>
-            <span>🚪</span> Logout
+            <span>ðŸšª</span> Logout
           </button>
         </div>
       </aside>
 
-      {/* ”€”€ Page Content ”€”€ */}
+      {/* â€â‚¬â€â‚¬ Page Content â€â‚¬â€â‚¬ */}
       <div style={styles.content}>{children}</div>
     </div>
   );
@@ -106,21 +106,21 @@ const UserLayout = ({ children }) => {
 
 const styles = {
   page:    { display: 'flex', height: '100vh', fontFamily: "'Outfit', sans-serif", overflow: 'hidden' },
-  sidebar: { width: '240px', flexShrink: 0, backgroundColor: '#0f2444', display: 'flex', flexDirection: 'column' },
-  brand:   { display: 'flex', alignItems: 'center', gap: '12px', padding: '22px 20px', borderBottom: '1px solid rgba(255,255,255,0.08)' },
+  sidebar: { width: '240px', flexShrink: 0, background: 'linear-gradient(180deg, #5A0006 0%, #7A0008 72%, #5A0006 100%)', display: 'flex', flexDirection: 'column' },
+  brand:   { display: 'flex', alignItems: 'center', gap: '12px', padding: '22px 20px', borderBottom: '1px solid rgba(242,195,107,0.22)' },
   brandName: { fontSize: '0.95rem', fontWeight: '800', color: 'white' },
   brandSub:  { fontSize: '0.68rem', color: 'rgba(255,255,255,0.45)', textTransform: 'uppercase', letterSpacing: '0.5px' },
-  userBadge: { display: 'flex', alignItems: 'center', gap: '12px', padding: '16px 20px', margin: '12px', backgroundColor: 'rgba(255,255,255,0.06)', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.08)' },
-  userAvatar: { width: '36px', height: '36px', borderRadius: '8px', backgroundColor: 'rgba(56,189,248,0.2)', color: '#38bdf8', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', fontSize: '1rem', flexShrink: 0 },
+  userBadge: { display: 'flex', alignItems: 'center', gap: '12px', padding: '16px 20px', margin: '12px', backgroundColor: 'rgba(227,162,59,0.12)', borderRadius: '10px', border: '1px solid rgba(242,195,107,0.24)' },
+  userAvatar: { width: '36px', height: '36px', borderRadius: '8px', backgroundColor: 'rgba(227,162,59,0.2)', color: '#F2C36B', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', fontSize: '1rem', flexShrink: 0 },
   userName:   { fontSize: '0.9rem', fontWeight: '700', color: 'white' },
   userRole:   { fontSize: '0.7rem', color: 'rgba(255,255,255,0.45)' },
   nav:     { flex: 1, padding: '8px 12px', display: 'flex', flexDirection: 'column', gap: '2px', overflowY: 'auto' },
   navItem: { display: 'flex', alignItems: 'center', gap: '12px', padding: '11px 12px', borderRadius: '8px', border: 'none', backgroundColor: 'transparent', color: 'rgba(255,255,255,0.55)', cursor: 'pointer', fontSize: '0.9rem', width: '100%', textAlign: 'left', fontFamily: "'Outfit', sans-serif", fontWeight: '500', transition: '0.15s' },
-  navActive: { backgroundColor: 'rgba(255,255,255,0.12)', color: 'white', fontWeight: '700' },
+  navActive: { backgroundColor: 'rgba(227,162,59,0.18)', color: '#F2C36B', fontWeight: '700', borderLeft: '3px solid #E3A23B' },
   navIcon:   { fontSize: '1rem', width: '20px', textAlign: 'center' },
-  sidebarBottom: { padding: '14px 12px', borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', flexDirection: 'column', gap: '2px' },
-  switchBtn: { padding: '10px 16px', backgroundColor: 'rgba(255,255,255,0.1)', color: 'white', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '0.85rem', fontWeight: '700', cursor: 'pointer', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'center', fontFamily: "'Outfit', sans-serif" },
-  content: { flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', backgroundColor: '#f1f5f9' },
+  sidebarBottom: { padding: '14px 12px', borderTop: '1px solid rgba(242,195,107,0.18)', display: 'flex', flexDirection: 'column', gap: '2px' },
+  switchBtn: { padding: '10px 16px', backgroundColor: 'rgba(227,162,59,0.14)', color: '#F2C36B', border: '1px solid rgba(242,195,107,0.36)', borderRadius: '8px', fontSize: '0.85rem', fontWeight: '700', cursor: 'pointer', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'center', fontFamily: "'Outfit', sans-serif" },
+  content: { flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', backgroundColor: '#F4EFE7' },
 };
 
 export default UserLayout;

@@ -98,7 +98,7 @@ const MenuEditor = () => {
           </div>
 
           <div style={styles.infoBox}>
-            <p style={{fontSize: '0.85rem', color: '#94a3b8'}}>This information will be displayed at the top of the digital menu scanned by users.</p>
+            <p style={{fontSize: '0.85rem', color: '#8D7E73'}}>This information will be displayed at the top of the digital menu scanned by users.</p>
           </div>
         </aside>
 
@@ -187,31 +187,31 @@ const MenuEditor = () => {
 };
 
 const styles = {
-  container: { padding: '40px', maxWidth: '1200px', margin: '0 auto', fontFamily: "'Outfit', sans-serif", color: 'white', backgroundColor: '#0f172a', minHeight: '100vh' },
-  loader: { height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#38bdf8', fontSize: '1.2rem' },
-  header: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '40px', paddingBottom: '20px', borderBottom: '1px solid #1e293b' },
-  backBtn: { backgroundColor: 'transparent', border: 'none', color: '#64748b', cursor: 'pointer', marginBottom: '10px', display: 'block', fontWeight: '600' },
+  container: { padding: '40px', maxWidth: '1200px', margin: '0 auto', fontFamily: "'Outfit', sans-serif", color: 'white', backgroundColor: '#5A0006', minHeight: '100vh' },
+  loader: { height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#E3A23B', fontSize: '1.2rem' },
+  header: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '40px', paddingBottom: '20px', borderBottom: '1px solid #7A0008' },
+  backBtn: { backgroundColor: 'transparent', border: 'none', color: '#6F6259', cursor: 'pointer', marginBottom: '10px', display: 'block', fontWeight: '600' },
   title: { fontSize: '2.5rem', fontWeight: '800', letterSpacing: '-1px' },
   headerActions: { display: 'flex', gap: '12px' },
   contentGrid: { display: 'grid', gridTemplateColumns: '350px 1fr', gap: '40px' },
-  sectionCard: { backgroundColor: '#1e293b', padding: '24px', borderRadius: '20px', border: '1px solid #334155' },
-  sectionTitle: { fontSize: '1.1rem', fontWeight: '700', marginBottom: '20px', color: '#38bdf8' },
+  sectionCard: { backgroundColor: '#7A0008', padding: '24px', borderRadius: '20px', border: '1px solid #8F5B5F' },
+  sectionTitle: { fontSize: '1.1rem', fontWeight: '700', marginBottom: '20px', color: '#E3A23B' },
   inputGroup: { marginBottom: '20px' },
-  label: { display: 'block', fontSize: '0.8rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px', fontWeight: '600' },
-  input: { width: '100%', padding: '12px 16px', backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '12px', color: 'white', fontSize: '1rem', transition: '0.2s' },
-  infoBox: { marginTop: '20px', padding: '15px', borderRadius: '12px', backgroundColor: 'rgba(56, 189, 248, 0.05)', border: '1px solid rgba(56, 189, 248, 0.2)' },
+  label: { display: 'block', fontSize: '0.8rem', color: '#8D7E73', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px', fontWeight: '600' },
+  input: { width: '100%', padding: '12px 16px', backgroundColor: '#5A0006', border: '1px solid #8F5B5F', borderRadius: '12px', color: 'white', fontSize: '1rem', transition: '0.2s' },
+  infoBox: { marginTop: '20px', padding: '15px', borderRadius: '12px', backgroundColor: 'rgba(227, 162, 59, 0.08)', border: '1px solid rgba(227, 162, 59, 0.28)' },
   mainContent: { display: 'flex', flexDirection: 'column', gap: '24px' },
   flexBetween: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
   sectionHeader: { fontSize: '1.5rem', fontWeight: '700' },
-  emptyItems: { padding: '60px', textAlign: 'center', backgroundColor: '#1e293b', borderRadius: '20px', border: '2px dashed #334155', color: '#64748b' },
+  emptyItems: { padding: '60px', textAlign: 'center', backgroundColor: '#7A0008', borderRadius: '20px', border: '2px dashed #8F5B5F', color: '#6F6259' },
   itemsList: { display: 'flex', flexDirection: 'column', gap: '20px' },
-  itemCard: { backgroundColor: '#1e293b', padding: '24px', borderRadius: '20px', border: '1px solid #334155', position: 'relative' },
+  itemCard: { backgroundColor: '#7A0008', padding: '24px', borderRadius: '20px', border: '1px solid #8F5B5F', position: 'relative' },
   itemCardHeader: { display: 'flex', justifyContent: 'space-between', marginBottom: '20px' },
-  itemNumber: { backgroundColor: '#0f172a', padding: '4px 12px', borderRadius: '8px', fontSize: '0.8rem', fontWeight: '700', color: '#38bdf8' },
+  itemNumber: { backgroundColor: '#5A0006', padding: '4px 12px', borderRadius: '8px', fontSize: '0.8rem', fontWeight: '700', color: '#E3A23B' },
   deleteBtn: { backgroundColor: 'transparent', border: 'none', color: '#ef4444', fontSize: '1.2rem', cursor: 'pointer' },
   itemGrid: { display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: '15px' },
-  btnBlue: { backgroundColor: '#38bdf8', color: '#0f172a', border: 'none', padding: '14px 28px', borderRadius: '12px', fontWeight: '800', cursor: 'pointer', fontSize: '1rem' },
-  btnOutline: { backgroundColor: 'transparent', color: '#38bdf8', border: '1px solid #38bdf8', padding: '10px 20px', borderRadius: '12px', fontWeight: '600', cursor: 'pointer' }
+  btnBlue: { backgroundColor: '#E3A23B', color: '#5A0006', border: 'none', padding: '14px 28px', borderRadius: '12px', fontWeight: '800', cursor: 'pointer', fontSize: '1rem' },
+  btnOutline: { backgroundColor: 'transparent', color: '#E3A23B', border: '1px solid #E3A23B', padding: '10px 20px', borderRadius: '12px', fontWeight: '600', cursor: 'pointer' }
 };
 
 export default MenuEditor;

@@ -1,14 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
 
 :root {
-  --primary: #38bdf8;
-  --primary-dark: #0ea5e9;
-  --bg-dark: #0f172a;
-  --bg-card: #1e293b;
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --accent: #f59e0b;
-  --glass: rgba(30, 41, 59, 0.7);
+  --primary: #7A0008;
+  --primary-dark: #5A0006;
+  --accent: #E3A23B;
+  --accent-light: #F2C36B;
+  --cream: #FAF7F2;
+  --cream-deep: #F4EFE7;
+  --surface: #ffffff;
+  --soft-grey: #E8DED1;
+  --text-main: #2B1A1C;
+  --text-heading: #5A0006;
+  --text-muted: #8D7E73;
+  --brand-gradient: linear-gradient(135deg, #5A0006 0%, #7A0008 58%, #E3A23B 120%);
+  --gold-gradient: linear-gradient(135deg, #E3A23B 0%, #F2C36B 100%);
+  --shadow-soft: 0 12px 32px rgba(90, 0, 6, 0.09);
+  --shadow-gold: 0 10px 24px rgba(227, 162, 59, 0.22);
+  --glass: rgba(122, 0, 8, 0.74);
 }
 
 * {
@@ -18,11 +26,21 @@
 }
 
 body {
-  background-color: var(--bg-dark);
+  background-color: var(--cream);
   color: var(--text-main);
   font-family: 'Outfit', sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+.page-title,
+.brand-heading {
+  color: var(--text-heading);
+  font-family: 'Playfair Display', Georgia, serif;
+  letter-spacing: 0;
 }
 
 /* Glassmorphism utility */
@@ -30,7 +48,7 @@ body {
   background: var(--glass);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(242, 195, 107, 0.18);
 }
 
 /* Custom Scrollbar */
@@ -39,20 +57,20 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-dark);
+  background: var(--cream);
 }
 ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #D7C7B8;
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
+  background: var(--accent);
 }
 
 /* Button Styles */
 .btn {
   padding: 10px 20px;
-  border-radius: 10px;
+  border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -64,20 +82,44 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: #0f172a;
+  background: var(--brand-gradient);
+  color: #fff;
 }
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.4);
+  box-shadow: var(--shadow-gold);
+  color: var(--accent-light);
 }
 
 .btn-outline {
   background: transparent;
-  border: 1px solid #334155;
+  border: 1px solid var(--accent);
   color: var(--text-main);
 }
 .btn-outline:hover {
-  background: #1e293b;
+  background: #FFF8E8;
   border-color: var(--primary);
+  color: var(--primary);
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: 'Outfit', sans-serif;
+}
+
+button {
+  transition: background-color 0.22s ease, border-color 0.22s ease, color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+button:hover {
+  box-shadow: 0 8px 18px rgba(90, 0, 6, 0.12);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(227, 162, 59, 0.18);
 }

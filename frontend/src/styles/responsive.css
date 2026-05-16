@@ -1,4 +1,4 @@
-/* ====== GLOBAL RESPONSIVE STYLES ====== */
+﻿/* ====== GLOBAL RESPONSIVE STYLES ====== */
 
 /* Responsive Typography */
 html {
@@ -170,7 +170,7 @@ select {
 
   table tr {
     margin-bottom: var(--spacing-lg);
-    border: 1px solid #e2e8f0;
+    border: 1px solid #E8DED1;
     border-radius: 8px;
     overflow: hidden;
   }

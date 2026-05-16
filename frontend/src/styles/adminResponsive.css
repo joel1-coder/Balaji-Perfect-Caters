@@ -1,10 +1,10 @@
-/* AdminLayout Responsive Styles */
+﻿/* AdminLayout Responsive Styles */
 
 .admin-page {
   display: flex;
   height: 100vh;
   font-family: 'Outfit', sans-serif;
-  background-color: #f1f5f9;
+  background-color: #F4EFE7;
   overflow: hidden;
 }
 
@@ -12,7 +12,7 @@
   width: 240px;
   flex-shrink: 0;
   background-color: white;
-  border-right: 1px solid #e2e8f0;
+  border-right: 1px solid #E8DED1;
   display: flex;
   flex-direction: column;
   padding: 0;
@@ -24,7 +24,7 @@
   align-items: center;
   gap: 12px;
   padding: 24px 20px;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid #E8DED1;
   flex-shrink: 0;
 }
 
@@ -35,12 +35,12 @@
 .admin-brand-name {
   font-size: 1rem;
   font-weight: 800;
-  color: #0f172a;
+  color: #5A0006;
 }
 
 .admin-brand-sub {
   font-size: 0.7rem;
-  color: #94a3b8;
+  color: #8D7E73;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -62,7 +62,7 @@
   border-radius: 8px;
   border: none;
   background-color: transparent;
-  color: #475569;
+  color: #5E514A;
   cursor: pointer;
   font-size: 0.9rem;
   width: 100%;
@@ -73,11 +73,11 @@
 }
 
 .admin-nav-item:hover {
-  background-color: #f1f5f9;
+  background-color: #F4EFE7;
 }
 
 .admin-nav-item.active {
-  background-color: #0f2444;
+  background-color: #7A0008;
   color: white;
   font-weight: 700;
 }
@@ -91,7 +91,7 @@
 
 .admin-sidebar-bottom {
   padding: 16px 12px;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid #E8DED1;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -100,7 +100,7 @@
 
 .admin-switch-btn {
   padding: 10px 16px;
-  background-color: #0f2444;
+  background-color: #7A0008;
   color: white;
   border: none;
   border-radius: 8px;
@@ -117,7 +117,7 @@
 }
 
 .admin-switch-btn:hover {
-  background-color: #1e3a5f;
+  background-color: #5A0006;
 }
 
 .admin-content {
@@ -128,10 +128,10 @@
   width: 100%;
 }
 
-/* ── Mobile Responsive — Hamburger Drawer ── */
+/* â”€â”€ Mobile Responsive â€” Hamburger Drawer â”€â”€ */
 @media (max-width: 768px) {
 
-  /* Hide sidebar by default on mobile — slide in from left */
+  /* Hide sidebar by default on mobile â€” slide in from left */
   .admin-sidebar {
     position: fixed !important;
     top: 0;
@@ -141,7 +141,7 @@
     transform: translateX(-100%);
     transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 200;
-    background-color: #0f2444 !important;
+    background-color: #7A0008 !important;
     border-right: none !important;
   }
 
@@ -166,7 +166,7 @@
 .page-banner {
   padding: clamp(16px, 4vw, 32px);
   background-color: white;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid #E8DED1;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -177,7 +177,7 @@
 .page-banner-title {
   font-size: clamp(20px, 5vw, 32px);
   font-weight: 700;
-  color: #0f172a;
+  color: #5A0006;
 }
 
 .page-banner-actions {
@@ -223,7 +223,7 @@
   .responsive-table tbody tr {
     display: block;
     margin-bottom: 16px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #E8DED1;
     border-radius: 8px;
   }
 

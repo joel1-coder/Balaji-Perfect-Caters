@@ -50,7 +50,7 @@ const DigitalMenu = () => {
 
   return (
     <div style={s.layout}>
-      {/* ──── Main Content ──── */}
+      {/* ---- Main Content ---- */}
       <main style={s.main}>
         <header style={s.header}>
           <div>
@@ -58,7 +58,7 @@ const DigitalMenu = () => {
             <p style={s.pageSubtitle}>View our fresh offerings for today's service.</p>
           </div>
           <div style={s.searchBox}>
-            <span style={{ color: '#94a3b8' }}>📈</span>
+            <span style={{ color: '#8D7E73' }}>??</span>
             <input 
               style={s.searchInput} 
               placeholder="Search menu items..." 
@@ -75,7 +75,7 @@ const DigitalMenu = () => {
 
             return (
               <section key={cat} style={s.section}>
-                <h2 style={s.sectionTitle}>🍽️ {cat.toUpperCase()}</h2>
+                <h2 style={s.sectionTitle}>??? {cat.toUpperCase()}</h2>
                 
                 <div style={s.grid}>
                   {catItems.map(item => (
@@ -85,7 +85,7 @@ const DigitalMenu = () => {
                         {item.image ? (
                           <img src={item.image} alt={item.name} style={s.cardImage} />
                         ) : (
-                          <div style={s.cardImagePlaceholder}>🍽️ No Image</div>
+                          <div style={s.cardImagePlaceholder}>??? No Image</div>
                         )}
                       </div>
                       
@@ -94,7 +94,7 @@ const DigitalMenu = () => {
                         <div style={s.cardRow}>
                           <h3 style={s.itemName}>{item.name}</h3>
                           <div style={s.itemPrice}>
-                            <span style={s.priceBox}>₹{item.price}</span>
+                            <span style={s.priceBox}>?{item.price}</span>
                           </div>
                         </div>
                         
@@ -127,34 +127,34 @@ const DigitalMenu = () => {
 };
 
 const s = {
-  layout: { display: 'flex', minHeight: '100vh', backgroundColor: '#f8fafc', fontFamily: "'Outfit', sans-serif" },
-  main: { flex: 1, display: 'flex', flexDirection: 'column', margin: '0 auto', maxWidth: '1200px', width: '100%', backgroundColor: '#f8fafc' },
+  layout: { display: 'flex', minHeight: '100vh', backgroundColor: '#FAF7F2', fontFamily: "'Outfit', sans-serif" },
+  main: { flex: 1, display: 'flex', flexDirection: 'column', margin: '0 auto', maxWidth: '1200px', width: '100%', backgroundColor: '#FAF7F2' },
   
-  header: { display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'space-between', alignItems: 'center', padding: '30px 20px', borderBottom: '1px solid #e2e8f0', backgroundColor: '#ffffff', borderRadius: '0 0 20px 20px', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' },
-  pageTitle: { fontSize: '1.8rem', fontWeight: '800', color: '#0f2444', marginBottom: '4px' },
-  pageSubtitle: { fontSize: '0.9rem', color: '#64748b' },
+  header: { display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'space-between', alignItems: 'center', padding: '30px 20px', borderBottom: '1px solid #E8DED1', background: 'linear-gradient(135deg, #ffffff 0%, #FAF7F2 66%, #FFF3D5 100%)', borderRadius: '0 0 14px 14px', boxShadow: '0 10px 28px rgba(90,0,6,0.08)' },
+  pageTitle: { fontSize: '1.8rem', fontWeight: '800', color: '#7A0008', marginBottom: '4px' },
+  pageSubtitle: { fontSize: '0.9rem', color: '#6F6259' },
   
-  searchBox: { display: 'flex', alignItems: 'center', gap: '8px', border: '1px solid #e2e8f0', borderRadius: '8px', padding: '10px 14px', width: '300px', maxWidth: '100%', backgroundColor: '#f1f5f9' },
+  searchBox: { display: 'flex', alignItems: 'center', gap: '8px', border: '1px solid #E8DED1', borderRadius: '8px', padding: '10px 14px', width: '300px', maxWidth: '100%', backgroundColor: '#F4EFE7' },
   searchInput: { border: 'none', backgroundColor: 'transparent', outline: 'none', fontSize: '0.9rem', width: '100%', fontFamily: "'Outfit', sans-serif" },
   
   contentScroll: { flex: 1, padding: '20px' },
   section: { marginTop: '30px', marginBottom: '40px' },
-  sectionTitle: { fontSize: '1rem', fontWeight: '800', color: '#475569', letterSpacing: '1px', marginBottom: '20px', borderBottom: '2px solid #e2e8f0', paddingBottom: '10px' },
+  sectionTitle: { fontSize: '1rem', fontWeight: '800', color: '#7A0008', letterSpacing: '1px', marginBottom: '20px', borderBottom: '2px solid #E3A23B', paddingBottom: '10px' },
   
   // Grid layout matching the Figma design (responsive)
   grid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '24px' },
   
   // Card
-  card: { backgroundColor: 'white', border: '1px solid #e2e8f0', borderRadius: '12px', overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)', transition: 'transform 0.2s, box-shadow 0.2s', cursor: 'pointer' },
-  cardImageWrap: { height: '200px', width: '100%', backgroundColor: '#f1f5f9' },
+  card: { backgroundColor: 'white', border: '1px solid #E8DED1', borderRadius: '12px', overflow: 'hidden', display: 'flex', flexDirection: 'column', boxShadow: '0 10px 24px rgba(90,0,6,0.07)', transition: 'transform 0.2s, box-shadow 0.2s', cursor: 'pointer' },
+  cardImageWrap: { height: '200px', width: '100%', backgroundColor: '#F4EFE7' },
   cardImage: { width: '100%', height: '100%', objectFit: 'cover' },
-  cardImagePlaceholder: { width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: '1rem' },
+  cardImagePlaceholder: { width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#8D7E73', fontSize: '1rem' },
   
   cardBody: { padding: '20px' },
   cardRow: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
-  itemName: { fontSize: '1.1rem', fontWeight: '700', color: '#0f172a' },
+  itemName: { fontSize: '1.1rem', fontWeight: '700', color: '#5A0006' },
   itemPrice: { display: 'flex', alignItems: 'center' },
-  priceBox: { fontSize: '1.05rem', fontWeight: '800', color: '#0f2444' },
+  priceBox: { fontSize: '1.05rem', fontWeight: '800', color: '#7A0008' },
   
   statusWrap: { display: 'flex', alignItems: 'center', gap: '8px' },
   statusDot: { width: '10px', height: '10px', borderRadius: '50%' },

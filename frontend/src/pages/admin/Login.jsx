@@ -40,11 +40,7 @@ const Login = () => {
       <div style={styles.card}>
         <div style={styles.logoRow}>
           <div style={styles.logoBox}>
-            <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
-              <rect width="32" height="32" rx="8" fill="#0f2444"/>
-              <path d="M8 23L16 9L24 23H8Z" fill="white"/>
-              <circle cx="16" cy="16" r="4" fill="#38bdf8"/>
-            </svg>
+            <img src="/bpc-logo.jpeg" alt="BPC High Class logo" style={styles.logoImg} />
           </div>
           <span style={styles.logoText}>Balaji Perfect Caters</span>
         </div>
@@ -120,17 +116,32 @@ const styles = {
     alignItems: 'center', 
     justifyContent: 'center', 
     minHeight: '100vh', 
-    backgroundColor: '#f1f5f9',
+    backgroundColor: '#F4EFE7',
     fontFamily: "'Outfit', sans-serif",
-    backgroundImage: 'radial-gradient(circle at top right, #e2e8f0 0%, #f1f5f9 100%)'
+    backgroundImage: 'radial-gradient(circle at top right, rgba(242,195,107,0.28) 0%, rgba(250,247,242,0.92) 42%), linear-gradient(135deg, #FAF7F2 0%, #F4EFE7 100%)'
   },
   card: {
     backgroundColor: 'white',
-    borderRadius: '20px',
+    borderRadius: '14px',
     width: '100%',
     maxWidth: '420px',
-    boxShadow: '0 20px 40px rgba(15, 36, 68, 0.08)',
-    overflow: 'hidden'
+    boxShadow: '0 22px 56px rgba(90, 0, 6, 0.14)',
+    overflow: 'hidden',
+    border: '1px solid rgba(227,162,59,0.22)'
+  },
+  logoBox: {
+    width: '54px',
+    height: '54px',
+    borderRadius: '10px',
+    overflow: 'hidden',
+    border: '1px solid #F2C36B',
+    boxShadow: '0 8px 20px rgba(90,0,6,0.12)',
+    flexShrink: 0
+  },
+  logoImg: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover'
   },
   logoRow: { 
     display: 'flex', 
@@ -141,14 +152,15 @@ const styles = {
     backgroundColor: 'white'
   },
   logoText: { 
-    fontSize: '1.25rem', 
+    fontFamily: "'Playfair Display', Georgia, serif",
+    fontSize: '1.3rem', 
     fontWeight: '800', 
-    color: '#0f172a' 
+    color: '#5A0006' 
   },
   tabContainer: {
     display: 'flex',
-    borderBottom: '1px solid #e2e8f0',
-    backgroundColor: '#f8fafc'
+    borderBottom: '1px solid #E8DED1',
+    backgroundColor: '#FAF7F2'
   },
   tab: {
     flex: 1,
@@ -156,14 +168,14 @@ const styles = {
     textAlign: 'center',
     fontSize: '0.95rem',
     fontWeight: '700',
-    color: '#64748b',
+    color: '#6F6259',
     cursor: 'pointer',
     transition: 'all 0.2s',
     borderBottom: '3px solid transparent'
   },
   activeTab: {
-    color: '#0f2444',
-    borderBottomColor: '#0f2444',
+    color: '#7A0008',
+    borderBottomColor: '#E3A23B',
     backgroundColor: 'white'
   },
   formContainer: {
@@ -172,12 +184,12 @@ const styles = {
   formTitle: { 
     fontSize: '1.5rem', 
     fontWeight: '800', 
-    color: '#0f172a', 
+    color: '#5A0006', 
     marginBottom: '8px',
     textAlign: 'center'
   },
   formSub: { 
-    color: '#64748b', 
+    color: '#6F6259', 
     marginBottom: '32px', 
     fontSize: '0.95rem',
     textAlign: 'center'
@@ -195,23 +207,23 @@ const styles = {
   label: { 
     fontSize: '0.8rem', 
     fontWeight: '700', 
-    color: '#374151', 
+    color: '#4A3D38', 
     textTransform: 'uppercase', 
     letterSpacing: '0.5px' 
   },
   input: { 
     padding: '14px 16px', 
-    border: '1.5px solid #e2e8f0', 
+    border: '1.5px solid #E8DED1', 
     borderRadius: '10px', 
     fontSize: '1rem', 
-    color: '#0f172a', 
+    color: '#5A0006', 
     outline: 'none', 
-    backgroundColor: '#f8fafc', 
+    backgroundColor: '#FAF7F2', 
     fontFamily: "'Outfit', sans-serif" 
   },
   loginBtn: { 
     padding: '16px', 
-    backgroundColor: '#0f2444', 
+    background: 'linear-gradient(135deg, #5A0006 0%, #7A0008 70%, #E3A23B 135%)', 
     color: 'white', 
     border: 'none', 
     borderRadius: '10px', 
@@ -220,7 +232,8 @@ const styles = {
     cursor: 'pointer', 
     fontFamily: "'Outfit', sans-serif",
     marginTop: '12px',
-    transition: 'background-color 0.2s'
+    transition: 'all 0.22s ease',
+    boxShadow: '0 10px 24px rgba(90,0,6,0.18)'
   },
   errorBox: { 
     backgroundColor: '#fef2f2', 
@@ -236,24 +249,24 @@ const styles = {
     marginTop: '32px', 
     textAlign: 'center',
     padding: '16px',
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#FAF7F2',
     borderRadius: '12px',
-    border: '1px dashed #cbd5e1'
+    border: '1px dashed #EFE3D3'
   },
   hintTitle: { 
     fontSize: '0.75rem', 
     textTransform: 'uppercase', 
     letterSpacing: '1px', 
-    color: '#94a3b8', 
+    color: '#8D7E73', 
     fontWeight: '700', 
     marginBottom: '8px' 
   },
   hintRow: { 
     fontSize: '0.85rem', 
-    color: '#475569'
+    color: '#5E514A'
   },
   hintLabel: { 
-    backgroundColor: '#0f2444', 
+    backgroundColor: '#7A0008', 
     color: 'white', 
     fontWeight: '700', 
     padding: '2px 6px', 

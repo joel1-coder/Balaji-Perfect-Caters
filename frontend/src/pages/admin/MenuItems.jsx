@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import AdminLayout from '../../components/AdminLayout';
 
@@ -8,13 +8,13 @@ const TABS  = ['All', ...TYPES];
 
 const BLANK_FORM = { name: '', category: 'Snacks', price: '', description: '', image: '' };
 
-// ”€”€ Helpers ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
+// â€â‚¬â€â‚¬ Helpers â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬
 const toast = (msg, type = 'success') => {
   const el = document.createElement('div');
   el.innerText = msg;
   Object.assign(el.style, {
     position: 'fixed', bottom: '24px', right: '24px', zIndex: 9999,
-    background: type === 'success' ? '#0f2444' : '#dc2626',
+    background: type === 'success' ? '#7A0008' : '#dc2626',
     color: 'white', padding: '12px 20px', borderRadius: '10px',
     fontFamily: "'Outfit', sans-serif", fontWeight: '600', fontSize: '0.9rem',
     boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
@@ -23,7 +23,7 @@ const toast = (msg, type = 'success') => {
   setTimeout(() => el.remove(), 2800);
 };
 
-// ”€”€ Component ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
+// â€â‚¬â€â‚¬ Component â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬
 const MenuItems = () => {
   const [menuId,     setMenuId]     = useState(null);
   const [items,      setItems]      = useState([]);
@@ -36,7 +36,7 @@ const MenuItems = () => {
   const [preview,    setPreview]    = useState('');
   const fileRef = useRef();
 
-  // ”€”€ Load menus on mount ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
+  // â€â‚¬â€â‚¬ Load menus on mount â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬
   useEffect(() => { fetchItems(); }, []);
 
   const fetchItems = async () => {
@@ -56,7 +56,7 @@ const MenuItems = () => {
     setLoading(false);
   };
 
-  // ”€”€ Seed data if no menu exists ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
+  // â€â‚¬â€â‚¬ Seed data if no menu exists â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬
   const handleSeed = async () => {
     try {
       await axios.post(`${API}/seed`);
@@ -65,7 +65,7 @@ const MenuItems = () => {
     } catch { toast('Seed failed', 'error'); }
   };
 
-  // ”€”€ Open modal ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
+  // â€â‚¬â€â‚¬ Open modal â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬
   const openAdd = () => {
     setEditItem(null);
     setForm(BLANK_FORM);
@@ -82,7 +82,7 @@ const MenuItems = () => {
 
   const closeModal = () => { setShowModal(false); setEditItem(null); };
 
-  // ”€”€ Image pick (converts to base64 preview, stores URL) ”€”€”€”€”€
+  // â€â‚¬â€â‚¬ Image pick (converts to base64 preview, stores URL) â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬
   const handleImageFile = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -94,7 +94,7 @@ const MenuItems = () => {
     reader.readAsDataURL(file);
   };
 
-  // ”€”€ Save (create or update) ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
+  // â€â‚¬â€â‚¬ Save (create or update) â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬
   const handleSave = async () => {
     if (!form.name.trim())    { toast('Name is required', 'error'); return; }
     if (!form.price || isNaN(form.price) || +form.price <= 0) { toast('Enter a valid price', 'error'); return; }
@@ -121,7 +121,7 @@ const MenuItems = () => {
     setSaving(false);
   };
 
-  // ”€”€ Delete ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
+  // â€â‚¬â€â‚¬ Delete â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬
   const handleDelete = async (item) => {
     if (!window.confirm(`Delete "${item.name}"?`)) return;
     try {
@@ -131,19 +131,19 @@ const MenuItems = () => {
     } catch { toast('Delete failed', 'error'); }
   };
 
-  // ”€”€ Filtered items ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
+  // â€â‚¬â€â‚¬ Filtered items â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬
   const filtered = activeTab === 'All' ? items : items.filter(i => i.category === activeTab);
 
-  // ”€”€ Category badge colours ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
+  // â€â‚¬â€â‚¬ Category badge colours â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬
   const catColor = {
-    Snacks:    { bg: '#fef9c3', color: '#854d0e' },
-    Tea:       { bg: '#ede9fe', color: '#6d28d9' },
+    Snacks:    { bg: '#FFF3D5', color: '#7A0008' },
+    Tea:       { bg: '#FFF3D5', color: '#7A0008' },
     Juice:     { bg: '#dcfce7', color: '#166534' },
-    Breakfast: { bg: '#ffedd5', color: '#9a3412' },
-    Lunch:     { bg: '#dbeafe', color: '#1e40af' },
+    Breakfast: { bg: '#FFF1D0', color: '#7A0008' },
+    Lunch:     { bg: '#FFF3D5', color: '#7A0008' },
   };
 
-  // ”€”€ Render ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
+  // â€â‚¬â€â‚¬ Render â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬
   return (
     <AdminLayout>
       {/* Top Bar */}
@@ -151,10 +151,10 @@ const MenuItems = () => {
         <h1 style={s.pageTitle}>Menu Management</h1>
         <div style={s.topRight}>
           <button style={s.qrBtn} onClick={() => window.open('/public/menu/main', '_blank')}>
-            📱 View Digital Menu
+            ðŸ“± View Digital Menu
           </button>
-          <button style={s.seedBtn} onClick={handleSeed}>⚡ Seed Demo</button>
-          <button style={s.addBtn}  onClick={openAdd}>➕ Add New Item</button>
+          <button style={s.seedBtn} onClick={handleSeed}>âš¡ Seed Demo</button>
+          <button style={s.addBtn}  onClick={openAdd}>âž• Add New Item</button>
         </div>
       </header>
 
@@ -177,8 +177,8 @@ const MenuItems = () => {
           <div style={s.emptyState}>Loading...</div>
         ) : items.length === 0 ? (
           <div style={s.emptyState}>
-            <p style={{ marginBottom: '16px', color: '#64748b' }}>No items yet. Seed demo data or add your first item.</p>
-            <button style={s.addBtn} onClick={handleSeed}>⚡ Seed Demo Data</button>
+            <p style={{ marginBottom: '16px', color: '#6F6259' }}>No items yet. Seed demo data or add your first item.</p>
+            <button style={s.addBtn} onClick={handleSeed}>âš¡ Seed Demo Data</button>
           </div>
         ) : (
           <div style={s.tableCard}>
@@ -194,7 +194,7 @@ const MenuItems = () => {
 
             {/* Table Rows */}
             {filtered.length === 0 ? (
-              <div style={{ padding: '40px', textAlign: 'center', color: '#94a3b8' }}>
+              <div style={{ padding: '40px', textAlign: 'center', color: '#8D7E73' }}>
                 No items in this category.
               </div>
             ) : filtered.map(item => (
@@ -203,20 +203,20 @@ const MenuItems = () => {
                   {item.image ? (
                     <img src={item.image} alt={item.name} style={s.thumb} onError={e => { e.target.style.display = 'none'; }}/>
                   ) : (
-                    <div style={s.thumbPlaceholder}>🍽️</div>
+                    <div style={s.thumbPlaceholder}>ðŸ½ï¸</div>
                   )}
                 </div>
-                <span style={{ flex: 2, fontWeight: '700', color: '#0f172a' }}>{item.name}</span>
+                <span style={{ flex: 2, fontWeight: '700', color: '#5A0006' }}>{item.name}</span>
                 <span style={{ flex: 1 }}>
-                  <span style={{ ...s.catBadge, ...(catColor[item.category] || { bg: '#f1f5f9', color: '#475569' }) }}>
+                  <span style={{ ...s.catBadge, ...(catColor[item.category] || { bg: '#F4EFE7', color: '#5E514A' }) }}>
                     {item.category}
                   </span>
                 </span>
-                <span style={{ flex: 1, fontWeight: '700', color: '#0f2444' }}>₹{parseFloat(item.price).toFixed(2)}</span>
-                <span style={{ flex: 2, color: '#64748b', fontSize: '0.85rem' }}>{item.description || '"”'}</span>
+                <span style={{ flex: 1, fontWeight: '700', color: '#7A0008' }}>â‚¹{parseFloat(item.price).toFixed(2)}</span>
+                <span style={{ flex: 2, color: '#6F6259', fontSize: '0.85rem' }}>{item.description || '"â€'}</span>
                 <div style={{ flex: '0 0 100px', display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
-                  <button style={s.editBtn}   onClick={() => openEdit(item)}>✏️ Edit</button>
-                  <button style={s.deleteBtn} onClick={() => handleDelete(item)}>🗑️</button>
+                  <button style={s.editBtn}   onClick={() => openEdit(item)}>âœï¸ Edit</button>
+                  <button style={s.deleteBtn} onClick={() => handleDelete(item)}>ðŸ—‘ï¸</button>
                 </div>
               </div>
             ))}
@@ -224,19 +224,19 @@ const MenuItems = () => {
             {/* Footer */}
             <div style={s.tableFooter}>
               Showing {filtered.length} of {items.length} items
-              <span style={{ color: '#16a34a', marginLeft: '12px' }}>— Menu Live</span>
+              <span style={{ color: '#16a34a', marginLeft: '12px' }}>â€”Â Menu Live</span>
             </div>
           </div>
         )}
       </div>
 
-      {/* ”€”€ Modal ”€”€ */}
+      {/* â€â‚¬â€â‚¬ Modal â€â‚¬â€â‚¬ */}
       {showModal && (
         <div style={s.overlay} onClick={e => e.target === e.currentTarget && closeModal()}>
           <div style={s.modal}>
             <div style={s.modalHeader}>
               <h2 style={s.modalTitle}>{editItem ? 'Edit Item' : 'Add New Item'}</h2>
-              <button style={s.closeBtn} onClick={closeModal}>×</button>
+              <button style={s.closeBtn} onClick={closeModal}>Ã—</button>
             </div>
 
             {/* Image Upload */}
@@ -246,8 +246,8 @@ const MenuItems = () => {
                   <img src={preview} alt="preview" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '12px' }}/>
                 ) : (
                   <div style={s.imagePlaceholder}>
-                    <span style={{ fontSize: '2rem' }}>📷</span>
-                    <span style={{ fontSize: '0.85rem', color: '#94a3b8', marginTop: '8px' }}>Click to upload image</span>
+                    <span style={{ fontSize: '2rem' }}>ðŸ“·</span>
+                    <span style={{ fontSize: '0.85rem', color: '#8D7E73', marginTop: '8px' }}>Click to upload image</span>
                   </div>
                 )}
               </div>
@@ -280,9 +280,9 @@ const MenuItems = () => {
 
               {/* Price */}
               <div style={s.fieldGroup}>
-                <label style={s.label}>Price (₹) <span style={{ color: '#ef4444' }}>*</span></label>
+                <label style={s.label}>Price (â‚¹) <span style={{ color: '#ef4444' }}>*</span></label>
                 <div style={s.priceWrapper}>
-                  <span style={s.rupeeSign}>₹</span>
+                  <span style={s.rupeeSign}>â‚¹</span>
                   <input style={{ ...s.input, paddingLeft: '32px' }} type="number" min="0" step="any" placeholder="0.00"
                     value={form.price} onChange={e => setForm(f => ({...f, price: e.target.value}))}/>
                 </div>
@@ -290,7 +290,7 @@ const MenuItems = () => {
 
               {/* Description */}
               <div style={{ ...s.fieldGroup, gridColumn: '1 / -1' }}>
-                <label style={s.label}>Description <span style={{ color: '#94a3b8' }}>(Optional)</span></label>
+                <label style={s.label}>Description <span style={{ color: '#8D7E73' }}>(Optional)</span></label>
                 <textarea style={{ ...s.input, height: '80px', resize: 'vertical' }}
                   placeholder="Briefly describe the dish..."
                   value={form.description}
@@ -312,58 +312,58 @@ const MenuItems = () => {
   );
 };
 
-// ”€”€ Styles ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
+// â€â‚¬â€â‚¬ Styles â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬â€â‚¬
 const s = {
-  topBar:    { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 28px', backgroundColor: 'white', borderBottom: '1px solid #e2e8f0' },
-  pageTitle: { fontSize: '1.4rem', fontWeight: '800', color: '#0f172a' },
+  topBar:    { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 28px', backgroundColor: 'white', borderBottom: '1px solid #E8DED1' },
+  pageTitle: { fontSize: '1.4rem', fontWeight: '800', color: '#5A0006' },
   topRight:  { display: 'flex', gap: '12px' },
-  qrBtn:     { padding: '10px 16px', border: '1px solid #38bdf8', borderRadius: '10px', backgroundColor: '#eff6ff', color: '#0369a1', cursor: 'pointer', fontWeight: '700', fontFamily: "'Outfit', sans-serif" },
-  seedBtn:   { padding: '10px 16px', border: '1px solid #e2e8f0', borderRadius: '10px', backgroundColor: 'white', color: '#374151', cursor: 'pointer', fontWeight: '600', fontFamily: "'Outfit', sans-serif" },
-  addBtn:    { padding: '10px 20px', backgroundColor: '#0f2444', color: 'white', border: 'none', borderRadius: '10px', fontWeight: '700', cursor: 'pointer', fontFamily: "'Outfit', sans-serif" },
+  qrBtn:     { padding: '10px 16px', border: '1px solid #E3A23B', borderRadius: '10px', backgroundColor: '#FFF8E8', color: '#7A0008', cursor: 'pointer', fontWeight: '700', fontFamily: "'Outfit', sans-serif" },
+  seedBtn:   { padding: '10px 16px', border: '1px solid #E8DED1', borderRadius: '10px', backgroundColor: 'white', color: '#4A3D38', cursor: 'pointer', fontWeight: '600', fontFamily: "'Outfit', sans-serif" },
+  addBtn:    { padding: '10px 20px', backgroundColor: '#7A0008', color: 'white', border: 'none', borderRadius: '10px', fontWeight: '700', cursor: 'pointer', fontFamily: "'Outfit', sans-serif" },
 
   page:      { flex: 1, padding: '24px', overflow: 'auto', fontFamily: "'Outfit', sans-serif" },
 
-  tabBar:    { display: 'flex', gap: '4px', marginBottom: '20px', borderBottom: '2px solid #e2e8f0' },
-  tab:       { padding: '10px 18px', border: 'none', backgroundColor: 'transparent', color: '#64748b', cursor: 'pointer', fontWeight: '600', fontFamily: "'Outfit', sans-serif", borderBottom: '2px solid transparent', marginBottom: '-2px', display: 'flex', alignItems: 'center', gap: '8px', transition: '0.15s' },
-  tabActive: { color: '#0f2444', borderBottom: '2px solid #0f2444', fontWeight: '800' },
-  tabCount:      { fontSize: '0.72rem', backgroundColor: '#f1f5f9', color: '#64748b', padding: '1px 7px', borderRadius: '20px', fontWeight: '700' },
-  tabCountActive:{ backgroundColor: '#0f2444', color: 'white' },
+  tabBar:    { display: 'flex', gap: '4px', marginBottom: '20px', borderBottom: '2px solid #E8DED1' },
+  tab:       { padding: '10px 18px', border: 'none', backgroundColor: 'transparent', color: '#6F6259', cursor: 'pointer', fontWeight: '600', fontFamily: "'Outfit', sans-serif", borderBottom: '2px solid transparent', marginBottom: '-2px', display: 'flex', alignItems: 'center', gap: '8px', transition: '0.15s' },
+  tabActive: { color: '#7A0008', borderBottom: '2px solid #7A0008', fontWeight: '800' },
+  tabCount:      { fontSize: '0.72rem', backgroundColor: '#F4EFE7', color: '#6F6259', padding: '1px 7px', borderRadius: '20px', fontWeight: '700' },
+  tabCountActive:{ backgroundColor: '#7A0008', color: 'white' },
 
-  tableCard:  { backgroundColor: 'white', borderRadius: '14px', border: '1px solid #e2e8f0', overflow: 'hidden' },
-  tableHead:  { display: 'flex', alignItems: 'center', gap: '16px', padding: '12px 20px', backgroundColor: '#f8fafc', borderBottom: '1px solid #e2e8f0', fontSize: '0.75rem', fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px' },
-  tableRow:   { display: 'flex', alignItems: 'center', gap: '16px', padding: '14px 20px', borderBottom: '1px solid #f8fafc', transition: '0.15s' },
+  tableCard:  { backgroundColor: 'white', borderRadius: '12px', border: '1px solid #E8DED1', overflow: 'hidden', boxShadow: '0 10px 26px rgba(90,0,6,0.07)' },
+  tableHead:  { display: 'flex', alignItems: 'center', gap: '16px', padding: '12px 20px', backgroundColor: '#FFF8E8', borderBottom: '1px solid #E8DED1', fontSize: '0.75rem', fontWeight: '700', color: '#7A0008', textTransform: 'uppercase', letterSpacing: '0.5px' },
+  tableRow:   { display: 'flex', alignItems: 'center', gap: '16px', padding: '14px 20px', borderBottom: '1px solid #FAF7F2', transition: '0.15s' },
   thumb:      { width: '44px', height: '44px', borderRadius: '10px', objectFit: 'cover' },
-  thumbPlaceholder: { width: '44px', height: '44px', borderRadius: '10px', backgroundColor: '#f1f5f9', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem' },
+  thumbPlaceholder: { width: '44px', height: '44px', borderRadius: '10px', backgroundColor: '#F4EFE7', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem' },
   catBadge:   { fontSize: '0.75rem', fontWeight: '700', padding: '3px 10px', borderRadius: '20px' },
-  editBtn:    { padding: '6px 12px', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '8px', color: '#374151', cursor: 'pointer', fontSize: '0.82rem', fontWeight: '600', fontFamily: "'Outfit', sans-serif" },
+  editBtn:    { padding: '6px 12px', backgroundColor: '#FFF8E8', border: '1px solid #F2C36B', borderRadius: '8px', color: '#7A0008', cursor: 'pointer', fontSize: '0.82rem', fontWeight: '700', fontFamily: "'Outfit', sans-serif" },
   deleteBtn:  { padding: '6px 10px', backgroundColor: '#fff1f2', border: 'none', borderRadius: '8px', color: '#ef4444', cursor: 'pointer', fontSize: '0.9rem' },
-  tableFooter:{ padding: '14px 20px', fontSize: '0.85rem', color: '#94a3b8', borderTop: '1px solid #f1f5f9' },
-  emptyState: { display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, minHeight: '300px', color: '#64748b' },
+  tableFooter:{ padding: '14px 20px', fontSize: '0.85rem', color: '#8D7E73', borderTop: '1px solid #F4EFE7' },
+  emptyState: { display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, minHeight: '300px', color: '#6F6259' },
 
   // Modal
   overlay:    { position: 'fixed', inset: 0, backgroundColor: 'rgba(15,23,42,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: '20px' },
-  modal:      { backgroundColor: 'white', borderRadius: '20px', width: '100%', maxWidth: '520px', maxHeight: '90vh', overflowY: 'auto', padding: '28px', boxShadow: '0 20px 60px rgba(0,0,0,0.25)' },
+  modal:      { backgroundColor: 'white', borderRadius: '14px', width: '100%', maxWidth: '520px', maxHeight: '90vh', overflowY: 'auto', padding: '28px', boxShadow: '0 24px 64px rgba(90,0,6,0.24)', border: '1px solid #E8DED1' },
   modalHeader:{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' },
-  modalTitle: { fontSize: '1.3rem', fontWeight: '800', color: '#0f172a' },
-  closeBtn:   { background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: '#94a3b8', lineHeight: 1 },
+  modalTitle: { fontSize: '1.3rem', fontWeight: '800', color: '#5A0006' },
+  closeBtn:   { background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: '#8D7E73', lineHeight: 1 },
 
   imageSection: { marginBottom: '20px' },
-  imagePreview: { width: '100%', height: '160px', border: '2px dashed #e2e8f0', borderRadius: '12px', cursor: 'pointer', overflow: 'hidden', marginBottom: '12px' },
+  imagePreview: { width: '100%', height: '160px', border: '2px dashed #E8DED1', borderRadius: '12px', cursor: 'pointer', overflow: 'hidden', marginBottom: '12px' },
   imagePlaceholder: { width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' },
   imageOr:    { display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' },
-  orLine:     { flex: 1, height: '1px', backgroundColor: '#e2e8f0' },
-  orText:     { fontSize: '0.78rem', color: '#94a3b8', whiteSpace: 'nowrap' },
+  orLine:     { flex: 1, height: '1px', backgroundColor: '#E8DED1' },
+  orText:     { fontSize: '0.78rem', color: '#8D7E73', whiteSpace: 'nowrap' },
 
   formGrid:   { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '24px' },
   fieldGroup: { display: 'flex', flexDirection: 'column', gap: '6px' },
-  label:      { fontSize: '0.8rem', fontWeight: '700', color: '#374151', textTransform: 'uppercase', letterSpacing: '0.5px' },
-  input:      { padding: '11px 14px', border: '1.5px solid #e2e8f0', borderRadius: '10px', fontSize: '0.95rem', color: '#0f172a', outline: 'none', fontFamily: "'Outfit', sans-serif", width: '100%', boxSizing: 'border-box' },
+  label:      { fontSize: '0.8rem', fontWeight: '700', color: '#4A3D38', textTransform: 'uppercase', letterSpacing: '0.5px' },
+  input:      { padding: '11px 14px', border: '1.5px solid #E8DED1', borderRadius: '10px', fontSize: '0.95rem', color: '#5A0006', outline: 'none', fontFamily: "'Outfit', sans-serif", width: '100%', boxSizing: 'border-box' },
   priceWrapper:{ position: 'relative' },
-  rupeeSign:  { position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#64748b', fontWeight: '700', zIndex: 1 },
+  rupeeSign:  { position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#6F6259', fontWeight: '700', zIndex: 1 },
 
   modalFooter: { display: 'flex', gap: '12px', justifyContent: 'flex-end' },
-  cancelBtn:   { padding: '12px 24px', border: '1px solid #e2e8f0', borderRadius: '10px', backgroundColor: 'white', color: '#374151', cursor: 'pointer', fontWeight: '600', fontFamily: "'Outfit', sans-serif" },
-  saveBtn:     { padding: '12px 28px', backgroundColor: '#0f2444', color: 'white', border: 'none', borderRadius: '10px', fontWeight: '700', cursor: 'pointer', fontFamily: "'Outfit', sans-serif" },
+  cancelBtn:   { padding: '12px 24px', border: '1px solid #E8DED1', borderRadius: '10px', backgroundColor: 'white', color: '#4A3D38', cursor: 'pointer', fontWeight: '600', fontFamily: "'Outfit', sans-serif" },
+  saveBtn:     { padding: '12px 28px', backgroundColor: '#7A0008', color: 'white', border: 'none', borderRadius: '10px', fontWeight: '700', cursor: 'pointer', fontFamily: "'Outfit', sans-serif" },
 };
 
 export default MenuItems;

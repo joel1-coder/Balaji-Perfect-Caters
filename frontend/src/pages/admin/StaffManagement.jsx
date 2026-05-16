@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AdminLayout from '../../components/AdminLayout';
 
@@ -14,7 +14,7 @@ const toast = (msg, type = 'success') => {
   el.innerText = msg;
   Object.assign(el.style, {
     position: 'fixed', bottom: '24px', right: '24px', zIndex: 9999,
-    background: type === 'success' ? '#0f2444' : '#dc2626',
+    background: type === 'success' ? '#7A0008' : '#dc2626',
     color: 'white', padding: '12px 20px', borderRadius: '10px',
     fontFamily: "'Outfit', sans-serif", fontWeight: '600', fontSize: '0.9rem',
     boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
@@ -25,15 +25,15 @@ const toast = (msg, type = 'success') => {
 
 const statusStyle = {
   'ON-DUTY': { bg: '#dcfce7', color: '#16a34a', dot: '#16a34a' },
-  'OFF-DUTY': { bg: '#f1f5f9', color: '#64748b', dot: '#94a3b8' },
+  'OFF-DUTY': { bg: '#F4EFE7', color: '#6F6259', dot: '#8D7E73' },
   'ABSENT': { bg: '#fee2e2', color: '#dc2626', dot: '#dc2626' },
 };
 
 const roleColors = {
-  Chef: { bg: '#eff6ff', color: '#2563eb' },
+  Chef: { bg: '#FFF8E8', color: '#A86612' },
   Cashier: { bg: '#f0fdf4', color: '#16a34a' },
-  Server: { bg: '#fdf4ff', color: '#9333ea' },
-  Manager: { bg: '#fef3c7', color: '#d97706' },
+  Server: { bg: '#FFF3D5', color: '#7A0008' },
+  Manager: { bg: '#FFF3D5', color: '#A86612' },
 };
 
 const StaffManagement = () => {
@@ -67,7 +67,7 @@ const StaffManagement = () => {
     } catch { toast('Seed failed', 'error'); }
   };
 
-  // —— Modal Actions ——
+  // â€”â€” Modal Actions â€”â€”
   const openAdd = () => {
     setEditItem(null);
     setForm(BLANK_FORM);
@@ -86,7 +86,7 @@ const StaffManagement = () => {
 
   const closeModal = () => { setShowModal(false); setEditItem(null); };
 
-  // —— Save (Create / Update) ——
+  // â€”â€” Save (Create / Update) â€”â€”
   const handleSave = async () => {
     if (!form.name.trim() || !form.empId.trim()) { toast('Name and Employee ID are required', 'error'); return; }
     
@@ -107,7 +107,7 @@ const StaffManagement = () => {
     setSaving(false);
   };
 
-  // —— Delete ——
+  // â€”â€” Delete â€”â€”
   const handleDelete = async (staff) => {
     if (!window.confirm(`Remove ${staff.name} (${staff.empId}) from the roster?`)) return;
     try {
@@ -128,39 +128,39 @@ const StaffManagement = () => {
       <header style={s.topBar}>
         <h1 style={s.pageTitle}>Staff Roster</h1>
         <div style={s.topRight}>
-          <button style={s.seedBtn} onClick={handleSeed}>⚡ Seed Demo</button>
-          <button style={s.addBtn} onClick={openAdd}>👤+ Add Employee</button>
+          <button style={s.seedBtn} onClick={handleSeed}>âš¡ Seed Demo</button>
+          <button style={s.addBtn} onClick={openAdd}>ðŸ‘¤+ Add Employee</button>
         </div>
       </header>
 
       <div style={s.page}>
-        <p style={{ color: '#64748b', marginBottom: '20px' }}>Manage shifts, roles, and review team performance for the current week.</p>
+        <p style={{ color: '#6F6259', marginBottom: '20px' }}>Manage shifts, roles, and review team performance for the current week.</p>
 
         {/* Stats Row */}
         <div style={s.statsRow}>
           <div style={s.statCard}>
-            <div style={s.statIcon}>👥</div>
+            <div style={s.statIcon}>ðŸ‘¥</div>
             <div style={s.statLabel}>Overall</div>
             <div style={s.statSub}>Total Staff</div>
             <div style={s.statVal}>{totalStaff}</div>
           </div>
-          <div style={{ ...s.statCard, backgroundColor: '#0f2444', color: 'white' }}>
-            <div style={s.statIcon}>⏱️</div>
+          <div style={{ ...s.statCard, backgroundColor: '#7A0008', color: 'white' }}>
+            <div style={s.statIcon}>â±ï¸</div>
             <div style={{ ...s.statLabel, color: 'rgba(255,255,255,0.7)' }}><span style={s.liveDot}></span> Live</div>
             <div style={{ ...s.statSub, color: 'rgba(255,255,255,0.7)' }}>Currently On-Duty</div>
             <div style={{ ...s.statVal, color: 'white' }}>{onDutyCount}</div>
           </div>
           <div style={{ ...s.statCard, flex: 2 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-              <span style={{ fontWeight: '700', color: '#0f172a' }}>Department Distribution</span>
+              <span style={{ fontWeight: '700', color: '#5A0006' }}>Department Distribution</span>
             </div>
             {[{ label: 'Kitchen (Chef)', count: chefsCount }, { label: 'Front Desk (Cashier)', count: cashiersCount }].map(d => {
               const pct = totalStaff ? Math.round((d.count / totalStaff) * 100) : 0;
               return (
                 <div key={d.label} style={{ marginBottom: '14px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-                    <span style={{ fontSize: '0.85rem', color: '#374151' }}>{d.label}</span>
-                    <span style={{ fontSize: '0.85rem', color: '#64748b' }}>{d.count} Staff ({pct}%)</span>
+                    <span style={{ fontSize: '0.85rem', color: '#4A3D38' }}>{d.label}</span>
+                    <span style={{ fontSize: '0.85rem', color: '#6F6259' }}>{d.count} Staff ({pct}%)</span>
                   </div>
                   <div style={s.progressBar}><div style={{ ...s.progressFill, width: `${pct}%` }}></div></div>
                 </div>
@@ -178,7 +178,7 @@ const StaffManagement = () => {
           {loading ? (
             <div style={{ padding: '40px', textAlign: 'center' }}>Loading...</div>
           ) : staffList.length === 0 ? (
-            <div style={{ padding: '40px', textAlign: 'center', color: '#64748b' }}>
+            <div style={{ padding: '40px', textAlign: 'center', color: '#6F6259' }}>
               No staff members found. Click "Seed Demo" or add an employee.
             </div>
           ) : (
@@ -195,7 +195,7 @@ const StaffManagement = () => {
                   <tr key={emp._id} style={s.tr}>
                     <td style={s.td}>
                       <div style={s.empCell}>
-                        <div style={{ ...s.avatar, backgroundColor: emp.color || '#e2e8f0' }}>
+                        <div style={{ ...s.avatar, backgroundColor: emp.color || '#E8DED1' }}>
                           {emp.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase()}
                         </div>
                         <div>
@@ -205,13 +205,13 @@ const StaffManagement = () => {
                       </div>
                     </td>
                     <td style={s.td}>
-                      <span style={{ ...s.roleBadge, backgroundColor: roleColors[emp.role]?.bg || '#f1f5f9', color: roleColors[emp.role]?.color || '#475569' }}>
+                      <span style={{ ...s.roleBadge, backgroundColor: roleColors[emp.role]?.bg || '#F4EFE7', color: roleColors[emp.role]?.color || '#5E514A' }}>
                         {emp.role}
                       </span>
                     </td>
                     <td style={s.td}>
-                      <div style={{ fontWeight: '600', color: '#0f172a', fontSize: '0.9rem' }}>{emp.shiftTiming}</div>
-                      <div style={{ fontSize: '0.78rem', color: '#94a3b8' }}>{emp.shiftLabel}</div>
+                      <div style={{ fontWeight: '600', color: '#5A0006', fontSize: '0.9rem' }}>{emp.shiftTiming}</div>
+                      <div style={{ fontSize: '0.78rem', color: '#8D7E73' }}>{emp.shiftLabel}</div>
                     </td>
                     <td style={s.td}>
                       <span style={{ ...s.statusBadge, backgroundColor: statusStyle[emp.status].bg, color: statusStyle[emp.status].color }}>
@@ -220,12 +220,12 @@ const StaffManagement = () => {
                       </span>
                     </td>
                     <td style={s.td}>
-                      <span style={s.rating}>⭐ {emp.rating}</span>
+                      <span style={s.rating}>â­ {emp.rating}</span>
                     </td>
                     <td style={s.td}>
                       <div style={{ display: 'flex', gap: '8px' }}>
-                        <button style={s.actionBtnEdit} onClick={() => openEdit(emp)}>✏️ Edit</button>
-                        <button style={s.actionBtnDel} onClick={() => handleDelete(emp)}>✕</button>
+                        <button style={s.actionBtnEdit} onClick={() => openEdit(emp)}>âœï¸ Edit</button>
+                        <button style={s.actionBtnDel} onClick={() => handleDelete(emp)}>âœ•</button>
                       </div>
                     </td>
                   </tr>
@@ -236,13 +236,13 @@ const StaffManagement = () => {
         </div>
       </div>
 
-      {/* —— Modal Form —— */}
+      {/* â€”â€” Modal Form â€”â€” */}
       {showModal && (
         <div style={s.overlay} onClick={e => e.target === e.currentTarget && closeModal()}>
           <div style={s.modal}>
             <div style={s.modalHeader}>
               <h2 style={s.modalTitle}>{editItem ? 'Edit Employee' : 'Add New Employee'}</h2>
-              <button style={s.closeBtn} onClick={closeModal}>×</button>
+              <button style={s.closeBtn} onClick={closeModal}>Ã—</button>
             </div>
 
             <div style={s.formGrid}>
@@ -292,53 +292,53 @@ const StaffManagement = () => {
 };
 
 const s = {
-  topBar: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 28px', backgroundColor: 'white', borderBottom: '1px solid #e2e8f0' },
-  pageTitle: { fontSize: '1.4rem', fontWeight: '800', color: '#0f172a' },
+  topBar: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 28px', backgroundColor: 'white', borderBottom: '1px solid #E8DED1' },
+  pageTitle: { fontSize: '1.4rem', fontWeight: '800', color: '#5A0006' },
   topRight: { display: 'flex', alignItems: 'center', gap: '12px' },
-  seedBtn:   { padding: '10px 16px', border: '1px solid #e2e8f0', borderRadius: '10px', backgroundColor: 'white', color: '#374151', cursor: 'pointer', fontWeight: '600', fontFamily: "'Outfit', sans-serif" },
-  addBtn: { backgroundColor: '#0f2444', color: 'white', border: 'none', borderRadius: '10px', padding: '10px 18px', fontWeight: '700', cursor: 'pointer', fontSize: '0.9rem', fontFamily: "'Outfit', sans-serif" },
+  seedBtn:   { padding: '10px 16px', border: '1px solid #E8DED1', borderRadius: '10px', backgroundColor: 'white', color: '#4A3D38', cursor: 'pointer', fontWeight: '600', fontFamily: "'Outfit', sans-serif" },
+  addBtn: { backgroundColor: '#7A0008', color: 'white', border: 'none', borderRadius: '10px', padding: '10px 18px', fontWeight: '700', cursor: 'pointer', fontSize: '0.9rem', fontFamily: "'Outfit', sans-serif" },
   page: { flex: 1, padding: '24px', overflow: 'auto', fontFamily: "'Outfit', sans-serif" },
   
   statsRow: { display: 'grid', gridTemplateColumns: '180px 200px 1fr', gap: '16px', marginBottom: '20px' },
-  statCard: { backgroundColor: 'white', borderRadius: '14px', padding: '20px', border: '1px solid #e2e8f0' },
+  statCard: { backgroundColor: 'white', borderRadius: '12px', padding: '20px', border: '1px solid #E8DED1', boxShadow: '0 10px 24px rgba(90,0,6,0.06)' },
   statIcon: { fontSize: '1.5rem', marginBottom: '12px' },
-  statLabel: { fontSize: '0.75rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'flex', alignItems: 'center', gap: '6px' },
-  statSub: { fontSize: '0.85rem', color: '#64748b', marginBottom: '4px', marginTop: '4px' },
-  statVal: { fontSize: '2rem', fontWeight: '800', color: '#0f172a' },
-  liveDot: { width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10b981', display: 'inline-block' },
-  progressBar: { height: '6px', backgroundColor: '#e2e8f0', borderRadius: '10px' },
-  progressFill: { height: '100%', backgroundColor: '#0f2444', borderRadius: '10px', transition: 'width 0.3s' },
+  statLabel: { fontSize: '0.75rem', color: '#8D7E73', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'flex', alignItems: 'center', gap: '6px' },
+  statSub: { fontSize: '0.85rem', color: '#6F6259', marginBottom: '4px', marginTop: '4px' },
+  statVal: { fontSize: '2rem', fontWeight: '800', color: '#5A0006' },
+  liveDot: { width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#E3A23B', display: 'inline-block' },
+  progressBar: { height: '6px', backgroundColor: '#E8DED1', borderRadius: '10px' },
+  progressFill: { height: '100%', backgroundColor: '#7A0008', borderRadius: '10px', transition: 'width 0.3s' },
   
-  card: { backgroundColor: 'white', borderRadius: '14px', padding: '24px', border: '1px solid #e2e8f0', marginBottom: '20px', boxShadow: '0 1px 4px rgba(0,0,0,0.06)' },
+  card: { backgroundColor: 'white', borderRadius: '12px', padding: '24px', border: '1px solid #E8DED1', marginBottom: '20px', boxShadow: '0 10px 26px rgba(90,0,6,0.07)' },
   cardHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' },
-  cardTitle: { fontSize: '1rem', fontWeight: '700', color: '#0f172a' },
+  cardTitle: { fontSize: '1rem', fontWeight: '700', color: '#5A0006' },
   table: { width: '100%', borderCollapse: 'collapse' },
-  th: { fontSize: '0.75rem', color: '#94a3b8', textTransform: 'uppercase', fontWeight: '700', padding: '10px 14px', textAlign: 'left', borderBottom: '1px solid #f1f5f9', letterSpacing: '0.5px' },
-  tr: { borderBottom: '1px solid #f8fafc' },
+  th: { fontSize: '0.75rem', color: '#8D7E73', textTransform: 'uppercase', fontWeight: '700', padding: '10px 14px', textAlign: 'left', borderBottom: '1px solid #F4EFE7', letterSpacing: '0.5px' },
+  tr: { borderBottom: '1px solid #FAF7F2' },
   td: { padding: '16px 14px', verticalAlign: 'middle' },
   empCell: { display: 'flex', alignItems: 'center', gap: '12px' },
-  avatar: { width: '36px', height: '36px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.78rem', fontWeight: '800', flexShrink: 0, color: '#0f172a' },
-  empName: { fontWeight: '700', fontSize: '0.9rem', color: '#0f172a' },
-  empId: { fontSize: '0.75rem', color: '#94a3b8' },
+  avatar: { width: '36px', height: '36px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.78rem', fontWeight: '800', flexShrink: 0, color: '#5A0006' },
+  empName: { fontWeight: '700', fontSize: '0.9rem', color: '#5A0006' },
+  empId: { fontSize: '0.75rem', color: '#8D7E73' },
   roleBadge: { fontSize: '0.78rem', fontWeight: '700', padding: '4px 12px', borderRadius: '20px' },
   statusBadge: { fontSize: '0.78rem', fontWeight: '700', padding: '4px 10px', borderRadius: '20px', display: 'inline-flex', alignItems: 'center' },
-  rating: { color: '#0f172a', fontWeight: '600', fontSize: '0.9rem' },
-  actionBtnEdit: { padding: '6px 10px', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '6px', color: '#374151', cursor: 'pointer', fontSize: '0.8rem', fontWeight: '600', fontFamily: "'Outfit', sans-serif" },
+  rating: { color: '#5A0006', fontWeight: '600', fontSize: '0.9rem' },
+  actionBtnEdit: { padding: '6px 10px', backgroundColor: '#FFF8E8', border: '1px solid #F2C36B', borderRadius: '6px', color: '#7A0008', cursor: 'pointer', fontSize: '0.8rem', fontWeight: '700', fontFamily: "'Outfit', sans-serif" },
   actionBtnDel: { padding: '6px 10px', backgroundColor: '#fff1f2', border: 'none', borderRadius: '6px', color: '#ef4444', cursor: 'pointer', fontSize: '0.9rem' },
   
   // Modal
   overlay:    { position: 'fixed', inset: 0, backgroundColor: 'rgba(15,23,42,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: '20px' },
-  modal:      { backgroundColor: 'white', borderRadius: '20px', width: '100%', maxWidth: '500px', padding: '28px', boxShadow: '0 20px 60px rgba(0,0,0,0.25)' },
+  modal:      { backgroundColor: 'white', borderRadius: '14px', width: '100%', maxWidth: '500px', padding: '28px', boxShadow: '0 24px 64px rgba(90,0,6,0.24)', border: '1px solid #E8DED1' },
   modalHeader:{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' },
-  modalTitle: { fontSize: '1.3rem', fontWeight: '800', color: '#0f172a' },
-  closeBtn:   { background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: '#94a3b8', lineHeight: 1 },
+  modalTitle: { fontSize: '1.3rem', fontWeight: '800', color: '#5A0006' },
+  closeBtn:   { background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: '#8D7E73', lineHeight: 1 },
   formGrid:   { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '24px' },
   fieldGroup: { display: 'flex', flexDirection: 'column', gap: '6px' },
-  label:      { fontSize: '0.8rem', fontWeight: '700', color: '#374151', textTransform: 'uppercase', letterSpacing: '0.5px' },
-  input:      { padding: '11px 14px', border: '1.5px solid #e2e8f0', borderRadius: '10px', fontSize: '0.95rem', color: '#0f172a', outline: 'none', fontFamily: "'Outfit', sans-serif", width: '100%', boxSizing: 'border-box' },
+  label:      { fontSize: '0.8rem', fontWeight: '700', color: '#4A3D38', textTransform: 'uppercase', letterSpacing: '0.5px' },
+  input:      { padding: '11px 14px', border: '1.5px solid #E8DED1', borderRadius: '10px', fontSize: '0.95rem', color: '#5A0006', outline: 'none', fontFamily: "'Outfit', sans-serif", width: '100%', boxSizing: 'border-box' },
   modalFooter: { display: 'flex', gap: '12px', justifyContent: 'flex-end', marginTop: '10px' },
-  cancelBtn:   { padding: '12px 24px', border: '1px solid #e2e8f0', borderRadius: '10px', backgroundColor: 'white', color: '#374151', cursor: 'pointer', fontWeight: '600', fontFamily: "'Outfit', sans-serif" },
-  saveBtn:     { padding: '12px 28px', backgroundColor: '#0f2444', color: 'white', border: 'none', borderRadius: '10px', fontWeight: '700', cursor: 'pointer', fontFamily: "'Outfit', sans-serif" },
+  cancelBtn:   { padding: '12px 24px', border: '1px solid #E8DED1', borderRadius: '10px', backgroundColor: 'white', color: '#4A3D38', cursor: 'pointer', fontWeight: '600', fontFamily: "'Outfit', sans-serif" },
+  saveBtn:     { padding: '12px 28px', backgroundColor: '#7A0008', color: 'white', border: 'none', borderRadius: '10px', fontWeight: '700', cursor: 'pointer', fontFamily: "'Outfit', sans-serif" },
 };
 
 export default StaffManagement;

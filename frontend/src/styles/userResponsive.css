@@ -1,4 +1,4 @@
-/* UserLayout Responsive Styles */
+﻿/* UserLayout Responsive Styles */
 @media (max-width: 768px) {
   /* Sidebar handling */
   .user-sidebar {
@@ -34,7 +34,7 @@
     width: 100% !important;
     max-width: none !important;
     border-left: none !important;
-    border-top: 1px solid #e2e8f0;
+    border-top: 1px solid #E8DED1;
   }
 
   /* Operator Menu adjustments */
@@ -63,7 +63,7 @@
 .user-hamburger div {
   width: 30px;
   height: 3px;
-  background-color: #0f2444;
+  background-color: #7A0008;
   border-radius: 10px;
   transition: all 0.3s linear;
   position: relative;
