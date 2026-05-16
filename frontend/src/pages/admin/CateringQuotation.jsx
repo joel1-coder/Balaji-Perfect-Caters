@@ -191,7 +191,7 @@ export default function CateringQuotation() {
  Leave discount blank for no discount enter a % only if needed
  </div>
  {orderLines.map((line, i) => {
- const preview = computeLineItem(line.key, line.qty, location, line.manualDiscount);
+ const preview = computeLineItem(line, location);
  return (
  <div key={i} style={{
  display: "grid", gridTemplateColumns: "2fr 1fr 1fr auto auto",
@@ -208,7 +208,16 @@ export default function CateringQuotation() {
  ))}
  </optgroup>
  ))}
- </select>
+  <optgroup label="Custom Options">
+    <option value="custom">Custom Item...</option>
+  </optgroup>
+  </select>
+  {line.key === 'custom' && (
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 8 }}>
+      <input type="text" placeholder="Item Name" value={line.customLabel || ''} onChange={e => updateLine(i, 'customLabel', e.target.value)} style={{...inputStyle, padding: '6px 8px'}} />
+      <input type="number" placeholder="Unit Price" value={line.customPrice || ''} onChange={e => updateLine(i, 'customPrice', e.target.value)} style={{...inputStyle, padding: '6px 8px'}} />
+    </div>
+  )}
  </div>
  <div>
  <input type="number" min={1} value={line.qty}
