@@ -26,7 +26,7 @@ const AdminLayout = ({ children }) => {
    const fetchNotifs = async () => {
      try {
        const res = await axios.get('https://balaji-perfect-caters.onrender.com/api/transactions');
-       if (res.data.success) {
+       if (res.data && res.data.data) {
          const recentTx = res.data.data.slice(0, 5);
          const notifs = recentTx.map(tx => ({
            id: tx._id,

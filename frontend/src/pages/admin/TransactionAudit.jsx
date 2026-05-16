@@ -111,6 +111,12 @@ const TransactionAudit = () => {
  const generateBill = () => {
  if (filteredData.length === 0) return alert('No data to generate bill!');
  
+ const formatDate = (d) => {
+ if (!d) return 'Start';
+ const [y, m, day] = d.split('-');
+ return `${day}/${m}/${y}`;
+ };
+
  let billContent = `
  <html>
  <head>
@@ -127,7 +133,8 @@ const TransactionAudit = () => {
  </style>
  </head>
  <body>
- <div id="content-to-pdf">
+ <div id="content-to-pdf" style="position: relative; z-index: 1;">
+ <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('/bpc-logo.jpeg'); background-size: contain; background-position: center; background-repeat: no-repeat; opacity: 0.08; z-index: -1;"></div>
  <div class="header">
  <h1>Balaji Perfect Caters</h1>
  <p>Department Billing Statement</p>
@@ -135,7 +142,7 @@ const TransactionAudit = () => {
  
  <div class="info">
  <p><strong>Department:</strong> ${departmentFilter === 'All Departments' ? 'All Departments' : departmentFilter}</p>
- <p><strong>Period:</strong> ${startDate || 'Start'} to ${endDate || 'End'}</p>
+ <p><strong>Period:</strong> ${startDate ? formatDate(startDate) : 'Start'} to ${endDate ? formatDate(endDate) : 'End'}</p>
  <p><strong>Generated on:</strong> ${new Date().toLocaleDateString()}</p>
  <p><strong>Total Transactions:</strong> ${filteredData.length}</p>
  </div>

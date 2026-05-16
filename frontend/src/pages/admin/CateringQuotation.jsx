@@ -1,4 +1,4 @@
-﻿import { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import AdminLayout from "../../components/AdminLayout";
 
 // PRICING ENGINE 
@@ -305,16 +305,18 @@ export default function CateringQuotation() {
  </button>
  </div>
 
- {/* Formal Quotation */}
  {showBill && (
  <div style={{
  marginTop: 28, background: "#fff", borderRadius: 16, padding: "36px 40px",
- border: "2px solid #F2C36B", boxShadow: "0 8px 40px rgba(0,0,0,0.08)"
+ border: "2px solid #F2C36B", boxShadow: "0 8px 40px rgba(0,0,0,0.08)",
+ position: "relative", overflow: "hidden"
  }}>
+ <div style={{ position: "absolute", inset: 0, backgroundImage: "url('/bpc-logo.jpeg')", backgroundPosition: "center", backgroundSize: "contain", backgroundRepeat: "no-repeat", opacity: 0.06, zIndex: 0, pointerEvents: "none" }} />
+ <div style={{ position: "relative", zIndex: 1 }}>
  <div style={{ borderBottom: "3px double #7A0008", paddingBottom: 20, marginBottom: 24 }}>
  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
  <div>
- <div style={{ fontSize: 22, fontWeight: "bold", color: "#7A0008" }}>Shree Caterers</div>
+ <div style={{ fontSize: 22, fontWeight: "bold", color: "#7A0008" }}>Balaji Perfect Caters</div>
  <div style={{ fontSize: 12, color: "#5A0006", marginTop: 4 }}>Premium Catering Services</div>
  </div>
  <div style={{ textAlign: "right" }}>
@@ -393,6 +395,7 @@ export default function CateringQuotation() {
 
  <div style={{ marginTop: 28, padding: "16px 20px", background: "#FAF7F2", borderRadius: 10, fontSize: 12, color: "#5A0006", borderLeft: "4px solid #E3A23B" }}>
  <strong>Terms & Conditions:</strong> 50% advance required at booking. Balance due 2 days before event. Prices inclusive of standard serviceware. Additional charges may apply for venue-specific requirements.
+ </div>
  </div>
  </div>
  )}
