@@ -71,6 +71,8 @@ const QuickBill = () => {
   const [menuOptions, setMenuOptions] = useState(FALLBACK_MENU_ITEMS.map(mapMenuItem));
   const [menuLoading, setMenuLoading] = useState(true);
   const [menuSource, setMenuSource] = useState('Live menu');
+  const [customItemName, setCustomItemName] = useState('');
+  const [customItemRate, setCustomItemRate] = useState('');
 
   useEffect(() => {
     fetchBillingMenu();
@@ -126,6 +128,33 @@ const QuickBill = () => {
         },
       ];
     });
+  };
+
+  const addCustomItem = (e) => {
+    e.preventDefault();
+    const name = customItemName.trim();
+    const rate = Number(customItemRate);
+
+    if (!name) {
+      alert('Enter the item name.');
+      return;
+    }
+
+    if (!Number.isFinite(rate) || rate <= 0) {
+      alert('Enter a valid rate.');
+      return;
+    }
+
+    addItemToBill({
+      id: `custom-${name.toLowerCase()}-${rate}`,
+      name,
+      price: rate,
+      group: 'Custom',
+      accent: '#7A0008',
+      tint: '#FFF6EC',
+    });
+    setCustomItemName('');
+    setCustomItemRate('');
   };
 
   const updateQty = (id, change) => {
@@ -246,6 +275,30 @@ const QuickBill = () => {
                 Refresh
               </button>
             </div>
+
+            <form className="quickbill-custom-item-form" style={s.customItemForm} onSubmit={addCustomItem}>
+              <div style={s.customItemTitle}>Quick Add Item</div>
+              <div className="quickbill-custom-item-fields" style={s.customItemFields}>
+                <input
+                  style={s.customInput}
+                  value={customItemName}
+                  onChange={(e) => setCustomItemName(e.target.value)}
+                  placeholder="Item name, e.g. Biscuits"
+                />
+                <input
+                  style={s.customInput}
+                  type="number"
+                  min="0"
+                  step="any"
+                  value={customItemRate}
+                  onChange={(e) => setCustomItemRate(e.target.value)}
+                  placeholder="Rate"
+                />
+                <button style={s.customAddButton} type="submit">
+                  Add
+                </button>
+              </div>
+            </form>
 
             <div className="quickbill-grid-container" style={s.gridContainer}>
               {menuOptions.map((item) => (
@@ -544,6 +597,47 @@ const s = {
     fontWeight: '800',
     cursor: 'pointer',
     flexShrink: 0,
+  },
+  customItemForm: {
+    backgroundColor: '#FFFDF8',
+    border: '1px solid #E8DED1',
+    borderRadius: '16px',
+    padding: '14px',
+    marginBottom: '18px',
+    boxShadow: '0 10px 22px rgba(90, 0, 6, 0.04)',
+  },
+  customItemTitle: {
+    color: '#5A0006',
+    fontWeight: '900',
+    marginBottom: '10px',
+    fontSize: '0.96rem',
+  },
+  customItemFields: {
+    display: 'grid',
+    gridTemplateColumns: 'minmax(0, 1.5fr) minmax(110px, 0.7fr) auto',
+    gap: '10px',
+    alignItems: 'center',
+  },
+  customInput: {
+    width: '100%',
+    border: '1px solid #E3D6C7',
+    borderRadius: '12px',
+    backgroundColor: '#FFFFFF',
+    color: '#5A0006',
+    padding: '12px 13px',
+    fontFamily: "'Outfit', sans-serif",
+    fontWeight: '700',
+    outline: 'none',
+  },
+  customAddButton: {
+    border: 'none',
+    borderRadius: '12px',
+    backgroundColor: '#7A0008',
+    color: '#FAF7F2',
+    padding: '12px 18px',
+    fontWeight: '900',
+    cursor: 'pointer',
+    fontFamily: "'Outfit', sans-serif",
   },
   gridContainer: {
     display: 'grid',
