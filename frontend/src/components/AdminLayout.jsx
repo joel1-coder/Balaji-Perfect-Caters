@@ -7,7 +7,6 @@ const navItems = [
  { label: 'Executive Overview', path: '/admin/overview' },
  { label: 'Menu Management', path: '/admin/menu-items' },
  { label: 'Transaction Audit', path: '/admin/audit' },
- { label: 'Staff Management', path: '/admin/staff' },
  { label: 'Catering Quotation', path: '/admin/quotation' },
  { label: 'Discount Offers', path: '/admin/discounts' },
 ];

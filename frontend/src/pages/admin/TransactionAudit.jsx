@@ -89,18 +89,109 @@ const TransactionAudit = () => {
  const toggleAll = () => {
  if (selected.length === filteredData.length) setSelected([]);
  else setSelected(filteredData.map(t => t._id));
+import React, { useState, useMemo, useEffect } from 'react';
+import axios from 'axios';
+import AdminLayout from '../../components/AdminLayout';
+
+const TRANSACTIONS = [
+ { id: '#TXN-98421', date: '2024-10-27', time: '10:42 AM', customer: 'David Chen', account: 'Emp ID: 450912', items: 'Continental Breakfast, Cappuccino', total: 18.50, status: 'Pending', station: 'Station 1' },
+ { id: '#TXN-98420', date: '2024-10-27', time: '10:38 AM', customer: 'Sarah Miller', account: 'Guest Visit', items: 'Gourmet Salad, Mineral Water', total: 14.20, status: 'Paid', station: 'Station 2' },
+ { id: '#TXN-98419', date: '2024-10-27', time: '10:35 AM', customer: 'Marcus Thorne', account: 'Emp ID: 450332', items: 'Daily Special Thali', total: 12.00, status: 'Paid', station: 'Station 1' },
+ { id: '#TXN-98418', date: '2024-10-26', time: '10:30 AM', customer: 'Elena Rodriguez', account: 'Staff Subsidized', items: 'Espresso, Croissant (x2)', total: 8.75, status: 'Pending', station: 'Station 1' },
+ { id: '#TXN-98417', date: '2024-10-26', time: '10:22 AM', customer: 'Logistics Team', account: 'Corporate Account', items: 'Bulk Lunch Pack (x12)', total: 144.00, status: 'Disputed', station: 'Station 2' },
+ { id: '#TXN-98416', date: '2024-10-26', time: '09:45 AM', customer: 'HR Department', account: 'Corporate Account', items: 'Meeting Snacks', total: 45.00, status: 'Paid', station: 'Station 1' },
+ { id: '#TXN-98415', date: '2024-10-25', time: '09:10 AM', customer: 'John Smith', account: 'Emp ID: 450111', items: 'Americano', total: 3.50, status: 'Paid', station: 'Station 2' },
+];
+
+const statusStyle = {
+ pending: { bg: '#FFF3D5', color: '#A86612' },
+ paid: { bg: '#dcfce7', color: '#16a34a' },
+ unpaid: { bg: '#fee2e2', color: '#dc2626' },
+};
+
+const TransactionAudit = () => {
+ const [selected, setSelected] = useState([]);
+ const [transactions, setTransactions] = useState([]);
+ const [loading, setLoading] = useState(true);
+ 
+ // Filters
+ const [searchQuery, setSearchQuery] = useState('');
+ const [statusFilter, setStatusFilter] = useState('All Transactions');
+ const [departmentFilter, setDepartmentFilter] = useState('All Departments');
+ const [startDate, setStartDate] = useState('');
+ const [endDate, setEndDate] = useState('');
+
+ const uniqueDepartments = useMemo(() => {
+ return [...new Set(transactions.map(t => t.department).filter(d => d && d.trim()!== ''))];
+ }, [transactions]);
+
+ useEffect(() => {
+ fetchTransactions();
+ }, []);
+
+ const fetchTransactions = async () => {
+ try {
+ const res = await axios.get('https://balaji-perfect-caters.onrender.com/api/transactions');
+ setTransactions(res.data.data);
+ } catch (err) {
+ console.error('Failed to fetch transactions');
+ }
+ setLoading(false);
+ };
+
+ const updateStatus = async (id, newStatus) => {
+ try {
+ await axios.patch(`https://balaji-perfect-caters.onrender.com/api/transactions/${id}/status`, { paymentStatus: newStatus });
+ setTransactions(prev => prev.map(t => t._id === id? {...t, paymentStatus: newStatus }: t));
+ } catch (err) {
+ alert('Failed to update status: ' + (err.response?.data?.error || err.message));
+ }
+ };
+ 
+ // Memoized Filtered List
+ const filteredData = useMemo(() => {
+ return transactions.filter(t => {
+ const itemNames = (t.items || []).map(i => i.name).join(', ');
+ const searchStr = ((t.orderId || '') + (t.customerName || '') + itemNames).toLowerCase();
+ const matchSearch = searchStr.includes(searchQuery.toLowerCase());
+ 
+ const tStatus = (t.paymentStatus || 'pending').toLowerCase();
+ const matchStatus = statusFilter === 'All Transactions' || tStatus === statusFilter.toLowerCase();
+ 
+ let matchDate = true;
+ if (t.createdAt) {
+ try {
+ const tDate = new Date(t.createdAt).toISOString().split('T')[0];
+ if (startDate) matchDate = matchDate && tDate >= startDate;
+ if (endDate) matchDate = matchDate && tDate <= endDate;
+ } catch (e) {
+ // ignore invalid dates
+ }
+ }
+
+ const matchDept = departmentFilter === 'All Departments' || (t.department || 'N/A') === departmentFilter;
+
+ return matchSearch && matchStatus && matchDate && matchDept;
+ });
+ }, [transactions, searchQuery, statusFilter, startDate, endDate, departmentFilter]);
+
+ const toggle = (id) => setSelected(prev => prev.includes(id)? prev.filter(x => x!== id): [...prev, id]);
+
+ const toggleAll = () => {
+ if (selected.length === filteredData.length) setSelected([]);
+ else setSelected(filteredData.map(t => t._id));
  };
 
  // CSV Export for Excel
  const exportToExcel = () => {
  if (filteredData.length === 0) return alert('No data to export!');
  
- let csvContent = 'Order ID,Date,Customer,Department,Items,Total Amount,Status\n';
+ let csvContent = 'Order ID,Date,Customer,Department,Items,Total Amount\n';
  
  filteredData.forEach(t => {
  const date = new Date(t.createdAt).toLocaleDateString();
  const itemStr = t.items.map(i => `${i.name} (x${i.qty})`).join('; ');
- csvContent += `${t.orderId},${date},"${t.customerName}","${t.department || 'N/A'}","${itemStr}",${t.totalAmount},${t.paymentStatus}\n`;
+ csvContent += `${t.orderId},${date},"${t.customerName}","${t.department || 'N/A'}","${itemStr}",${t.totalAmount}\n`;
  });
  
  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -122,7 +213,6 @@ const TransactionAudit = () => {
  <p><strong>Order ID:</strong> ${t.orderId}</p>
  <p><strong>Customer:</strong> ${t.customerName} (${t.department || 'N/A'})</p>
  <p><strong>Total:</strong> Rs. ${t.totalAmount.toFixed(2)}</p>
- <p><strong>Status:</strong> ${t.paymentStatus.toUpperCase()}</p>
  <p><strong>Date:</strong> ${new Date(t.createdAt).toLocaleString()}</p>
  </div>`;
  });
@@ -338,29 +428,6 @@ const TransactionAudit = () => {
  </td>
  <td data-label="Items" style={{...s.td, color: '#5E514A' }}>{(t.items || []).map(i => i.name).join(', ')}</td>
  <td data-label="Total Amount" style={{...s.td, fontWeight: '700' }}>Rs. {(t.totalAmount || 0).toFixed(2)}</td>
- <td data-label="Status" style={s.td}>
- <select
- value={t.paymentStatus || 'pending'}
- onChange={e => updateStatus(t._id, e.target.value)}
- style={{
- padding: '5px 10px',
- borderRadius: '20px',
- border: '1.5px solid',
- fontSize: '0.78rem',
- fontWeight: '700',
- cursor: 'pointer',
- outline: 'none',
- fontFamily: "'Outfit', sans-serif",
- backgroundColor: (statusStyle[t.paymentStatus] || statusStyle.pending).bg,
- color: (statusStyle[t.paymentStatus] || statusStyle.pending).color,
- borderColor: (statusStyle[t.paymentStatus] || statusStyle.pending).color,
- }}
- >
- <option value="paid">paid</option>
- <option value="unpaid">unpaid</option>
- <option value="pending">pending</option>
- </select>
- </td>
  </tr>
  ))}
  </tbody>
