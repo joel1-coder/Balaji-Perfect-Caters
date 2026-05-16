@@ -31,37 +31,42 @@ const SERVICES = {
 const CGST_RATE = 0.025;
 const SGST_RATE = 0.025;
 
-function computeLineItem(key, qty, locationKey, manualDiscountPct) {
- const item = MENU[key];
- if (!item || qty <= 0) return null;
+function computeLineItem(line, locationKey) {
+  const item = line.key === 'custom' 
+    ? { label: line.customLabel || 'Custom Item', basePrice: Number(line.customPrice) || 0, unit: line.customUnit || 'unit', category: 'Custom' }
+    : MENU[line.key];
+  if (!item || line.qty <= 0) return null;
 
- const loc = LOCATION_MULTIPLIERS[locationKey];
- const adjustedBase = +(item.basePrice * loc.multiplier).toFixed(2);
+  const qty = line.qty;
+  const manualDiscountPct = line.manualDiscount;
 
- const discountVal = (manualDiscountPct!== "" && manualDiscountPct!== null && manualDiscountPct!== undefined)? Math.min(100, Math.max(0, parseFloat(manualDiscountPct) || 0)): 0;
+  const loc = LOCATION_MULTIPLIERS[locationKey];
+  const adjustedBase = +(item.basePrice * loc.multiplier).toFixed(2);
 
- const discountedPrice = +(adjustedBase * (1 - discountVal / 100)).toFixed(2);
- const subtotal = +(discountedPrice * qty).toFixed(2);
+  const discountVal = (manualDiscountPct !== "" && manualDiscountPct !== null && manualDiscountPct !== undefined) ? Math.min(100, Math.max(0, parseFloat(manualDiscountPct) || 0)) : 0;
 
- return {
- key,
- label: item.label,
- category: item.category,
- unit: item.unit,
- qty,
- basePrice: item.basePrice,
- adjustedBase,
- discountPct: discountVal,
- pricePerUnit: discountedPrice,
- subtotal,
- };
+  const discountedPrice = +(adjustedBase * (1 - discountVal / 100)).toFixed(2);
+  const subtotal = +(discountedPrice * qty).toFixed(2);
+
+  return {
+    key: line.key,
+    label: item.label,
+    category: item.category,
+    unit: item.unit,
+    qty,
+    basePrice: item.basePrice,
+    adjustedBase,
+    discountPct: discountVal,
+    pricePerUnit: discountedPrice,
+    subtotal,
+  };
 }
 
 function computeBill(orderLines, locationKey, serviceKey, eventPax) {
- const loc = LOCATION_MULTIPLIERS[locationKey];
- const items = orderLines.map(({ key, qty, manualDiscount }) => computeLineItem(key, qty, locationKey, manualDiscount)).filter(Boolean);
+  const loc = LOCATION_MULTIPLIERS[locationKey];
+  const items = orderLines.map((line) => computeLineItem(line, locationKey)).filter(Boolean);
 
- const itemsTotal = items.reduce((s, i) => s + i.subtotal, 0);
+  const itemsTotal = items.reduce((s, i) => s + i.subtotal, 0);
 
  // Delivery charge
  let deliveryCharge = 0;
@@ -295,18 +300,49 @@ export default function CateringQuotation() {
 
  {/* Generate Formal Quote */}
  <div style={{ textAlign: "center", marginTop: 8 }}>
- <button onClick={() => setShowBill(b =>!b)} style={{
+ <button onClick={() => setShowBill(b => !b)} style={{
  background: "linear-gradient(135deg, #7A0008, #F2C36B)",
  color: "#fff", border: "none", padding: "14px 40px",
  borderRadius: 50, fontSize: 15, cursor: "pointer", letterSpacing: 1,
  boxShadow: "0 4px 20px rgba(194,65,12,0.4)"
  }}>
- {showBill? "Hide Formal Quotation": "Generate Formal Quotation"}
+ {showBill ? "Hide Formal Quotation" : "Generate Formal Quotation"}
  </button>
+
+ {showBill && (
+   <button onClick={() => {
+     const printContent = document.getElementById('quotation-bill').innerHTML;
+     const printWindow = window.open('', '', 'width=800,height=900');
+     printWindow.document.write(`
+       <html>
+         <head>
+           <title>Quotation - Balaji Perfect Caters</title>
+           <style>
+             body { font-family: 'Outfit', sans-serif; padding: 20px; color: #5A0006; }
+             * { box-sizing: border-box; }
+             @media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+           </style>
+         </head>
+         <body>
+           ${printContent}
+           <script>
+             window.onload = function() { window.print(); window.close(); }
+           </script>
+         </body>
+       </html>
+     `);
+     printWindow.document.close();
+   }} style={{
+     background: "#5A0006", color: "#fff", border: "none", padding: "14px 24px",
+     borderRadius: 50, fontSize: 15, cursor: "pointer", marginLeft: 16
+   }}>
+     Download as PDF
+   </button>
+ )}
  </div>
 
  {showBill && (
- <div style={{
+ <div id="quotation-bill" style={{
  marginTop: 28, background: "#fff", borderRadius: 16, padding: "36px 40px",
  border: "2px solid #F2C36B", boxShadow: "0 8px 40px rgba(0,0,0,0.08)",
  position: "relative", overflow: "hidden"
@@ -380,7 +416,7 @@ export default function CateringQuotation() {
  {bill.staffingCharge > 0 && <FRow label="Staffing Surcharge" value={fmt(bill.staffingCharge)} />}
  <FRow label="Pre-Tax Amount" value={fmt(bill.preTax)} divider />
  <FRow label={`CGST (${(CGST_RATE*100).toFixed(1)}%)`} value={fmt(bill.cgst)} />
- <FRow label={`SGST (${(SGST_RATE*100).toFixed(1)}%)`} value={fmt(bill.sgst)} />
+ <FRow label={`SGST (${(CGST_RATE*100).toFixed(1)}%)`} value={fmt(bill.sgst)} />
  <div style={{
  display: "flex", justifyContent: "space-between", padding: "12px 0",
  borderTop: "3px double #7A0008", marginTop: 6, fontWeight: "bold", fontSize: 16, color: "#7A0008"
@@ -391,10 +427,6 @@ export default function CateringQuotation() {
  Amount in words: {toWords(bill.grandTotal)} rupees only
  </div>
  </div>
- </div>
-
- <div style={{ marginTop: 28, padding: "16px 20px", background: "#FAF7F2", borderRadius: 10, fontSize: 12, color: "#5A0006", borderLeft: "4px solid #E3A23B" }}>
- <strong>Terms & Conditions:</strong> 50% advance required at booking. Balance due 2 days before event. Prices inclusive of standard serviceware. Additional charges may apply for venue-specific requirements.
  </div>
  </div>
  </div>

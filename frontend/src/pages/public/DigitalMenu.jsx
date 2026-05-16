@@ -63,7 +63,10 @@ const DigitalMenu = () => {
  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '20px' }}>
  <img src="/bpc-logo.jpeg" alt="Logo" style={{ width: '80px', height: '80px', borderRadius: '12px', objectFit: 'cover', marginBottom: '12px', boxShadow: '0 4px 12px rgba(90,0,6,0.1)' }} />
  <h1 style={{ fontSize: '2.2rem', fontWeight: '800', color: '#7A0008', margin: '0 0 6px 0' }}>St Joseph's College Canteen</h1>
- <h2 style={{ fontSize: '1.1rem', fontWeight: '700', color: '#E3A23B', margin: '0 0 12px 0', textTransform: 'uppercase', letterSpacing: '1px' }}>catered by Balaji Perfect Caters</h2>
+ <div style={{ textAlign: 'center', marginBottom: '12px' }}>
+   <div style={{ fontSize: '0.9rem', color: '#E3A23B', fontStyle: 'italic', fontWeight: '600', marginBottom: '2px' }}>catered by</div>
+   <h2 style={{ fontSize: '1.1rem', fontWeight: '700', color: '#E3A23B', margin: '0', textTransform: 'uppercase', letterSpacing: '1px' }}>Balaji Perfect Caters</h2>
+ </div>
  <p style={s.pageSubtitle}>View our fresh offerings for today's service.</p>
  </div>
  <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
