@@ -3,18 +3,6 @@ import AdminLayout from "../../components/AdminLayout";
 
 // PRICING ENGINE 
 
-const MENU = {
- idli: { label: "Idli", basePrice: 5, unit: "pc", category: "South Indian" },
- dosa: { label: "Plain Dosa", basePrice: 40, unit: "pc", category: "South Indian" },
- uttapam: { label: "Uttapam", basePrice: 55, unit: "pc", category: "South Indian" },
- vada: { label: "Medu Vada", basePrice: 15, unit: "pc", category: "South Indian" },
- biryani: { label: "Veg Biryani", basePrice: 120, unit: "plate", category: "Rice" },
- pulao: { label: "Jeera Pulao", basePrice: 80, unit: "plate", category: "Rice" },
- paneer: { label: "Paneer Butter Masala", basePrice: 180, unit: "plate", category: "Curry" },
- dal: { label: "Dal Tadka", basePrice: 90, unit: "plate", category: "Curry" },
- gulab: { label: "Gulab Jamun", basePrice: 20, unit: "pc", category: "Dessert" },
- halwa: { label: "Sooji Halwa", basePrice: 35, unit: "plate", category: "Dessert" },
-};
 
 const LOCATION_MULTIPLIERS = {
  local: { label: "Within City", multiplier: 1.00, deliveryBase: 0 },
@@ -32,10 +20,8 @@ const CGST_RATE = 0.025;
 const SGST_RATE = 0.025;
 
 function computeLineItem(line, locationKey) {
-  const item = line.key === 'custom' 
-    ? { label: line.customLabel || 'Custom Item', basePrice: Number(line.customPrice) || 0, unit: line.customUnit || 'unit', category: 'Custom' }
-    : MENU[line.key];
-  if (!item || line.qty <= 0) return null;
+  const item = { label: line.customLabel || 'Custom Item', basePrice: Number(line.customPrice) || 0, unit: line.customUnit || 'unit', category: 'Custom' };
+  if (line.qty <= 0) return null;
 
   const qty = line.qty;
   const manualDiscountPct = line.manualDiscount;
@@ -94,10 +80,9 @@ function computeBill(orderLines, locationKey, serviceKey, eventPax) {
 
 const fmt = (n) => "Rs. " + Number(n).toLocaleString("en-IN", { minimumFractionDigits: 2 });
 
-const categories = [...new Set(Object.values(MENU).map(m => m.category))];
 
 export default function CateringQuotation() {
- const [orderLines, setOrderLines] = useState([{ key: "idli", qty: 100, manualDiscount: "" }]);
+ const [orderLines, setOrderLines] = useState([{ key: "custom", customLabel: "", customPrice: "", customUnit: "unit", qty: 50, manualDiscount: "" }]);
  const [location, setLocation] = useState("local");
  const [service, setService] = useState("delivery");
  const [pax, setPax] = useState(100);
@@ -105,7 +90,7 @@ export default function CateringQuotation() {
  const [eventDate, setEventDate] = useState("");
  const [showBill, setShowBill] = useState(false);
 
- const addLine = () => setOrderLines(prev => [...prev, { key: "idli", qty: 50, manualDiscount: "" }]);
+ const addLine = () => setOrderLines(prev => [...prev, { key: "custom", customLabel: "", customPrice: "", customUnit: "unit", qty: 50, manualDiscount: "" }]);
  const removeLine = (i) => setOrderLines(prev => prev.filter((_, idx) => idx!== i));
  const updateLine = (i, field, val) =>
  setOrderLines(prev => prev.map((l, idx) => idx === i? {...l,
@@ -200,24 +185,10 @@ export default function CateringQuotation() {
  border: "1px solid #F2C36B"
  }}>
  <div>
- <select value={line.key} onChange={e => updateLine(i, "key", e.target.value)} style={{...inputStyle, marginBottom: 0 }}>
- {categories.map(cat => (
- <optgroup key={cat} label={cat}>
- {Object.entries(MENU).filter(([,v]) => v.category === cat).map(([k,v]) => (
- <option key={k} value={k}>{v.label} - {fmt(v.basePrice)}/{v.unit}</option>
- ))}
- </optgroup>
- ))}
-  <optgroup label="Custom Options">
-    <option value="custom">Custom Item...</option>
-  </optgroup>
-  </select>
-  {line.key === 'custom' && (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 8 }}>
+ <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
       <input type="text" placeholder="Item Name" value={line.customLabel || ''} onChange={e => updateLine(i, 'customLabel', e.target.value)} style={{...inputStyle, padding: '6px 8px'}} />
       <input type="number" placeholder="Unit Price" value={line.customPrice || ''} onChange={e => updateLine(i, 'customPrice', e.target.value)} style={{...inputStyle, padding: '6px 8px'}} />
     </div>
-  )}
  </div>
  <div>
  <input type="number" min={1} value={line.qty}
