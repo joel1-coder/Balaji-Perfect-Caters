@@ -23,16 +23,16 @@ const connectDB = async () => {
   try {
     // Try to connect to Atlas with a 10-second timeout
     await mongoose.connect(process.env.MONGO_URI, { serverSelectionTimeoutMS: 10000 });
-    console.log('✅ MongoDB Connected (Atlas)');
+    console.log('MongoDB Connected (Atlas)');
   } catch (err) {
-    console.log('⚠️ Atlas Connection Failed. Starting local temporary memory database...');
+    console.log('Atlas connection failed. Starting local temporary memory database...');
     try {
       const mongoServer = await MongoMemoryServer.create();
       const memUri = mongoServer.getUri();
       await mongoose.connect(memUri);
-      console.log('✅ Local Memory DB Connected! (Data will reset on restart)');
+      console.log('Local memory DB connected. Data will reset on restart.');
     } catch (memErr) {
-      console.error('❌ Memory DB Error:', memErr);
+      console.error('Memory DB Error:', memErr);
     }
   }
 };
@@ -46,4 +46,4 @@ app.use('/api/discounts', discountRoutes);
 
 app.get('/', (req, res) => res.send('Canteen API is running...'));
 
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

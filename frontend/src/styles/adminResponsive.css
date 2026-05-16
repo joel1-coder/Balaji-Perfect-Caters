@@ -246,3 +246,309 @@
     text-align: left;
   }
 }
+
+/* App-wide mobile structure fixes for admin screens with inline styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.admin-content,
+.admin-content > *,
+.admin-page-body,
+.admin-section-header,
+.admin-top-bar {
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .overview-kpi-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .overview-bottom-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .staff-stats-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .staff-stats-row > *:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .audit-filter-card {
+    align-items: stretch !important;
+    flex-direction: column !important;
+  }
+
+  .audit-export-box {
+    border-left: 0 !important;
+    border-top: 1px solid #E8DED1;
+    padding-left: 0 !important;
+    padding-top: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-page > div[style],
+  .admin-content,
+  .admin-content > div {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .admin-content header[style],
+  .admin-section-header {
+    padding: 14px 16px !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 14px !important;
+  }
+
+  .admin-top-bar {
+    padding: 10px 16px !important;
+    gap: 10px !important;
+  }
+
+  .admin-top-actions {
+    gap: 10px !important;
+  }
+
+  .admin-section-actions {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px !important;
+    width: 100%;
+  }
+
+  .admin-section-actions > button,
+  .audit-search-actions,
+  .audit-search-actions > *,
+  .audit-search-actions input {
+    width: 100% !important;
+  }
+
+  .admin-page-body {
+    padding: 16px !important;
+  }
+
+  .admin-scroll-tabs {
+    overflow-x: auto !important;
+    margin-left: -16px !important;
+    margin-right: -16px !important;
+    padding: 0 16px !important;
+    scroll-snap-type: x proximity;
+  }
+
+  .admin-scroll-tabs > button {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    white-space: nowrap;
+  }
+
+  .overview-page {
+    gap: 18px !important;
+  }
+
+  .overview-hero-card {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 22px !important;
+  }
+
+  .overview-hero-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .overview-hero-actions > button {
+    width: 100%;
+  }
+
+  .overview-kpi-row,
+  .staff-stats-row,
+  .audit-summary-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  .overview-bottom-grid {
+    gap: 16px !important;
+  }
+
+  .overview-bottom-grid > * {
+    padding: 18px !important;
+    min-width: 0;
+  }
+
+  .audit-filter-left {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .audit-filter-left > *,
+  .audit-filter-left input,
+  .audit-filter-left select {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .audit-export-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .audit-export-actions > button {
+    width: 100%;
+  }
+
+  .audit-bulk-bar {
+    flex-wrap: wrap !important;
+    align-items: flex-start !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-page {
+    height: auto !important;
+    min-height: 100vh;
+    overflow-x: hidden !important;
+  }
+
+  .admin-content {
+    overflow-x: hidden !important;
+  }
+
+  .admin-content > div[style] {
+    overflow-x: hidden !important;
+  }
+
+  .admin-hamburger {
+    flex-shrink: 0;
+  }
+
+  .admin-info-text {
+    display: none !important;
+  }
+
+  .menu-items-table-card,
+  .staff-table-card,
+  .audit-table-card {
+    padding: 14px !important;
+    overflow: visible !important;
+  }
+
+  .menu-items-table-head {
+    display: none !important;
+  }
+
+  .menu-items-table-row {
+    display: grid !important;
+    grid-template-columns: 56px minmax(0, 1fr);
+    align-items: start !important;
+    gap: 10px 12px !important;
+    padding: 16px !important;
+    margin-bottom: 12px;
+    border: 1px solid #E8DED1;
+    border-radius: 12px;
+    background: #fff;
+  }
+
+  .menu-item-image-cell {
+    grid-row: span 3;
+  }
+
+  .menu-item-name-cell,
+  .menu-item-type-cell,
+  .menu-item-price-cell,
+  .menu-item-desc-cell,
+  .menu-item-actions-cell {
+    flex: none !important;
+    min-width: 0;
+  }
+
+  .menu-item-name-cell {
+    font-size: 1rem;
+  }
+
+  .menu-item-desc-cell {
+    grid-column: 1 / -1;
+    line-height: 1.45;
+  }
+
+  .menu-item-actions-cell {
+    grid-column: 1 / -1;
+    justify-content: stretch !important;
+  }
+
+  .menu-item-actions-cell > button {
+    flex: 1;
+    min-height: 40px;
+  }
+
+  .staff-table-card table,
+  .audit-table-card table {
+    display: block !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  .staff-table-card thead,
+  .audit-table-card thead {
+    display: none !important;
+  }
+
+  .staff-table-card tbody,
+  .staff-table-card tr,
+  .staff-table-card td,
+  .audit-table-card tbody,
+  .audit-table-card tr,
+  .audit-table-card td {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .staff-table-card tr,
+  .audit-table-card tr {
+    margin-bottom: 14px !important;
+    padding: 14px !important;
+    border: 1px solid #E8DED1 !important;
+    border-radius: 12px !important;
+    background: #fff !important;
+  }
+
+  .staff-table-card td,
+  .audit-table-card td {
+    padding: 9px 0 !important;
+    text-align: left !important;
+    border: 0 !important;
+  }
+
+  .staff-table-card td::before,
+  .audit-table-card td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 4px;
+    color: #8D7E73;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    position: static !important;
+  }
+
+  .staff-table-card td:last-child > div {
+    width: 100%;
+  }
+
+  .staff-table-card td:last-child button {
+    flex: 1;
+    min-height: 38px;
+  }
+}

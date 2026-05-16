@@ -147,9 +147,9 @@ const MenuItems = () => {
  return (
  <AdminLayout>
  {/* Top Bar */}
- <header style={s.topBar}>
+ <header className="admin-section-header menu-items-header" style={s.topBar}>
  <h1 style={s.pageTitle}>Menu Management</h1>
- <div style={s.topRight}>
+ <div className="admin-section-actions" style={s.topRight}>
  <button style={s.qrBtn} onClick={() => window.open('/public/menu/main', '_blank')}>
  View Digital Menu
  </button>
@@ -158,9 +158,9 @@ const MenuItems = () => {
  </div>
  </header>
 
- <div style={s.page}>
+ <div className="admin-page-body menu-items-page" style={s.page}>
  {/* Category Tabs */}
- <div style={s.tabBar}>
+ <div className="admin-scroll-tabs" style={s.tabBar}>
  {TABS.map(t => (
  <button key={t} onClick={() => setActiveTab(t)}
  style={{...s.tab,...(activeTab === t? s.tabActive: {}) }}>
@@ -181,9 +181,9 @@ const MenuItems = () => {
  <button style={s.addBtn} onClick={handleSeed}>Seed Demo Data</button>
  </div>
  ): (
- <div style={s.tableCard}>
+ <div className="menu-items-table-card" style={s.tableCard}>
  {/* Table Header */}
- <div style={s.tableHead}>
+ <div className="menu-items-table-head" style={s.tableHead}>
  <span style={{ flex: '0 0 60px' }}>Image</span>
  <span style={{ flex: 2 }}>Name</span>
  <span style={{ flex: 1 }}>Type</span>
@@ -198,23 +198,23 @@ const MenuItems = () => {
  No items in this category.
  </div>
  ): filtered.map(item => (
- <div key={item._id} style={s.tableRow}>
- <div style={{ flex: '0 0 60px' }}>
+ <div key={item._id} className="menu-items-table-row" style={s.tableRow}>
+ <div className="menu-item-image-cell" style={{ flex: '0 0 60px' }}>
  {item.image? (
  <img src={item.image} alt={item.name} style={s.thumb} onError={e => { e.target.style.display = 'none'; }}/>
  ): (
  <div style={s.thumbPlaceholder}></div>
  )}
  </div>
- <span style={{ flex: 2, fontWeight: '700', color: '#5A0006' }}>{item.name}</span>
- <span style={{ flex: 1 }}>
+ <span className="menu-item-name-cell" style={{ flex: 2, fontWeight: '700', color: '#5A0006' }}>{item.name}</span>
+ <span className="menu-item-type-cell" style={{ flex: 1 }}>
  <span style={{...s.catBadge,...(catColor[item.category] || { bg: '#F4EFE7', color: '#5E514A' }) }}>
  {item.category}
  </span>
  </span>
- <span style={{ flex: 1, fontWeight: '700', color: '#7A0008' }}>Rs. {parseFloat(item.price).toFixed(2)}</span>
- <span style={{ flex: 2, color: '#6F6259', fontSize: '0.85rem' }}>{item.description || ''}</span>
- <div style={{ flex: '0 0 100px', display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+ <span className="menu-item-price-cell" style={{ flex: 1, fontWeight: '700', color: '#7A0008' }}>Rs. {parseFloat(item.price).toFixed(2)}</span>
+ <span className="menu-item-desc-cell" style={{ flex: 2, color: '#6F6259', fontSize: '0.85rem' }}>{item.description || ''}</span>
+ <div className="menu-item-actions-cell" style={{ flex: '0 0 100px', display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
  <button style={s.editBtn} onClick={() => openEdit(item)}>Edit</button>
  <button style={s.deleteBtn} onClick={() => handleDelete(item)}>Delete</button>
  </div>

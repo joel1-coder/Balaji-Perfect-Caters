@@ -193,15 +193,15 @@ const QuickBill = () => {
 
   return (
     <UserLayout>
-      <div style={s.pageShell}>
-        <header style={s.topBar}>
+      <div className="quickbill-page-shell" style={s.pageShell}>
+        <header className="quickbill-top-bar" style={s.topBar}>
           <div style={s.titleWrap}>
             <div style={s.kicker}>Operator Billing Screen</div>
             <h1 style={s.pageTitle}>Easy Bill Counter</h1>
             <p style={s.pageSubtitle}>1. Tap item  2. Check total  3. Save order</p>
           </div>
 
-          <div style={s.operatorCard}>
+          <div className="quickbill-operator-card" style={s.operatorCard}>
             <div style={s.operatorAvatar}>{userInitial}</div>
             <div>
               <div style={s.operatorName}>{userName}</div>
@@ -210,7 +210,7 @@ const QuickBill = () => {
           </div>
         </header>
 
-        <div style={s.stepsRow}>
+        <div className="quickbill-steps-row" style={s.stepsRow}>
           <div style={s.stepCard}>
             <div style={s.stepNumber}>1</div>
             <div>
@@ -234,9 +234,9 @@ const QuickBill = () => {
           </div>
         </div>
 
-        <div style={s.contentArea}>
-          <section style={s.menuPanel}>
-            <div style={s.panelHeader}>
+        <div className="quickbill-content-area" style={s.contentArea}>
+          <section className="quickbill-menu-panel" style={s.menuPanel}>
+            <div className="quickbill-panel-header" style={s.panelHeader}>
               <div>
                 <div style={s.panelLabel}>Select Item</div>
                 <h2 style={s.panelTitle}>Tap any item to add it to the bill</h2>
@@ -247,7 +247,7 @@ const QuickBill = () => {
               </button>
             </div>
 
-            <div style={s.gridContainer}>
+            <div className="quickbill-grid-container" style={s.gridContainer}>
               {menuOptions.map((item) => (
                 <button
                   key={item.id || item.name}
@@ -268,7 +268,7 @@ const QuickBill = () => {
             </div>
           </section>
 
-          <aside style={s.billPanel}>
+          <aside className="quickbill-bill-panel" style={s.billPanel}>
             <div style={s.memberCard}>
               <div>
                 <div style={s.memberLabel}>Customer</div>

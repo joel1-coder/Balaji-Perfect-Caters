@@ -232,9 +232,9 @@ const TransactionAudit = () => {
 
  return (
  <AdminLayout>
- <header style={s.topBar}>
+ <header className="admin-section-header audit-header" style={s.topBar}>
  <h1 style={s.pageTitle}>Transaction Audit</h1>
- <div style={s.topRight}>
+ <div className="admin-section-actions audit-search-actions" style={s.topRight}>
  <div style={s.searchBox}>
  <input 
  style={s.searchInput} 
@@ -246,10 +246,10 @@ const TransactionAudit = () => {
  </div>
  </header>
 
- <div style={s.page}>
+ <div className="admin-page-body audit-page" style={s.page}>
  {/* Filters */}
- <div style={s.filterCard}>
- <div style={s.filterLeft}>
+ <div className="audit-filter-card" style={s.filterCard}>
+ <div className="audit-filter-left" style={s.filterLeft}>
  <div style={s.filterGroup}>
  <label style={s.filterLabel}>Start Date</label>
  <input type="date" style={s.filterInput} value={startDate} onChange={e => setStartDate(e.target.value)} />
@@ -281,9 +281,9 @@ const TransactionAudit = () => {
  Clear Filters
  </button>
  </div>
- <div style={s.exportBox}>
+ <div className="audit-export-box" style={s.exportBox}>
  <div style={s.exportLabel}>EXPORT FILTERED LOGS</div>
- <div style={{ display: 'flex', gap: '10px' }}>
+ <div className="audit-export-actions" style={{ display: 'flex', gap: '10px' }}>
  <button style={s.exportBtn} onClick={exportToExcel}>Excel (CSV)</button>
  <button style={s.exportBtn} onClick={exportToWord}>Word (TXT)</button>
  <button style={{...s.exportBtn, backgroundColor: '#7A0008', color: 'white' }} onClick={generateBill}>Generate Bill</button>
@@ -292,8 +292,8 @@ const TransactionAudit = () => {
  </div>
 
  {/* Table */}
- <div style={s.card}>
- <div style={s.bulkBar}>
+ <div className="audit-table-card" style={s.card}>
+ <div className="audit-bulk-bar" style={s.bulkBar}>
  <span style={{ color: '#6F6259', fontSize: '0.85rem' }}>{selected.length} items selected</span>
  {selected.length > 0 && (
  <>
@@ -326,19 +326,19 @@ const TransactionAudit = () => {
  </tr>
  ): filteredData.map((t) => (
  <tr key={t._id} style={{...s.tr, backgroundColor: selected.includes(t._id)? '#FAF7F2': 'white' }}>
- <td style={s.td}><input type="checkbox" checked={selected.includes(t._id)} onChange={() => toggle(t._id)}/></td>
- <td style={{...s.td, fontWeight: '700', color: '#5A0006' }}>{t.orderId}</td>
- <td style={s.td}>
+ <td data-label="Select" style={s.td}><input type="checkbox" checked={selected.includes(t._id)} onChange={() => toggle(t._id)}/></td>
+ <td data-label="Transaction ID" style={{...s.td, fontWeight: '700', color: '#5A0006' }}>{t.orderId}</td>
+ <td data-label="Date & Time" style={s.td}>
  <div style={{ fontWeight: '600', color: '#4A3D38', fontSize: '0.9rem' }}>{new Date(t.createdAt).toLocaleDateString()}</div>
  <div style={{ color: '#8D7E73', fontSize: '0.75rem' }}>{new Date(t.createdAt).toLocaleTimeString()}</div>
  </td>
- <td style={s.td}>
+ <td data-label="Customer / Account" style={s.td}>
  <div style={{ fontWeight: '700', color: '#5A0006', fontSize: '0.9rem' }}>{t.customerName}</div>
  <div style={{ fontSize: '0.78rem', color: '#8D7E73' }}>{t.customerId || t.department || 'N/A'}</div>
  </td>
- <td style={{...s.td, color: '#5E514A' }}>{(t.items || []).map(i => i.name).join(', ')}</td>
- <td style={{...s.td, fontWeight: '700' }}>Rs. {(t.totalAmount || 0).toFixed(2)}</td>
- <td style={s.td}>
+ <td data-label="Items" style={{...s.td, color: '#5E514A' }}>{(t.items || []).map(i => i.name).join(', ')}</td>
+ <td data-label="Total Amount" style={{...s.td, fontWeight: '700' }}>Rs. {(t.totalAmount || 0).toFixed(2)}</td>
+ <td data-label="Status" style={s.td}>
  <select
  value={t.paymentStatus || 'pending'}
  onChange={e => updateStatus(t._id, e.target.value)}
@@ -367,7 +367,7 @@ const TransactionAudit = () => {
  </table>
  </div>
 
- <div style={s.bottomRow}>
+ <div className="audit-summary-row" style={s.bottomRow}>
  <div style={{...s.summaryCard, backgroundColor: '#7A0008', color: 'white' }}>
  <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', letterSpacing: '1px' }}>FILTERED TOTAL</div>
  <div style={{ fontSize: '2.2rem', fontWeight: '800', color: 'white', margin: '8px 0' }}>Rs. {totalFilteredValue.toFixed(2)}</div>

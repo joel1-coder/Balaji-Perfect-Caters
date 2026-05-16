@@ -46,6 +46,88 @@
   }
 }
 
+.quickbill-page-shell,
+.quickbill-page-shell * {
+  box-sizing: border-box;
+}
+
+@media (max-width: 1120px) {
+  .quickbill-content-area {
+    grid-template-columns: 1fr !important;
+  }
+
+  .quickbill-bill-panel {
+    width: 100% !important;
+    max-width: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .quickbill-page-shell {
+    width: 100%;
+    overflow-x: hidden;
+    padding-top: 54px;
+  }
+
+  .quickbill-top-bar {
+    padding: 18px 16px 14px !important;
+    align-items: stretch !important;
+  }
+
+  .quickbill-operator-card {
+    width: 100%;
+  }
+
+  .quickbill-steps-row,
+  .quickbill-content-area {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .quickbill-steps-row {
+    grid-template-columns: 1fr !important;
+    padding-bottom: 14px !important;
+  }
+
+  .quickbill-content-area {
+    gap: 16px !important;
+    padding-bottom: 20px !important;
+  }
+
+  .quickbill-menu-panel {
+    padding: 16px !important;
+    border-radius: 16px !important;
+  }
+
+  .quickbill-panel-header {
+    flex-direction: column !important;
+  }
+
+  .quickbill-panel-header button {
+    width: 100%;
+  }
+
+  .quickbill-grid-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  .quickbill-grid-container > button {
+    min-height: 150px !important;
+    padding: 14px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .quickbill-grid-container {
+    grid-template-columns: 1fr !important;
+  }
+
+  .quickbill-top-bar h1 {
+    font-size: 2rem !important;
+  }
+}
+
 /* Base Hamburger Class */
 .user-hamburger {
   display: none;

@@ -3,7 +3,7 @@ import Menu from '../models/Menu.js';
 
 const router = express.Router();
 
-// ── Seed Demo Data (MUST be before /:id routes) ───────────────
+// Seed demo data. Keep this before /:id routes.
 router.post('/seed', async (req, res) => {
   try {
     await Menu.deleteMany({});
@@ -25,7 +25,7 @@ router.post('/seed', async (req, res) => {
   }
 });
 
-// ── Menu CRUD ─────────────────────────────────────────────────
+// Menu CRUD
 
 // GET all menus
 router.get('/', async (req, res) => {
@@ -80,7 +80,7 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-// ── Item CRUD (within a menu) ─────────────────────────────────
+// Item CRUD within a menu
 
 // POST add item to menu
 router.post('/:menuId/items', async (req, res) => {

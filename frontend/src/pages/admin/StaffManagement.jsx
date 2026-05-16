@@ -125,19 +125,19 @@ const StaffManagement = () => {
 
  return (
  <AdminLayout>
- <header style={s.topBar}>
+ <header className="admin-section-header staff-header" style={s.topBar}>
  <h1 style={s.pageTitle}>Staff Roster</h1>
- <div style={s.topRight}>
+ <div className="admin-section-actions" style={s.topRight}>
  <button style={s.seedBtn} onClick={handleSeed}>Seed Demo</button>
  <button style={s.addBtn} onClick={openAdd}>+ Add Employee</button>
  </div>
  </header>
 
- <div style={s.page}>
+ <div className="admin-page-body staff-page" style={s.page}>
  <p style={{ color: '#6F6259', marginBottom: '20px' }}>Manage shifts, roles, and review team performance for the current week.</p>
 
  {/* Stats Row */}
- <div style={s.statsRow}>
+ <div className="staff-stats-row" style={s.statsRow}>
  <div style={s.statCard}>
  <div style={s.statLabel}>Overall</div>
  <div style={s.statSub}>Total Staff</div>
@@ -168,7 +168,7 @@ const StaffManagement = () => {
  </div>
 
  {/* Active Roster Table */}
- <div style={s.card}>
+ <div className="staff-table-card" style={s.card}>
  <div style={s.cardHeader}>
  <h3 style={s.cardTitle}>Active Roster</h3>
  </div>
@@ -191,7 +191,7 @@ const StaffManagement = () => {
  <tbody>
  {staffList.map(emp => (
  <tr key={emp._id} style={s.tr}>
- <td style={s.td}>
+ <td data-label="Employee" style={s.td}>
  <div style={s.empCell}>
  <div style={{...s.avatar, backgroundColor: emp.color || '#E8DED1' }}>
  {emp.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase()}
@@ -202,25 +202,25 @@ const StaffManagement = () => {
  </div>
  </div>
  </td>
- <td style={s.td}>
+ <td data-label="Role" style={s.td}>
  <span style={{...s.roleBadge, backgroundColor: roleColors[emp.role]?.bg || '#F4EFE7', color: roleColors[emp.role]?.color || '#5E514A' }}>
  {emp.role}
  </span>
  </td>
- <td style={s.td}>
+ <td data-label="Shift Timing" style={s.td}>
  <div style={{ fontWeight: '600', color: '#5A0006', fontSize: '0.9rem' }}>{emp.shiftTiming}</div>
  <div style={{ fontSize: '0.78rem', color: '#8D7E73' }}>{emp.shiftLabel}</div>
  </td>
- <td style={s.td}>
+ <td data-label="Status" style={s.td}>
  <span style={{...s.statusBadge, backgroundColor: statusStyle[emp.status].bg, color: statusStyle[emp.status].color }}>
  <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: statusStyle[emp.status].dot, display: 'inline-block', marginRight: '5px' }}></span>
  {emp.status}
  </span>
  </td>
- <td style={s.td}>
+ <td data-label="Rating" style={s.td}>
  <span style={s.rating}> {emp.rating}</span>
  </td>
- <td style={s.td}>
+ <td data-label="Actions" style={s.td}>
  <div style={{ display: 'flex', gap: '8px' }}>
  <button style={s.actionBtnEdit} onClick={() => openEdit(emp)}>Edit</button>
  <button style={s.actionBtnDel} onClick={() => handleDelete(emp)}>Delete</button>

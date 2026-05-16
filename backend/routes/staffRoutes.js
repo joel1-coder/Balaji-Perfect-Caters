@@ -55,10 +55,10 @@ router.post('/seed', async (req, res) => {
   try {
     await Staff.deleteMany({});
     const initialStaff = [
-      { name: 'Julianna Doe', empId: 'emp-9821', role: 'Chef', shiftTiming: '06:00 AM — 02:00 PM', shiftLabel: 'Morning Shift', status: 'ON-DUTY', rating: 4.8, color: '#dbeafe' },
-      { name: 'Marcus Sterling', empId: 'emp-4420', role: 'Cashier', shiftTiming: '11:00 AM — 07:00 PM', shiftLabel: 'General Shift', status: 'ON-DUTY', rating: 4.5, color: '#f3e8ff' },
-      { name: 'Aisha Lewis', empId: 'emp-7712', role: 'Server', shiftTiming: '02:00 PM — 10:00 PM', shiftLabel: 'Evening Shift', status: 'OFF-DUTY', rating: 4.9, color: '#dcfce7' },
-      { name: 'Robert King', empId: 'emp-2104', role: 'Chef', shiftTiming: '06:00 AM — 02:00 PM', shiftLabel: 'Morning Shift', status: 'ABSENT', rating: 3.2, color: '#fee2e2' },
+      { name: 'Julianna Doe', empId: 'emp-9821', role: 'Chef', shiftTiming: '06:00 AM - 02:00 PM', shiftLabel: 'Morning Shift', status: 'ON-DUTY', rating: 4.8, color: '#dbeafe' },
+      { name: 'Marcus Sterling', empId: 'emp-4420', role: 'Cashier', shiftTiming: '11:00 AM - 07:00 PM', shiftLabel: 'General Shift', status: 'ON-DUTY', rating: 4.5, color: '#f3e8ff' },
+      { name: 'Aisha Lewis', empId: 'emp-7712', role: 'Server', shiftTiming: '02:00 PM - 10:00 PM', shiftLabel: 'Evening Shift', status: 'OFF-DUTY', rating: 4.9, color: '#dcfce7' },
+      { name: 'Robert King', empId: 'emp-2104', role: 'Chef', shiftTiming: '06:00 AM - 02:00 PM', shiftLabel: 'Morning Shift', status: 'ABSENT', rating: 3.2, color: '#fee2e2' },
     ];
     await Staff.insertMany(initialStaff);
     res.status(201).json({ success: true, message: 'Seeded demo staff' });

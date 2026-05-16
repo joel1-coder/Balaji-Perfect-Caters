@@ -119,7 +119,7 @@ const AdminLayout = ({ children }) => {
  <div style={s.main}>
 
  {/* Top Header Bar */}
- <header style={s.topBar}>
+ <header className="admin-top-bar" style={s.topBar}>
  <div style={s.topLeft}>
  {/* Hamburger only visible on mobile */}
  <button
@@ -138,7 +138,7 @@ const AdminLayout = ({ children }) => {
  </span>
  </div>
 
- <div style={s.topRight}>
+ <div className="admin-top-actions" style={s.topRight}>
  {/* Notification Bell */}
  <div ref={notifRef} style={{ position: 'relative' }}>
  <button style={s.bellBtn} onClick={() => setShowNotif(v =>!v)} title="Notifications">
@@ -182,9 +182,9 @@ const AdminLayout = ({ children }) => {
  </div>
 
  {/* Admin Avatar */}
- <div style={s.adminBadge}>
+ <div className="admin-user-badge" style={s.adminBadge}>
  <div style={s.adminAvatar}>{adminUser.charAt(0).toUpperCase()}</div>
- <div style={s.adminInfo}>
+ <div className="admin-info-text" style={s.adminInfo}>
  <div style={s.adminName}>{adminUser.charAt(0).toUpperCase() + adminUser.slice(1)}</div>
  <div style={s.adminRole}>Administrator</div>
  </div>

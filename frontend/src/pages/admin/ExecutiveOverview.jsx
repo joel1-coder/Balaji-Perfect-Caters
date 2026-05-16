@@ -23,14 +23,14 @@ const ExecutiveOverview = () => {
  return (
  <AdminLayout>
 
- <div style={s.page}>
+ <div className="admin-page-body overview-page" style={s.page}>
  
  {/* Welcome Hero */}
- <div style={s.heroCard}>
+ <div className="overview-hero-card" style={s.heroCard}>
  <div style={s.heroLeft}>
  <h2 style={s.heroTitle}>Good morning, Admin!</h2>
  <p style={s.heroText}>Here is what's happening with your catering operations today. Revenue is up <strong style={{ color: '#F2C36B' }}>12%</strong> compared to yesterday.</p>
- <div style={{ display: 'flex', gap: '12px', marginTop: '16px' }}>
+ <div className="overview-hero-actions" style={{ display: 'flex', gap: '12px', marginTop: '16px' }}>
  <button style={s.primaryBtn} onClick={() => window.open('/public/menu/main', '_blank')}>View Live Menu</button>
  <button style={s.secondaryBtn}>Generate Daily Report</button>
  </div>
@@ -47,7 +47,7 @@ const ExecutiveOverview = () => {
  </div>
 
  {/* KPI Row */}
- <div style={s.kpiRow}>
+ <div className="overview-kpi-row" style={s.kpiRow}>
  <div style={{...s.kpiCard, borderTop: '4px solid #E3A23B' }}>
  <div style={s.kpiHeader}>
  <span style={s.kpiLabel}>TODAY'S REVENUE</span>
@@ -79,7 +79,7 @@ const ExecutiveOverview = () => {
  </div>
 
  {/* Bottom Grid */}
- <div style={s.bottomGrid}>
+ <div className="overview-bottom-grid" style={s.bottomGrid}>
  
  {/* Chart Section */}
  <div style={s.chartCard}>
