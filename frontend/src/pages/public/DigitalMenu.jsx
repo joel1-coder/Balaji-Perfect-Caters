@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
@@ -59,14 +59,17 @@ const DigitalMenu = () => {
  <div style={s.layout}>
  {/* ---- Main Content ---- */}
  <main style={s.main}>
- <header style={s.header}>
- <div>
- <h1 style={s.pageTitle}>{menu.restaurantName}</h1>
+ <header style={{...s.header, flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+ <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '20px' }}>
+ <img src="/bpc-logo.jpeg" alt="Logo" style={{ width: '80px', height: '80px', borderRadius: '12px', objectFit: 'cover', marginBottom: '12px', boxShadow: '0 4px 12px rgba(90,0,6,0.1)' }} />
+ <h1 style={{ fontSize: '2.2rem', fontWeight: '800', color: '#7A0008', margin: '0 0 6px 0' }}>St Joseph's College Canteen</h1>
+ <h2 style={{ fontSize: '1.1rem', fontWeight: '700', color: '#E3A23B', margin: '0 0 12px 0', textTransform: 'uppercase', letterSpacing: '1px' }}>catered by Balaji Perfect Caters</h2>
  <p style={s.pageSubtitle}>View our fresh offerings for today's service.</p>
- <div style={s.publicActions}>
+ </div>
+ <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+ <div style={{...s.publicActions, marginTop: 0 }}>
  <a href={`/public/menu/${id || 'main'}`} style={{...s.publicLink, ...s.publicLinkActive}}>Menu</a>
  <a href="/public/discounts/main" style={s.publicLink}>Discounts</a>
- </div>
  </div>
  <div style={s.searchBox}>
  <input 
@@ -75,6 +78,7 @@ const DigitalMenu = () => {
  value={searchQuery}
  onChange={e => setSearchQuery(e.target.value)}
  />
+ </div>
  </div>
  </header>
 
@@ -92,9 +96,9 @@ const DigitalMenu = () => {
  <div key={item._id} style={s.card}>
  {/* Image */}
  <div style={s.cardImageWrap}>
- {item.image? (
+ {item.image ? (
  <img src={item.image} alt={item.name} style={s.cardImage} />
- ): (
+ ) : (
  <div style={s.cardImagePlaceholder}>No Image</div>
  )}
  </div>
@@ -110,12 +114,12 @@ const DigitalMenu = () => {
  
  <div style={{...s.cardRow, marginTop: '14px' }}>
  <div style={s.statusWrap}>
- {item.isAvailable? (
+ {item.isAvailable ? (
  <>
  <div style={{...s.statusDot, backgroundColor: '#16a34a' }} />
  <span style={{...s.statusText, color: '#16a34a' }}>Available</span>
  </>
- ): (
+ ) : (
  <>
  <div style={{...s.statusDot, backgroundColor: '#dc2626' }} />
  <span style={{...s.statusText, color: '#dc2626' }}>Unavailable</span>

@@ -13,7 +13,7 @@ const ExecutiveOverview = () => {
  {/* Welcome Hero */}
  <div className="overview-hero-card" style={s.heroCard}>
  <div style={s.heroLeft}>
- <h2 style={s.heroTitle}>Good morning, Admin!</h2>
+ <h2 style={{...s.heroTitle, color: '#ffffff'}}>Good morning, Admin!</h2>
  <p style={s.heroText}>Here is what's happening with your catering operations today. Revenue is up <strong style={{ color: '#F2C36B' }}>12%</strong> compared to yesterday.</p>
  <div className="overview-hero-actions" style={{ display: 'flex', gap: '12px', marginTop: '16px' }}>
  <button style={s.primaryBtn} onClick={() => window.open('/public/menu/main', '_blank')}>View Live Menu</button>

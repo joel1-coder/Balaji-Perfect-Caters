@@ -28,18 +28,20 @@ const AdminLayout = ({ children }) => {
        const res = await axios.get('https://balaji-perfect-caters.onrender.com/api/transactions');
        if (res.data && res.data.data) {
          const recentTx = res.data.data.slice(0, 5);
-         const notifs = recentTx.map(tx => ({
-           id: tx._id,
-           title: tx.paymentStatus === 'paid' ? 'New Transaction' : 'Unpaid Order Alert',
-           message: `Order #${tx.orderId} Rs. ${tx.totalAmount} is ${tx.paymentStatus.toUpperCase()}`,
-           time: new Date(tx.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-           read: false
-         }));
+         const readIds = new Set(JSON.parse(localStorage.getItem('canteen_read_notifs') || '[]'));
+         const deletedIds = new Set(JSON.parse(localStorage.getItem('canteen_del_notifs') || '[]'));
          
-         setNotifications(prev => {
-           const readIds = new Set(prev.filter(p => p.read).map(p => p.id));
-           return notifs.map(n => ({...n, read: readIds.has(n.id)}));
-         });
+         const notifs = recentTx
+           .filter(tx => !deletedIds.has(tx._id))
+           .map(tx => ({
+             id: tx._id,
+             title: tx.paymentStatus === 'paid' ? 'New Transaction' : 'Unpaid Order Alert',
+             message: `Order #${tx.orderId} Rs. ${tx.totalAmount} is ${tx.paymentStatus.toUpperCase()}`,
+             time: new Date(tx.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+             read: readIds.has(tx._id)
+           }));
+         
+         setNotifications(notifs);
        }
      } catch (err) {
        console.error("Failed to fetch notifications:", err);
@@ -74,8 +76,27 @@ const AdminLayout = ({ children }) => {
  // Close sidebar on route change
  useEffect(() => { setSidebarOpen(false); }, [location.pathname]);
 
- const markAllRead = () => setNotifications(prev => prev.map(n => ({...n, read: true })));
- const markOneRead = (id) => setNotifications(prev => prev.map(n => n.id === id? {...n, read: true }: n));
+ const markAllRead = () => {
+    const readIds = new Set(JSON.parse(localStorage.getItem('canteen_read_notifs') || '[]'));
+    notifications.forEach(n => readIds.add(n.id));
+    localStorage.setItem('canteen_read_notifs', JSON.stringify([...readIds]));
+    setNotifications(prev => prev.map(n => ({...n, read: true })));
+  };
+
+  const markOneRead = (id) => {
+    const readIds = new Set(JSON.parse(localStorage.getItem('canteen_read_notifs') || '[]'));
+    readIds.add(id);
+    localStorage.setItem('canteen_read_notifs', JSON.stringify([...readIds]));
+    setNotifications(prev => prev.map(n => n.id === id ? {...n, read: true } : n));
+  };
+
+  const clearNotifications = () => {
+    const deletedIds = new Set(JSON.parse(localStorage.getItem('canteen_del_notifs') || '[]'));
+    notifications.forEach(n => deletedIds.add(n.id));
+    localStorage.setItem('canteen_del_notifs', JSON.stringify([...deletedIds]));
+    setNotifications([]);
+  };
+
  const handleLogout = () => { localStorage.removeItem('canteen_auth'); navigate('/login'); };
  const adminUser = localStorage.getItem('canteen_user') || 'Admin';
 
@@ -198,7 +219,7 @@ const AdminLayout = ({ children }) => {
  ))}
  </div>
  <div style={s.dropFooter}>
- <button style={s.clearBtn} onClick={() => setNotifications([])}>Clear all</button>
+ <button style={s.clearBtn} onClick={clearNotifications}>Clear all</button>
  </div>
  </div>
  )}
