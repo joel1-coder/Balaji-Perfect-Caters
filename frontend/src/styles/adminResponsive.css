@@ -128,10 +128,10 @@
   width: 100%;
 }
 
-/* â”€â”€ Mobile Responsive â€” Hamburger Drawer â”€â”€ */
+/* Mobile Responsive - Hamburger Drawer */
 @media (max-width: 768px) {
 
-  /* Hide sidebar by default on mobile â€” slide in from left */
+  /* Hide sidebar by default on mobile - slide in from left */
   .admin-sidebar {
     position: fixed !important;
     top: 0;
