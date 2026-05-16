@@ -1,5 +1,6 @@
-﻿import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
 import '../styles/adminResponsive.css';
 
 const navItems = [
@@ -11,13 +12,7 @@ const navItems = [
  { label: 'Discount Offers', path: '/admin/discounts' },
 ];
 
-const INITIAL_NOTIFICATIONS = [
- { id: 1, title: 'New Transaction', message: 'BB5119 Rs. 305.00 marked as PAID', time: '2 min ago', read: false },
- { id: 2, title: 'Unpaid Order Alert', message: 'BB4627 Rs. 305.00 is still UNPAID', time: '18 min ago', read: false },
- { id: 3, title: 'New Staff Added', message: 'Rahul Sharma (EMP-9421) added to roster', time: '1 hr ago', read: false },
- { id: 4, title: 'Menu Updated', message: 'Veg Biryani price changed to Rs. 80', time: '3 hrs ago', read: true },
- { id: 5, title: 'Order Cleared', message: 'BB2295 Rs. 320.00 cleared successfully', time: 'Yesterday', read: true },
-];
+const INITIAL_NOTIFICATIONS = [];
 
 const AdminLayout = ({ children }) => {
  const navigate = useNavigate();
@@ -27,6 +22,35 @@ const AdminLayout = ({ children }) => {
  const [sidebarOpen, setSidebarOpen] = useState(false);
  const notifRef = useRef(null);
  const sidebarRef = useRef(null);
+
+ useEffect(() => {
+   const fetchNotifs = async () => {
+     try {
+       const res = await axios.get('https://balaji-perfect-caters.onrender.com/api/transactions');
+       if (res.data.success) {
+         const recentTx = res.data.data.slice(0, 5);
+         const notifs = recentTx.map(tx => ({
+           id: tx._id,
+           title: tx.paymentStatus === 'paid' ? 'New Transaction' : 'Unpaid Order Alert',
+           message: `Order #${tx.orderId} Rs. ${tx.totalAmount} is ${tx.paymentStatus.toUpperCase()}`,
+           time: new Date(tx.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+           read: false
+         }));
+         
+         setNotifications(prev => {
+           const readIds = new Set(prev.filter(p => p.read).map(p => p.id));
+           return notifs.map(n => ({...n, read: readIds.has(n.id)}));
+         });
+       }
+     } catch (err) {
+       console.error("Failed to fetch notifications:", err);
+     }
+   };
+   
+   fetchNotifs();
+   const interval = setInterval(fetchNotifs, 10000);
+   return () => clearInterval(interval);
+ }, []);
 
  const unreadCount = notifications.filter(n =>!n.read).length;
 
