@@ -7,6 +7,7 @@ const navItems = [
   { icon: '🍽️', label: 'Menu Management',    path: '/admin/menu-items' },
   { icon: '📈', label: 'Transaction Audit',  path: '/admin/audit' },
   { icon: '👥', label: 'Staff Management',   path: '/admin/staff' },
+  { icon: '📝', label: 'Catering Quotation', path: '/admin/quotation' },
 ];
 
 const INITIAL_NOTIFICATIONS = [

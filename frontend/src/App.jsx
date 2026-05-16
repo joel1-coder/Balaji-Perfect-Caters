@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import Login from './pages/admin/Login';
@@ -9,6 +9,7 @@ import StaffManagement   from './pages/admin/StaffManagement';
 import TransactionAudit  from './pages/admin/TransactionAudit';
 import MenuItems         from './pages/admin/MenuItems';
 import MenuEditor        from './pages/admin/MenuEditor';
+import CateringQuotation from './pages/admin/CateringQuotation';
 
 // ”€”€ User / Operator Pages ”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€”€
 import QuickBill from './pages/admin/QuickBill';
@@ -48,6 +49,7 @@ function App() {
         <Route path="/admin/menu-items/edit/:id" element={<AdminRoute><MenuEditor /></AdminRoute>} />
         <Route path="/admin/audit"      element={<AdminRoute><TransactionAudit /></AdminRoute>} />
         <Route path="/admin/staff"      element={<AdminRoute><StaffManagement /></AdminRoute>} />
+        <Route path="/admin/quotation"  element={<AdminRoute><CateringQuotation /></AdminRoute>} />
 
         {/* ──── User / Operator Routes ──── */}
         <Route path="/user/billing"     element={<UserRoute><QuickBill /></UserRoute>} />
