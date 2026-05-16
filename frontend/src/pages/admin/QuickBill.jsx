@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import UserLayout from '../../components/UserLayout';
 
-const MENU_OPTIONS = [
+const MENU_API = 'https://balaji-perfect-caters.onrender.com/api/menus';
+
+const FALLBACK_MENU_ITEMS = [
   { name: 'Masala Tea', price: 15, group: 'Hot Drink', accent: '#A64B2A', tint: '#FFF3E8' },
   { name: 'Coffee', price: 20, group: 'Hot Drink', accent: '#6E4A32', tint: '#F7EEE8' },
   { name: 'Veg Club Sandwich', price: 85, group: 'Snack', accent: '#6C7A2A', tint: '#F5F8E8' },
@@ -13,6 +15,40 @@ const MENU_OPTIONS = [
   { name: 'Fresh Juice', price: 50, group: 'Juice', accent: '#3B7A43', tint: '#ECF8EE' },
   { name: 'Lassi', price: 30, group: 'Cold Drink', accent: '#6C5A9A', tint: '#F1EDFA' },
 ];
+
+const CATEGORY_STYLES = {
+  Snacks: { accent: '#A85B17', tint: '#FFF2E5' },
+  Tea: { accent: '#A64B2A', tint: '#FFF3E8' },
+  Juice: { accent: '#3B7A43', tint: '#ECF8EE' },
+  Breakfast: { accent: '#6C7A2A', tint: '#F5F8E8' },
+  Lunch: { accent: '#7A0008', tint: '#FFF0F0' },
+  Bottle: { accent: '#2D6F7A', tint: '#EAF7F8' },
+  'Cold Drink': { accent: '#6C5A9A', tint: '#F1EDFA' },
+};
+
+const toInitials = (name) =>
+  name
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join('')
+    .toUpperCase();
+
+const mapMenuItem = (item) => {
+  const category = item.category || item.group || 'Food';
+  const style = CATEGORY_STYLES[category] || { accent: '#8A4A32', tint: '#FFF6EC' };
+
+  return {
+    id: item._id || item.id || item.name,
+    name: item.name,
+    price: Number(item.price) || 0,
+    group: category,
+    accent: item.accent || style.accent,
+    tint: item.tint || style.tint,
+    isAvailable: item.isAvailable !== false,
+  };
+};
 
 const PAYMENT_MODES = [
   { id: 'paid', label: 'Paid Now' },
@@ -32,6 +68,37 @@ const QuickBill = () => {
   const [member, setMember] = useState(initialMember);
   const [showMemberModal, setShowMemberModal] = useState(false);
   const [tempMember, setTempMember] = useState(initialMember);
+  const [menuOptions, setMenuOptions] = useState(FALLBACK_MENU_ITEMS.map(mapMenuItem));
+  const [menuLoading, setMenuLoading] = useState(true);
+  const [menuSource, setMenuSource] = useState('Live menu');
+
+  useEffect(() => {
+    fetchBillingMenu();
+  }, []);
+
+  const fetchBillingMenu = async () => {
+    setMenuLoading(true);
+    try {
+      const res = await axios.get(MENU_API, { timeout: 4000 });
+      const menus = res.data.data || [];
+      const firstMenu = menus.find((menu) => menu.items?.length);
+      const liveItems = firstMenu?.items?.filter((item) => item.isAvailable !== false).map(mapMenuItem) || [];
+
+      if (liveItems.length) {
+        setMenuOptions(liveItems);
+        setMenuSource(firstMenu.restaurantName || 'Live menu');
+      } else {
+        setMenuOptions(FALLBACK_MENU_ITEMS.map(mapMenuItem));
+        setMenuSource('Sample menu');
+      }
+    } catch (err) {
+      console.error('Failed to load billing menu:', err.message);
+      setMenuOptions(FALLBACK_MENU_ITEMS.map(mapMenuItem));
+      setMenuSource('Sample menu');
+    } finally {
+      setMenuLoading(false);
+    }
+  };
 
   const addItemToBill = (menuItem) => {
     setOrderItems((prev) => {
@@ -173,22 +240,22 @@ const QuickBill = () => {
               <div>
                 <div style={s.panelLabel}>Select Item</div>
                 <h2 style={s.panelTitle}>Tap any item to add it to the bill</h2>
+                <div style={s.menuSource}>{menuLoading ? 'Loading latest menu...' : menuSource}</div>
               </div>
+              <button style={s.refreshBtn} onClick={fetchBillingMenu} disabled={menuLoading}>
+                Refresh
+              </button>
             </div>
 
             <div style={s.gridContainer}>
-              {MENU_OPTIONS.map((item) => (
+              {menuOptions.map((item) => (
                 <button
-                  key={item.name}
+                  key={item.id || item.name}
                   style={{ ...s.itemButton, backgroundColor: item.tint, borderColor: item.accent }}
                   onClick={() => addItemToBill(item)}
                 >
                   <div style={{ ...s.itemBadge, backgroundColor: item.accent }}>
-                    {item.name
-                      .split(' ')
-                      .slice(0, 2)
-                      .map((part) => part[0])
-                      .join('')}
+                    {toInitials(item.name)}
                   </div>
                   <div style={s.itemMeta}>
                     <div style={{ ...s.itemGroup, color: item.accent }}>{item.group}</div>
@@ -451,7 +518,7 @@ const s = {
     padding: '22px',
     boxShadow: '0 18px 40px rgba(122, 0, 8, 0.06)',
   },
-  panelHeader: { marginBottom: '20px' },
+  panelHeader: { marginBottom: '20px', display: 'flex', justifyContent: 'space-between', gap: '14px', alignItems: 'flex-start' },
   panelLabel: {
     color: '#A97A32',
     fontWeight: '800',
@@ -466,6 +533,17 @@ const s = {
     fontFamily: "'Playfair Display', serif",
     fontSize: '1.55rem',
     lineHeight: 1.1,
+  },
+  menuSource: { marginTop: '8px', color: '#8D7E73', fontWeight: '700', fontSize: '0.85rem' },
+  refreshBtn: {
+    border: '1px solid #E3A23B',
+    backgroundColor: '#FFF8E8',
+    color: '#7A0008',
+    borderRadius: '10px',
+    padding: '10px 12px',
+    fontWeight: '800',
+    cursor: 'pointer',
+    flexShrink: 0,
   },
   gridContainer: {
     display: 'grid',

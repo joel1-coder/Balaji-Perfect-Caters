@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import menuRoutes from './routes/menuRoutes.js';
 import staffRoutes from './routes/staffRoutes.js';
 import transactionRoutes from './routes/transactionRoutes.js';
+import discountRoutes from './routes/discountRoutes.js';
 
 dotenv.config();
 
@@ -41,6 +42,7 @@ connectDB();
 app.use('/api/menus', menuRoutes);
 app.use('/api/staff', staffRoutes);
 app.use('/api/transactions', transactionRoutes);
+app.use('/api/discounts', discountRoutes);
 
 app.get('/', (req, res) => res.send('Canteen API is running...'));
 

@@ -104,8 +104,8 @@ const UserLayout = ({ children }) => {
 };
 
 const styles = {
- page: { display: 'flex', height: '100vh', fontFamily: "'Outfit', sans-serif", overflow: 'hidden' },
- sidebar: { width: '240px', flexShrink: 0, background: 'linear-gradient(180deg, #5A0006 0%, #7A0008 72%, #5A0006 100%)', display: 'flex', flexDirection: 'column' },
+ page: { display: 'flex', minHeight: '100vh', fontFamily: "'Outfit', sans-serif", overflow: 'visible', backgroundColor: '#F4EFE7' },
+ sidebar: { width: '240px', height: '100vh', position: 'sticky', top: 0, flexShrink: 0, background: 'linear-gradient(180deg, #5A0006 0%, #7A0008 72%, #5A0006 100%)', display: 'flex', flexDirection: 'column' },
  brand: { display: 'flex', alignItems: 'center', gap: '12px', padding: '22px 20px', borderBottom: '1px solid rgba(242,195,107,0.22)' },
  brandName: { fontSize: '0.95rem', fontWeight: '800', color: 'white' },
  brandSub: { fontSize: '0.68rem', color: 'rgba(255,255,255,0.45)', textTransform: 'uppercase', letterSpacing: '0.5px' },
@@ -118,7 +118,7 @@ const styles = {
  navActive: { backgroundColor: 'rgba(227,162,59,0.18)', color: '#F2C36B', fontWeight: '700', borderLeft: '3px solid #E3A23B' },
  sidebarBottom: { padding: '14px 12px', borderTop: '1px solid rgba(242,195,107,0.18)', display: 'flex', flexDirection: 'column', gap: '2px' },
  switchBtn: { padding: '10px 16px', backgroundColor: 'rgba(227,162,59,0.14)', color: '#F2C36B', border: '1px solid rgba(242,195,107,0.36)', borderRadius: '8px', fontSize: '0.85rem', fontWeight: '700', cursor: 'pointer', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'center', fontFamily: "'Outfit', sans-serif" },
- content: { flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', backgroundColor: '#F4EFE7' },
+ content: { flex: 1, display: 'flex', flexDirection: 'column', overflow: 'visible', minWidth: 0, backgroundColor: '#F4EFE7' },
 };
 
 export default UserLayout;

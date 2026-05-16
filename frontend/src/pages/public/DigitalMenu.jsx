@@ -2,6 +2,8 @@
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
+const API = 'https://balaji-perfect-caters.onrender.com/api/menus';
+
 const DigitalMenu = () => {
  const { id } = useParams();
  const [menu, setMenu] = useState(null);
@@ -27,11 +29,16 @@ const DigitalMenu = () => {
  useEffect(() => {
  const fetchMenu = async () => {
  try {
- const res = await axios.get(`https://balaji-perfect-caters.onrender.com/api/menus`, { timeout: 3000 });
+ if (id && id !== 'main') {
+ const res = await axios.get(`${API}/${id}`, { timeout: 3000 });
+ setMenu(res.data.data || MOCK_MENU);
+ } else {
+ const res = await axios.get(API, { timeout: 3000 });
  if (res.data.data && res.data.data.length > 0 && res.data.data[0].items.length > 0) {
  setMenu(res.data.data[0]);
  } else {
  setMenu(MOCK_MENU);
+ }
  }
  } catch (err) {
  setMenu(MOCK_MENU);
@@ -56,6 +63,10 @@ const DigitalMenu = () => {
  <div>
  <h1 style={s.pageTitle}>{menu.restaurantName}</h1>
  <p style={s.pageSubtitle}>View our fresh offerings for today's service.</p>
+ <div style={s.publicActions}>
+ <a href={`/public/menu/${id || 'main'}`} style={{...s.publicLink, ...s.publicLinkActive}}>Menu</a>
+ <a href="/public/discounts/main" style={s.publicLink}>Discounts</a>
+ </div>
  </div>
  <div style={s.searchBox}>
  <input 
@@ -132,6 +143,9 @@ const s = {
  header: { display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'space-between', alignItems: 'center', padding: '30px 20px', borderBottom: '1px solid #E8DED1', background: 'linear-gradient(135deg, #ffffff 0%, #FAF7F2 66%, #FFF3D5 100%)', borderRadius: '0 0 14px 14px', boxShadow: '0 10px 28px rgba(90,0,6,0.08)' },
  pageTitle: { fontSize: '1.8rem', fontWeight: '800', color: '#7A0008', marginBottom: '4px' },
  pageSubtitle: { fontSize: '0.9rem', color: '#6F6259' },
+ publicActions: { display: 'flex', gap: '10px', marginTop: '16px', flexWrap: 'wrap' },
+ publicLink: { textDecoration: 'none', border: '1px solid #E3A23B', color: '#7A0008', backgroundColor: '#FFF8E8', padding: '9px 13px', borderRadius: '10px', fontWeight: '800', fontSize: '0.86rem' },
+ publicLinkActive: { backgroundColor: '#7A0008', color: '#FAF7F2', borderColor: '#7A0008' },
  
  searchBox: { display: 'flex', alignItems: 'center', gap: '8px', border: '1px solid #E8DED1', borderRadius: '8px', padding: '10px 14px', width: '300px', maxWidth: '100%', backgroundColor: '#F4EFE7' },
  searchInput: { border: 'none', backgroundColor: 'transparent', outline: 'none', fontSize: '0.9rem', width: '100%', fontFamily: "'Outfit', sans-serif" },

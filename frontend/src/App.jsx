@@ -10,6 +10,7 @@ import TransactionAudit from './pages/admin/TransactionAudit';
 import MenuItems from './pages/admin/MenuItems';
 import MenuEditor from './pages/admin/MenuEditor';
 import CateringQuotation from './pages/admin/CateringQuotation';
+import DiscountEditor from './pages/admin/DiscountEditor';
 
 // User / Operator Pages 
 import QuickBill from './pages/admin/QuickBill';
@@ -17,6 +18,7 @@ import OperatorMenu from './pages/admin/OperatorMenu';
 
 // Public Pages (no auth) 
 import DigitalMenu from './pages/public/DigitalMenu';
+import PublicDiscounts from './pages/public/PublicDiscounts';
 
 import './index.css';
 
@@ -50,6 +52,7 @@ function App() {
  <Route path="/admin/audit" element={<AdminRoute><TransactionAudit /></AdminRoute>} />
  <Route path="/admin/staff" element={<AdminRoute><StaffManagement /></AdminRoute>} />
  <Route path="/admin/quotation" element={<AdminRoute><CateringQuotation /></AdminRoute>} />
+ <Route path="/admin/discounts" element={<AdminRoute><DiscountEditor /></AdminRoute>} />
 
  {/* User / Operator Routes */}
  <Route path="/user/billing" element={<UserRoute><QuickBill /></UserRoute>} />
@@ -62,6 +65,8 @@ function App() {
 
  {/* Public QR Menu (no auth required) */}
  <Route path="/public/menu/:id" element={<DigitalMenu />} />
+ <Route path="/public/discounts/:id" element={<PublicDiscounts />} />
+ <Route path="/public/discounts" element={<PublicDiscounts />} />
 
  {/* Fallback */}
  <Route path="*" element={<Navigate to="/login" replace />} />

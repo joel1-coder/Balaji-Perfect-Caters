@@ -8,6 +8,7 @@ const navItems = [
  { label: 'Transaction Audit', path: '/admin/audit' },
  { label: 'Staff Management', path: '/admin/staff' },
  { label: 'Catering Quotation', path: '/admin/quotation' },
+ { label: 'Discount Offers', path: '/admin/discounts' },
 ];
 
 const INITIAL_NOTIFICATIONS = [
