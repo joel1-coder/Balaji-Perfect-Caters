@@ -3,7 +3,75 @@ import axios from 'axios';
 import AdminLayout from '../../components/AdminLayout';
 
 const ExecutiveOverview = () => {
- const currentDate = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+ const [stats, setStats] = useState({
+   todayRevenue: 0,
+   totalOrders: 0,
+   avgOrderValue: 0,
+   chartData: [0, 0, 0, 0, 0, 0, 0],
+   topItems: []
+ });
+
+ useEffect(() => {
+   const fetchStats = async () => {
+     try {
+       const res = await axios.get('https://balaji-perfect-caters.onrender.com/api/transactions');
+       const txs = res.data.data || [];
+       
+       // Calculate today's stats
+       const todayStr = new Date().toISOString().split('T')[0];
+       const todayTxs = txs.filter(tx => tx.createdAt && (tx.createdAt.startsWith(todayStr) || tx.createdAt.includes(todayStr)));
+
+       const todayRevenue = todayTxs.reduce((sum, tx) => sum + (tx.totalAmount || 0), 0);
+       const totalOrders = todayTxs.length;
+       const avgOrderValue = totalOrders > 0 ? (todayRevenue / totalOrders) : 0;
+
+       // Chart data (last 7 days grouped by day of week)
+       const dayTotals = [0, 0, 0, 0, 0, 0, 0]; // Mon, Tue, Wed, Thu, Fri, Sat, Sun
+       const oneWeekAgo = new Date();
+       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+       
+       txs.forEach(tx => {
+         if (!tx.createdAt) return;
+         const d = new Date(tx.createdAt);
+         if (d >= oneWeekAgo) {
+           let dayIndex = d.getDay() - 1; // 0=Mon
+           if (dayIndex === -1) dayIndex = 6; // Sunday is 6
+           dayTotals[dayIndex] += (tx.totalAmount || 0);
+         }
+       });
+       
+       const maxDay = Math.max(...dayTotals, 1);
+       const chartData = dayTotals.map(v => Math.round((v / maxDay) * 100));
+
+       // Top selling items
+       const itemMap = {};
+       txs.forEach(tx => {
+         if (tx.items) {
+            tx.items.forEach(item => {
+               if (!itemMap[item.name]) itemMap[item.name] = { units: 0, revenue: 0 };
+               itemMap[item.name].units += (item.quantity || 1);
+               itemMap[item.name].revenue += ((item.price || 0) * (item.quantity || 1));
+            });
+         }
+       });
+
+       const topItems = Object.entries(itemMap)
+         .map(([name, data]) => ({ name, ...data }))
+         .sort((a, b) => b.revenue - a.revenue)
+         .slice(0, 4)
+         .map((item, i) => ({
+            ...item,
+            trend: '+5%', // placeholder since we don't have historical item tracking easily
+            color: i % 2 === 0 ? '#FFF3D5' : '#dcfce7'
+         }));
+
+       setStats({ todayRevenue, totalOrders, avgOrderValue, chartData, topItems });
+     } catch (err) {
+       console.error("Failed to fetch stats", err);
+     }
+   };
+   fetchStats();
+ }, []);
 
  return (
  <AdminLayout>
@@ -36,21 +104,21 @@ const ExecutiveOverview = () => {
  <div style={s.kpiHeader}>
  <span style={s.kpiLabel}>TODAY'S REVENUE</span>
  </div>
- <div style={s.kpiValue}>Rs. 3,248.50</div>
+ <div style={s.kpiValue}>Rs. {stats.todayRevenue.toFixed(2)}</div>
  <div style={s.kpiTrend}><span style={{ color: '#9C6B22' }}> +8.4%</span> vs last week</div>
  </div>
  <div style={{...s.kpiCard, borderTop: '4px solid #F2C36B' }}>
  <div style={s.kpiHeader}>
- <span style={s.kpiLabel}>TOTAL ORDERS</span>
+ <span style={s.kpiLabel}>TODAY'S ORDERS</span>
  </div>
- <div style={s.kpiValue}>412</div>
+ <div style={s.kpiValue}>{stats.totalOrders}</div>
  <div style={s.kpiTrend}><span style={{ color: '#9C6B22' }}> +12.1%</span> vs last week</div>
  </div>
  <div style={{...s.kpiCard, borderTop: '4px solid #E3A23B' }}>
  <div style={s.kpiHeader}>
  <span style={s.kpiLabel}>AVERAGE ORDER VALUE</span>
  </div>
- <div style={s.kpiValue}>Rs. 7.88</div>
+ <div style={s.kpiValue}>Rs. {stats.avgOrderValue.toFixed(2)}</div>
  <div style={s.kpiTrend}><span style={{ color: '#ef4444' }}> -1.2%</span> vs last week</div>
  </div>
  </div>
@@ -63,10 +131,10 @@ const ExecutiveOverview = () => {
  <select style={s.timeSelect}><option>This Week</option><option>Last Week</option></select>
  </div>
  <div style={s.chartArea}>
- {/* Mock CSS Bar Chart */}
+ {/* CSS Bar Chart */}
  <div style={s.chartGrid}>
  {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, i) => {
- const height = [40, 65, 55, 80, 95, 45, 30][i];
+ const height = stats.chartData[i] || 5; // minimum 5% height to always show a stub
  return (
  <div key={day} style={s.chartCol}>
  <div style={s.chartBarContainer}>
@@ -87,12 +155,9 @@ const ExecutiveOverview = () => {
  <button style={{ background: 'none', border: 'none', color: '#7A0008', fontWeight: '700', cursor: 'pointer' }}>View All</button>
  </div>
  <div style={s.listCont}>
- {[
- { name: 'Grilled Chicken Salad', units: 142, revenue: 'Rs. 1,136.00', trend: '+12%', color: '#FFF3D5' },
- { name: 'Fresh Orange Juice', units: 98, revenue: 'Rs. 490.00', trend: '+5%', color: '#FFF3D5' },
- { name: 'Espresso Double', units: 85, revenue: 'Rs. 340.00', trend: '+2%', color: '#FFF3D5' },
- { name: 'Avocado Toast', units: 76, revenue: 'Rs. 646.00', trend: '-3%', color: '#dcfce7' },
- ].map((item, i) => (
+ {stats.topItems.length === 0 ? (
+  <div style={{ padding: '20px', textAlign: 'center', color: '#6F6259' }}>No items sold yet.</div>
+ ) : stats.topItems.map((item, i) => (
  <div key={i} style={s.listItem}>
  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
  <div style={{ width: '40px', height: '40px', borderRadius: '10px', backgroundColor: item.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', color: '#5A0006' }}>
@@ -104,8 +169,8 @@ const ExecutiveOverview = () => {
  </div>
  </div>
  <div style={{ textAlign: 'right' }}>
- <div style={{ fontWeight: '800', color: '#5A0006', fontSize: '0.95rem' }}>{item.revenue}</div>
- <div style={{ fontSize: '0.75rem', color: item.trend.startsWith('+')? '#9C6B22': '#ef4444', fontWeight: '700' }}>
+ <div style={{ fontWeight: '800', color: '#5A0006', fontSize: '0.95rem' }}>Rs. {item.revenue.toFixed(2)}</div>
+ <div style={{ fontSize: '0.75rem', color: item.trend.startsWith('+') ? '#9C6B22' : '#ef4444', fontWeight: '700' }}>
  {item.trend}
  </div>
  </div>
@@ -127,7 +192,7 @@ const pulseAnim = `
  100% { box-shadow: 0 0 0 0 rgba(227, 162, 59, 0); }
  }
 `;
-if (typeof document!== 'undefined') {
+if (typeof document !== 'undefined') {
  const style = document.createElement('style');
  style.innerHTML = pulseAnim;
  document.head.appendChild(style);
