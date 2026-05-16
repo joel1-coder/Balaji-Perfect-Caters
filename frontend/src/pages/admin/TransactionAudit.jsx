@@ -2,22 +2,6 @@ import React, { useState, useMemo, useEffect } from 'react';
 import axios from 'axios';
 import AdminLayout from '../../components/AdminLayout';
 
-const TRANSACTIONS = [
- { id: '#TXN-98421', date: '2024-10-27', time: '10:42 AM', customer: 'David Chen', account: 'Emp ID: 450912', items: 'Continental Breakfast, Cappuccino', total: 18.50, status: 'Pending', station: 'Station 1' },
- { id: '#TXN-98420', date: '2024-10-27', time: '10:38 AM', customer: 'Sarah Miller', account: 'Guest Visit', items: 'Gourmet Salad, Mineral Water', total: 14.20, status: 'Paid', station: 'Station 2' },
- { id: '#TXN-98419', date: '2024-10-27', time: '10:35 AM', customer: 'Marcus Thorne', account: 'Emp ID: 450332', items: 'Daily Special Thali', total: 12.00, status: 'Paid', station: 'Station 1' },
- { id: '#TXN-98418', date: '2024-10-26', time: '10:30 AM', customer: 'Elena Rodriguez', account: 'Staff Subsidized', items: 'Espresso, Croissant (x2)', total: 8.75, status: 'Pending', station: 'Station 1' },
- { id: '#TXN-98417', date: '2024-10-26', time: '10:22 AM', customer: 'Logistics Team', account: 'Corporate Account', items: 'Bulk Lunch Pack (x12)', total: 144.00, status: 'Disputed', station: 'Station 2' },
- { id: '#TXN-98416', date: '2024-10-26', time: '09:45 AM', customer: 'HR Department', account: 'Corporate Account', items: 'Meeting Snacks', total: 45.00, status: 'Paid', station: 'Station 1' },
- { id: '#TXN-98415', date: '2024-10-25', time: '09:10 AM', customer: 'John Smith', account: 'Emp ID: 450111', items: 'Americano', total: 3.50, status: 'Paid', station: 'Station 2' },
-];
-
-const statusStyle = {
- pending: { bg: '#FFF3D5', color: '#A86612' },
- paid: { bg: '#dcfce7', color: '#16a34a' },
- unpaid: { bg: '#fee2e2', color: '#dc2626' },
-};
-
 const TransactionAudit = () => {
  const [selected, setSelected] = useState([]);
  const [transactions, setTransactions] = useState([]);
@@ -25,13 +9,12 @@ const TransactionAudit = () => {
  
  // Filters
  const [searchQuery, setSearchQuery] = useState('');
- const [statusFilter, setStatusFilter] = useState('All Transactions');
  const [departmentFilter, setDepartmentFilter] = useState('All Departments');
  const [startDate, setStartDate] = useState('');
  const [endDate, setEndDate] = useState('');
 
  const uniqueDepartments = useMemo(() => {
- return [...new Set(transactions.map(t => t.department).filter(d => d && d.trim()!== ''))];
+ return [...new Set(transactions.map(t => t.department).filter(d => d && d.trim() !== ''))];
  }, [transactions]);
 
  useEffect(() => {
@@ -48,24 +31,12 @@ const TransactionAudit = () => {
  setLoading(false);
  };
 
- const updateStatus = async (id, newStatus) => {
- try {
- await axios.patch(`https://balaji-perfect-caters.onrender.com/api/transactions/${id}/status`, { paymentStatus: newStatus });
- setTransactions(prev => prev.map(t => t._id === id? {...t, paymentStatus: newStatus }: t));
- } catch (err) {
- alert('Failed to update status: ' + (err.response?.data?.error || err.message));
- }
- };
- 
  // Memoized Filtered List
  const filteredData = useMemo(() => {
  return transactions.filter(t => {
  const itemNames = (t.items || []).map(i => i.name).join(', ');
  const searchStr = ((t.orderId || '') + (t.customerName || '') + itemNames).toLowerCase();
  const matchSearch = searchStr.includes(searchQuery.toLowerCase());
- 
- const tStatus = (t.paymentStatus || 'pending').toLowerCase();
- const matchStatus = statusFilter === 'All Transactions' || tStatus === statusFilter.toLowerCase();
  
  let matchDate = true;
  if (t.createdAt) {
@@ -80,102 +51,11 @@ const TransactionAudit = () => {
 
  const matchDept = departmentFilter === 'All Departments' || (t.department || 'N/A') === departmentFilter;
 
- return matchSearch && matchStatus && matchDate && matchDept;
+ return matchSearch && matchDate && matchDept;
  });
- }, [transactions, searchQuery, statusFilter, startDate, endDate, departmentFilter]);
+ }, [transactions, searchQuery, startDate, endDate, departmentFilter]);
 
- const toggle = (id) => setSelected(prev => prev.includes(id)? prev.filter(x => x!== id): [...prev, id]);
-
- const toggleAll = () => {
- if (selected.length === filteredData.length) setSelected([]);
- else setSelected(filteredData.map(t => t._id));
-import React, { useState, useMemo, useEffect } from 'react';
-import axios from 'axios';
-import AdminLayout from '../../components/AdminLayout';
-
-const TRANSACTIONS = [
- { id: '#TXN-98421', date: '2024-10-27', time: '10:42 AM', customer: 'David Chen', account: 'Emp ID: 450912', items: 'Continental Breakfast, Cappuccino', total: 18.50, status: 'Pending', station: 'Station 1' },
- { id: '#TXN-98420', date: '2024-10-27', time: '10:38 AM', customer: 'Sarah Miller', account: 'Guest Visit', items: 'Gourmet Salad, Mineral Water', total: 14.20, status: 'Paid', station: 'Station 2' },
- { id: '#TXN-98419', date: '2024-10-27', time: '10:35 AM', customer: 'Marcus Thorne', account: 'Emp ID: 450332', items: 'Daily Special Thali', total: 12.00, status: 'Paid', station: 'Station 1' },
- { id: '#TXN-98418', date: '2024-10-26', time: '10:30 AM', customer: 'Elena Rodriguez', account: 'Staff Subsidized', items: 'Espresso, Croissant (x2)', total: 8.75, status: 'Pending', station: 'Station 1' },
- { id: '#TXN-98417', date: '2024-10-26', time: '10:22 AM', customer: 'Logistics Team', account: 'Corporate Account', items: 'Bulk Lunch Pack (x12)', total: 144.00, status: 'Disputed', station: 'Station 2' },
- { id: '#TXN-98416', date: '2024-10-26', time: '09:45 AM', customer: 'HR Department', account: 'Corporate Account', items: 'Meeting Snacks', total: 45.00, status: 'Paid', station: 'Station 1' },
- { id: '#TXN-98415', date: '2024-10-25', time: '09:10 AM', customer: 'John Smith', account: 'Emp ID: 450111', items: 'Americano', total: 3.50, status: 'Paid', station: 'Station 2' },
-];
-
-const statusStyle = {
- pending: { bg: '#FFF3D5', color: '#A86612' },
- paid: { bg: '#dcfce7', color: '#16a34a' },
- unpaid: { bg: '#fee2e2', color: '#dc2626' },
-};
-
-const TransactionAudit = () => {
- const [selected, setSelected] = useState([]);
- const [transactions, setTransactions] = useState([]);
- const [loading, setLoading] = useState(true);
- 
- // Filters
- const [searchQuery, setSearchQuery] = useState('');
- const [statusFilter, setStatusFilter] = useState('All Transactions');
- const [departmentFilter, setDepartmentFilter] = useState('All Departments');
- const [startDate, setStartDate] = useState('');
- const [endDate, setEndDate] = useState('');
-
- const uniqueDepartments = useMemo(() => {
- return [...new Set(transactions.map(t => t.department).filter(d => d && d.trim()!== ''))];
- }, [transactions]);
-
- useEffect(() => {
- fetchTransactions();
- }, []);
-
- const fetchTransactions = async () => {
- try {
- const res = await axios.get('https://balaji-perfect-caters.onrender.com/api/transactions');
- setTransactions(res.data.data);
- } catch (err) {
- console.error('Failed to fetch transactions');
- }
- setLoading(false);
- };
-
- const updateStatus = async (id, newStatus) => {
- try {
- await axios.patch(`https://balaji-perfect-caters.onrender.com/api/transactions/${id}/status`, { paymentStatus: newStatus });
- setTransactions(prev => prev.map(t => t._id === id? {...t, paymentStatus: newStatus }: t));
- } catch (err) {
- alert('Failed to update status: ' + (err.response?.data?.error || err.message));
- }
- };
- 
- // Memoized Filtered List
- const filteredData = useMemo(() => {
- return transactions.filter(t => {
- const itemNames = (t.items || []).map(i => i.name).join(', ');
- const searchStr = ((t.orderId || '') + (t.customerName || '') + itemNames).toLowerCase();
- const matchSearch = searchStr.includes(searchQuery.toLowerCase());
- 
- const tStatus = (t.paymentStatus || 'pending').toLowerCase();
- const matchStatus = statusFilter === 'All Transactions' || tStatus === statusFilter.toLowerCase();
- 
- let matchDate = true;
- if (t.createdAt) {
- try {
- const tDate = new Date(t.createdAt).toISOString().split('T')[0];
- if (startDate) matchDate = matchDate && tDate >= startDate;
- if (endDate) matchDate = matchDate && tDate <= endDate;
- } catch (e) {
- // ignore invalid dates
- }
- }
-
- const matchDept = departmentFilter === 'All Departments' || (t.department || 'N/A') === departmentFilter;
-
- return matchSearch && matchStatus && matchDate && matchDept;
- });
- }, [transactions, searchQuery, statusFilter, startDate, endDate, departmentFilter]);
-
- const toggle = (id) => setSelected(prev => prev.includes(id)? prev.filter(x => x!== id): [...prev, id]);
+ const toggle = (id) => setSelected(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
 
  const toggleAll = () => {
  if (selected.length === filteredData.length) setSelected([]);
@@ -238,12 +118,12 @@ const TransactionAudit = () => {
  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
  <style>
  body { font-family: 'Outfit', sans-serif; padding: 40px; color: #333; }
- #content-to-pdf { padding: 20px; }.header { text-align: center; margin-bottom: 40px; }.header h1 { margin: 0; color: #7A0008; }.header p { margin: 5px 0; color: #666; }.info { margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 20px; }.info p { margin: 5px 0; }
+ #content-to-pdf { padding: 20px; } .header { text-align: center; margin-bottom: 40px; } .header h1 { margin: 0; color: #7A0008; } .header p { margin: 5px 0; color: #666; } .info { margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 20px; } .info p { margin: 5px 0; }
  table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
  th, td { border-bottom: 1px solid #ddd; padding: 12px; text-align: left; }
  th { background-color: #FAF7F2; color: #7A0008; }
- tr { page-break-inside: avoid; }.total { text-align: right; font-size: 1.5em; font-weight: bold; color: #7A0008; margin-top: 20px; }.no-print { text-align: center; margin-top: 50px; }
- @media print {.no-print { display: none; } }
+ tr { page-break-inside: avoid; } .total { text-align: right; font-size: 1.5em; font-weight: bold; color: #7A0008; margin-top: 20px; } .no-print { text-align: center; margin-top: 50px; }
+ @media print { .no-print { display: none; } }
  </style>
  </head>
  <body>
@@ -254,7 +134,7 @@ const TransactionAudit = () => {
  </div>
  
  <div class="info">
- <p><strong>Department:</strong> ${departmentFilter === 'All Departments'? 'All Departments': departmentFilter}</p>
+ <p><strong>Department:</strong> ${departmentFilter === 'All Departments' ? 'All Departments' : departmentFilter}</p>
  <p><strong>Period:</strong> ${startDate || 'Start'} to ${endDate || 'End'}</p>
  <p><strong>Generated on:</strong> ${new Date().toLocaleDateString()}</p>
  <p><strong>Total Transactions:</strong> ${filteredData.length}</p>
@@ -299,7 +179,7 @@ const TransactionAudit = () => {
  
  var pxHeight = element.scrollHeight;
  var inHeight = (pxHeight / 96) + 1.5; 
- var pdfFormat = inHeight > 11? [8.5, inHeight]: 'letter';
+ var pdfFormat = inHeight > 11 ? [8.5, inHeight] : 'letter';
 
  var opt = {
  margin: 0.5,
@@ -355,18 +235,9 @@ const TransactionAudit = () => {
  {uniqueDepartments.map(d => <option key={d} value={d}>{d}</option>)}
  </select>
  </div>
- <div style={s.filterGroup}>
- <label style={s.filterLabel}>Audit Category</label>
- <select style={s.filterInput} value={statusFilter} onChange={e => setStatusFilter(e.target.value)}>
- <option>All Transactions</option>
- <option>Paid</option>
- <option>Pending</option>
- <option>Disputed</option>
- </select>
- </div>
  <button 
  style={s.clearBtn} 
- onClick={() => { setStartDate(''); setEndDate(''); setStatusFilter('All Transactions'); setDepartmentFilter('All Departments'); }}
+ onClick={() => { setStartDate(''); setEndDate(''); setDepartmentFilter('All Departments'); }}
  >
  Clear Filters
  </button>
@@ -376,7 +247,7 @@ const TransactionAudit = () => {
  <div className="audit-export-actions" style={{ display: 'flex', gap: '10px' }}>
  <button style={s.exportBtn} onClick={exportToExcel}>Excel (CSV)</button>
  <button style={s.exportBtn} onClick={exportToWord}>Word (TXT)</button>
- <button style={{...s.exportBtn, backgroundColor: '#7A0008', color: 'white' }} onClick={generateBill}>Generate Bill</button>
+ <button style={{ ...s.exportBtn, backgroundColor: '#7A0008', color: 'white' }} onClick={generateBill}>Generate Bill</button>
  </div>
  </div>
  </div>
@@ -385,12 +256,7 @@ const TransactionAudit = () => {
  <div className="audit-table-card" style={s.card}>
  <div className="audit-bulk-bar" style={s.bulkBar}>
  <span style={{ color: '#6F6259', fontSize: '0.85rem' }}>{selected.length} items selected</span>
- {selected.length > 0 && (
- <>
- <button style={s.bulkBtn}>Mark as Paid</button>
- <button style={{...s.bulkBtn, color: '#ef4444' }}>Flag for Review</button>
- </>
- )}
+ 
  <span style={{ marginLeft: 'auto', color: '#8D7E73', fontSize: '0.8rem' }}>
  Showing {filteredData.length} Transactions
  </span>
@@ -408,16 +274,16 @@ const TransactionAudit = () => {
  </tr>
  </thead>
  <tbody>
- {filteredData.length === 0? (
+ {filteredData.length === 0 ? (
  <tr>
- <td colSpan="7" style={{ textAlign: 'center', padding: '40px', color: '#8D7E73' }}>
- {loading? 'Loading transactions...': 'No transactions match your filters.'}
+ <td colSpan="6" style={{ textAlign: 'center', padding: '40px', color: '#8D7E73' }}>
+ {loading ? 'Loading transactions...' : 'No transactions match your filters.'}
  </td>
  </tr>
- ): filteredData.map((t) => (
- <tr key={t._id} style={{...s.tr, backgroundColor: selected.includes(t._id)? '#FAF7F2': 'white' }}>
+ ) : filteredData.map((t) => (
+ <tr key={t._id} style={{ ...s.tr, backgroundColor: selected.includes(t._id) ? '#FAF7F2' : 'white' }}>
  <td data-label="Select" style={s.td}><input type="checkbox" checked={selected.includes(t._id)} onChange={() => toggle(t._id)}/></td>
- <td data-label="Transaction ID" style={{...s.td, fontWeight: '700', color: '#5A0006' }}>{t.orderId}</td>
+ <td data-label="Transaction ID" style={{ ...s.td, fontWeight: '700', color: '#5A0006' }}>{t.orderId}</td>
  <td data-label="Date & Time" style={s.td}>
  <div style={{ fontWeight: '600', color: '#4A3D38', fontSize: '0.9rem' }}>{new Date(t.createdAt).toLocaleDateString()}</div>
  <div style={{ color: '#8D7E73', fontSize: '0.75rem' }}>{new Date(t.createdAt).toLocaleTimeString()}</div>
@@ -426,8 +292,8 @@ const TransactionAudit = () => {
  <div style={{ fontWeight: '700', color: '#5A0006', fontSize: '0.9rem' }}>{t.customerName}</div>
  <div style={{ fontSize: '0.78rem', color: '#8D7E73' }}>{t.customerId || t.department || 'N/A'}</div>
  </td>
- <td data-label="Items" style={{...s.td, color: '#5E514A' }}>{(t.items || []).map(i => i.name).join(', ')}</td>
- <td data-label="Total Amount" style={{...s.td, fontWeight: '700' }}>Rs. {(t.totalAmount || 0).toFixed(2)}</td>
+ <td data-label="Items" style={{ ...s.td, color: '#5E514A' }}>{(t.items || []).map(i => i.name).join(', ')}</td>
+ <td data-label="Total Amount" style={{ ...s.td, fontWeight: '700' }}>Rs. {(t.totalAmount || 0).toFixed(2)}</td>
  </tr>
  ))}
  </tbody>
@@ -435,29 +301,21 @@ const TransactionAudit = () => {
  </div>
 
  <div className="audit-summary-row" style={s.bottomRow}>
- <div style={{...s.summaryCard, backgroundColor: '#7A0008', color: 'white' }}>
+ <div style={{ ...s.summaryCard, backgroundColor: '#7A0008', color: 'white' }}>
  <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', letterSpacing: '1px' }}>FILTERED TOTAL</div>
  <div style={{ fontSize: '2.2rem', fontWeight: '800', color: 'white', margin: '8px 0' }}>Rs. {totalFilteredValue.toFixed(2)}</div>
  <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Total sum of currently visible items</div>
  </div>
  <div style={s.summaryCard}>
  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
- <span style={{ fontSize: '0.7rem', color: '#8D7E73', textTransform: 'uppercase', letterSpacing: '1px' }}>UNPAID TRANSACTIONS</span>
+ <span style={{ fontSize: '0.7rem', color: '#8D7E73', textTransform: 'uppercase', letterSpacing: '1px' }}>TOTAL TRANSACTIONS</span>
  </div>
  <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#5A0006' }}>
- {filteredData.filter(x => x.paymentStatus === 'unpaid').length}
+ {filteredData.length}
  </div>
- <div style={{ fontSize: '0.8rem', color: '#ef4444' }}>Requires immediate payment</div>
+ <div style={{ fontSize: '0.8rem', color: '#6F6259' }}>Currently visible transactions</div>
  </div>
- <div style={s.summaryCard}>
- <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
- <span style={{ fontSize: '0.7rem', color: '#8D7E73', textTransform: 'uppercase', letterSpacing: '1px' }}>PAID TRANSACTIONS</span>
- </div>
- <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#5A0006' }}>
- {filteredData.filter(x => x.paymentStatus === 'paid').length}
- </div>
- <div style={{ fontSize: '0.8rem', color: '#6F6259' }}>Cleared successfully</div>
- </div>
+ <div style={{ ...s.summaryCard, visibility: 'hidden' }}></div>
  </div>
  </div>
  </AdminLayout>
