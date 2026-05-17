@@ -79,6 +79,11 @@ const QuickBill = () => {
       return;
     }
 
+    const confirmed = window.confirm(
+      `Please confirm the order details:\n\nCustomer Name : ${member.name}\nDepartment       : ${member.dept}\nTotal Amount    : Rs. ${grandTotal.toFixed(2)}\n\nClick OK to save the order.`
+    );
+    if (!confirmed) return;
+
     const orderId = `BB${Math.floor(1000 + Math.random() * 9000)}`;
     const cleanedItems = orderItems.map(({ id, accent, tint, group, ...rest }) => rest);
 
