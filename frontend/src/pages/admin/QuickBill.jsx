@@ -30,8 +30,6 @@ const QuickBill = () => {
   const [orderItems, setOrderItems] = useState([]);
   const [paymentStatus, setPaymentStatus] = useState('paid');
   const [member, setMember] = useState(initialMember);
-  const [showMemberModal, setShowMemberModal] = useState(false);
-  const [tempMember, setTempMember] = useState(initialMember);
 
   const addItemToBill = (menuItem) => {
     setOrderItems((prev) => {
@@ -109,16 +107,6 @@ const QuickBill = () => {
     }
   };
 
-  const handleOpenMember = () => {
-    setTempMember(member);
-    setShowMemberModal(true);
-  };
-
-  const handleUpdateMember = () => {
-    setMember(tempMember);
-    setShowMemberModal(false);
-  };
-
   const userName = localStorage.getItem('canteen_user') || 'Operator';
   const userInitial = userName.charAt(0).toUpperCase();
 
@@ -140,30 +128,6 @@ const QuickBill = () => {
             </div>
           </div>
         </header>
-
-        <div style={s.stepsRow} className="quickbill-steps-row">
-          <div style={s.stepCard}>
-            <div style={s.stepNumber}>1</div>
-            <div>
-              <div style={s.stepTitle}>Choose Food</div>
-              <div style={s.stepText}>Large buttons for fast item selection.</div>
-            </div>
-          </div>
-          <div style={s.stepCard}>
-            <div style={s.stepNumber}>2</div>
-            <div>
-              <div style={s.stepTitle}>Review Bill</div>
-              <div style={s.stepText}>See quantity and amount on the right.</div>
-            </div>
-          </div>
-          <div style={s.stepCard}>
-            <div style={s.stepNumber}>3</div>
-            <div>
-              <div style={s.stepTitle}>Save Order</div>
-              <div style={s.stepText}>One clear button to complete billing.</div>
-            </div>
-          </div>
-        </div>
 
         <div style={s.contentArea} className="quickbill-content-area">
           <section style={s.menuPanel} className="quickbill-menu-panel">
@@ -200,15 +164,22 @@ const QuickBill = () => {
           </section>
 
           <aside style={s.billPanel} className="quickbill-bill-panel">
-            <div style={s.memberCard}>
-              <div>
-                <div style={s.memberLabel}>Customer</div>
-                <div style={s.memberName}>{member.name}</div>
-                <div style={s.memberDept}>{member.dept}</div>
+            <div style={{ padding: '16px', background: 'white', borderRadius: '12px', border: '1px solid #E8DED1', marginBottom: '0' }}>
+              <div style={{ fontSize: '0.7rem', color: '#8D7E73', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: '700', marginBottom: '10px' }}>Customer Details</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <input
+                  style={{ padding: '8px 12px', border: '1px solid #E8DED1', borderRadius: '8px', fontSize: '0.9rem', fontFamily: "'Outfit', sans-serif", outline: 'none' }}
+                  placeholder="Customer Name"
+                  value={member.name}
+                  onChange={(e) => setMember({ ...member, name: e.target.value })}
+                />
+                <input
+                  style={{ padding: '8px 12px', border: '1px solid #E8DED1', borderRadius: '8px', fontSize: '0.9rem', fontFamily: "'Outfit', sans-serif", outline: 'none' }}
+                  placeholder="Department or Note"
+                  value={member.dept}
+                  onChange={(e) => setMember({ ...member, dept: e.target.value })}
+                />
               </div>
-              <button style={s.memberButton} onClick={handleOpenMember}>
-                Change
-              </button>
             </div>
 
             <div style={s.modeWrap}>
@@ -299,48 +270,6 @@ const QuickBill = () => {
           </aside>
         </div>
       </div>
-
-      {showMemberModal && (
-        <div style={s.modalOverlay}>
-          <div style={s.modal}>
-            <div style={s.modalHeader}>
-              <h3 style={s.modalTitle}>Customer Details</h3>
-              <button style={s.closeBtn} onClick={() => setShowMemberModal(false)}>
-                X
-              </button>
-            </div>
-
-            <div style={s.modalBody}>
-              <div style={s.field}>
-                <label style={s.fieldLabel}>Customer Name</label>
-                <input
-                  style={s.input}
-                  value={tempMember.name}
-                  onChange={(e) => setTempMember({ ...tempMember, name: e.target.value })}
-                />
-              </div>
-
-              <div style={s.field}>
-                <label style={s.fieldLabel}>Department or Note</label>
-                <input
-                  style={s.input}
-                  value={tempMember.dept}
-                  onChange={(e) => setTempMember({ ...tempMember, dept: e.target.value })}
-                />
-              </div>
-            </div>
-
-            <div style={s.modalFooter}>
-              <button style={s.cancelBtn} onClick={() => setShowMemberModal(false)}>
-                Cancel
-              </button>
-              <button style={s.modalSaveBtn} onClick={handleUpdateMember}>
-                Save
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </UserLayout>
   );
 };

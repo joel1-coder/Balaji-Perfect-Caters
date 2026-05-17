@@ -3,7 +3,7 @@ import axios from 'axios';
 import AdminLayout from '../../components/AdminLayout';
 
 const TransactionAudit = () => {
- const [selected, setSelected] = useState([]);
+
  const [transactions, setTransactions] = useState([]);
  const [loading, setLoading] = useState(true);
  
@@ -54,13 +54,6 @@ const TransactionAudit = () => {
  return matchSearch && matchDate && matchDept;
  });
  }, [transactions, searchQuery, startDate, endDate, departmentFilter]);
-
- const toggle = (id) => setSelected(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
-
- const toggleAll = () => {
- if (selected.length === filteredData.length) setSelected([]);
- else setSelected(filteredData.map(t => t._id));
- };
 
  // CSV Export for Excel
  const exportToExcel = () => {
@@ -262,8 +255,6 @@ const TransactionAudit = () => {
  {/* Table */}
  <div className="audit-table-card" style={s.card}>
  <div className="audit-bulk-bar" style={s.bulkBar}>
- <span style={{ color: '#6F6259', fontSize: '0.85rem' }}>{selected.length} items selected</span>
- 
  <span style={{ marginLeft: 'auto', color: '#8D7E73', fontSize: '0.8rem' }}>
  Showing {filteredData.length} Transactions
  </span>
@@ -271,25 +262,18 @@ const TransactionAudit = () => {
  <table style={s.table}>
  <thead>
  <tr>
- <th style={s.th}>
- <input type="checkbox" 
- checked={filteredData.length > 0 && selected.length === filteredData.length} 
- onChange={toggleAll}
- />
- </th>
- {['Transaction ID', 'Date & Time', 'Customer / Account', 'Items', 'Total Amount'].map(h => <th key={h} style={s.th}>{h}</th>)}
+  {['Transaction ID', 'Date & Time', 'Customer / Account', 'Items', 'Total Amount'].map(h => <th key={h} style={s.th}>{h}</th>)}
  </tr>
  </thead>
  <tbody>
  {filteredData.length === 0 ? (
  <tr>
- <td colSpan="6" style={{ textAlign: 'center', padding: '40px', color: '#8D7E73' }}>
+ <td colSpan="5" style={{ textAlign: 'center', padding: '40px', color: '#8D7E73' }}>
  {loading ? 'Loading transactions...' : 'No transactions match your filters.'}
  </td>
  </tr>
  ) : filteredData.map((t) => (
- <tr key={t._id} style={{ ...s.tr, backgroundColor: selected.includes(t._id) ? '#FAF7F2' : 'white' }}>
- <td data-label="Select" style={s.td}><input type="checkbox" checked={selected.includes(t._id)} onChange={() => toggle(t._id)}/></td>
+ <tr key={t._id} style={s.tr}>
  <td data-label="Transaction ID" style={{ ...s.td, fontWeight: '700', color: '#5A0006' }}>{t.orderId}</td>
  <td data-label="Date & Time" style={s.td}>
  <div style={{ fontWeight: '600', color: '#4A3D38', fontSize: '0.9rem' }}>{new Date(t.createdAt).toLocaleDateString()}</div>

@@ -408,10 +408,21 @@ export default function CateringQuotation() {
  </div>
  </div>
  </div>
- </div>
- </div>
- )}
- </div>
+  {/* Signed by */}
+  <div style={{ marginTop: 48, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, paddingTop: 24, borderTop: '1px solid #E3A23B' }}>
+  <div style={{ textAlign: 'center' }}>
+  <div style={{ borderTop: '1px solid #5A0006', marginBottom: 8, paddingTop: 8, color: '#7A0008', fontSize: 12, fontWeight: 'bold', letterSpacing: 1 }}>CUSTOMER SIGNATURE</div>
+  <div style={{ fontSize: 11, color: '#9C6B22' }}>Signed by: {clientName || '_______________'}</div>
+  </div>
+  <div style={{ textAlign: 'center' }}>
+  <div style={{ borderTop: '1px solid #5A0006', marginBottom: 8, paddingTop: 8, color: '#7A0008', fontSize: 12, fontWeight: 'bold', letterSpacing: 1 }}>AUTHORISED SIGNATORY</div>
+  <div style={{ fontSize: 11, color: '#9C6B22' }}>Signed by: Balaji Perfect Caters</div>
+  </div>
+  </div>
+  </div>
+  </div>
+  )}
+  </div>
  </div>
  </AdminLayout>
  );
