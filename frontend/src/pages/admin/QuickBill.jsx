@@ -14,10 +14,6 @@ const MENU_OPTIONS = [
   { name: 'Lassi', price: 30, group: 'Cold Drink', accent: '#6C5A9A', tint: '#F1EDFA' },
 ];
 
-const PAYMENT_MODES = [
-  { id: 'paid', label: 'Paid Now' },
-  { id: 'credit', label: 'Credit' },
-];
 
 const initialMember = {
   name: 'Walk-in Customer',
@@ -28,7 +24,6 @@ const initialMember = {
 
 const QuickBill = () => {
   const [orderItems, setOrderItems] = useState([]);
-  const [paymentStatus, setPaymentStatus] = useState('paid');
   const [member, setMember] = useState(initialMember);
 
   const addItemToBill = (menuItem) => {
@@ -94,7 +89,7 @@ const QuickBill = () => {
       department: member.dept,
       items: cleanedItems,
       totalAmount: grandTotal,
-      paymentStatus,
+      paymentStatus: 'paid',
     };
 
     try {
@@ -182,20 +177,7 @@ const QuickBill = () => {
               </div>
             </div>
 
-            <div style={s.modeWrap}>
-              {PAYMENT_MODES.map((mode) => (
-                <button
-                  key={mode.id}
-                  style={{
-                    ...s.modeButton,
-                    ...(paymentStatus === mode.id ? s.modeButtonActive : {}),
-                  }}
-                  onClick={() => setPaymentStatus(mode.id)}
-                >
-                  {mode.label}
-                </button>
-              ))}
-            </div>
+
 
             <div style={s.billCard}>
               <div style={s.billHeader}>
@@ -249,10 +231,7 @@ const QuickBill = () => {
                   <span>Total Items</span>
                   <strong>{totalUnits}</strong>
                 </div>
-                <div style={s.summaryRow}>
-                  <span>Payment</span>
-                  <strong>{paymentStatus === 'paid' ? 'Paid Now' : 'Credit'}</strong>
-                </div>
+
                 <div style={s.summaryTotal}>
                   <span>Grand Total</span>
                   <strong>Rs. {grandTotal.toFixed(2)}</strong>
