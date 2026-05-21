@@ -144,9 +144,10 @@ const AdminLayout = ({ children }) => {
 
  <div style={s.sidebarBottom}>
  <button style={s.switchBtn} onClick={() => {
- localStorage.setItem('canteen_role', 'operator');
- localStorage.setItem('canteen_user', 'operator');
- navigate('/user/billing');
+ localStorage.removeItem('canteen_auth');
+ localStorage.removeItem('canteen_role');
+ localStorage.removeItem('canteen_user');
+ navigate('/login?tab=operator');
  }}>
  Switch to Operator
  </button>

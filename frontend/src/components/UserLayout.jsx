@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/userResponsive.css';
 
@@ -81,9 +81,10 @@ const UserLayout = ({ children }) => {
  {/* Bottom */}
  <div style={styles.sidebarBottom}>
  <button style={styles.switchBtn} onClick={() => {
- localStorage.setItem('canteen_role', 'admin');
- localStorage.setItem('canteen_user', 'admin');
- navigate('/admin/overview');
+ localStorage.removeItem('canteen_auth');
+ localStorage.removeItem('canteen_role');
+ localStorage.removeItem('canteen_user');
+ navigate('/login?tab=admin');
  }}>
  Switch to Admin
  </button>

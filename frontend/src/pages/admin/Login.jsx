@@ -1,5 +1,5 @@
-﻿import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const CREDENTIALS = {
  admin: { password: 'admin@123', role: 'admin', redirect: '/admin/overview' },
@@ -7,33 +7,71 @@ const CREDENTIALS = {
 };
 
 const Login = () => {
- const [activeTab, setActiveTab] = useState('admin');
- const [username, setUsername] = useState('admin');
- const [password, setPassword] = useState('');
- const [error, setError] = useState('');
- const navigate = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
 
- const handleTabSwitch = (tab) => {
- setActiveTab(tab);
- setUsername(tab);
- setPassword('');
- setError('');
- };
+  // Get initial tab from query parameter (?tab=) or state, default to admin
+  const searchParams = new URLSearchParams(location.search);
+  const queryTab = searchParams.get('tab');
+  const initialTab = (queryTab === 'admin' || queryTab === 'operator') 
+    ? queryTab 
+    : (location.state?.tab === 'admin' || location.state?.tab === 'operator') 
+      ? location.state.tab 
+      : 'admin';
 
- const handleLogin = (e) => {
- e.preventDefault();
- setError('');
- const user = CREDENTIALS[username.toLowerCase().trim()];
- 
- if (!user || user.password!== password || user.role!== activeTab) {
- setError('Invalid username or password. Please try again.');
- return;
- }
- localStorage.setItem('canteen_auth', 'true');
- localStorage.setItem('canteen_role', user.role);
- localStorage.setItem('canteen_user', username);
- navigate(user.redirect);
- };
+  const [activeTab, setActiveTab] = useState(initialTab);
+  const [username, setUsername] = useState(initialTab);
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  // Update form if the query parameter changes
+  useEffect(() => {
+    const tab = searchParams.get('tab');
+    if (tab === 'admin' || tab === 'operator') {
+      setActiveTab(tab);
+      setUsername(tab);
+      setPassword('');
+      setError('');
+    }
+  }, [location.search]);
+
+  const handleTabSwitch = (tab) => {
+    setActiveTab(tab);
+    setUsername(tab);
+    setPassword('');
+    setError('');
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setError('');
+    const user = CREDENTIALS[username.toLowerCase().trim()];
+    
+    if (!user) {
+      setError('Invalid username. Please try again.');
+      return;
+    }
+    
+    if (user.password !== password) {
+      setError('Invalid password. Please try again.');
+      return;
+    }
+    
+    if (user.role !== activeTab) {
+      if (user.role === 'admin') {
+        setError('Admin credentials cannot be used for User Login. Please use the Admin Login tab.');
+      } else {
+        setError('User credentials cannot be used for Admin Login. Please use the User/Operator Login tab.');
+      }
+      return;
+    }
+
+    localStorage.setItem('canteen_auth', 'true');
+    localStorage.setItem('canteen_role', user.role);
+    localStorage.setItem('canteen_user', username);
+    navigate(user.redirect);
+  };
+
 
  return (
  <div style={styles.page}>
